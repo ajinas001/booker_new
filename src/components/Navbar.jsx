@@ -2,7 +2,13 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaXTwitter,
+  FaYoutube,
+} from "react-icons/fa6";
 // --- Static Data ---
 const SERVICES_DATA_RAW = [
   {
@@ -14,7 +20,8 @@ const SERVICES_DATA_RAW = [
   {
     title: "Taxation",
     link: "/taxation",
-    description: "• Corporate Tax\n• Value Added Tax (VAT)\n• Tax Agent Service",
+    description:
+      "• Corporate Tax\n• Value Added Tax (VAT)\n• Tax Agent Service",
   },
   {
     title: "Accounting & Bookkeeping",
@@ -42,7 +49,7 @@ const SERVICES_DATA_RAW = [
   },
 ];
 
-const NAV_LINKS = ["Home", "About", "Services","Faq", "Blog", "Contact"];
+const NAV_LINKS = ["Home", "About", "Services", "Faq", "Blog", "Contact"];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,13 +73,13 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="absolute w-full z-50 py-4 bg-transparent text-white">
+      <nav className="fixed top-0 left-0 w-full z-50 py-2 bg-white text-black ">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/images/LogoL.png"
+                src="/images/LogoD.png"
                 alt="Booker Accounting Company Logo"
                 width={120}
                 height={120}
@@ -130,10 +137,59 @@ export default function Navbar() {
                 );
               })}
             </div>
+            <div className="hidden lg:flex   justify-center items-center gap-2">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xl hover:text-blue-600 transition"
+              >
+                <FaFacebookF />
+              </a>
 
-            <Link href={'/contact'} className="hidden lg:block ml-4 px-8 py-3 rounded-tl-full rounded-tr-full rounded-br-full border-2 border-white text-white font-medium hover:bg-secondary transition">
-              Get started
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xl hover:text-pink-600 transition"
+              >
+                <FaInstagram />
+              </a>
+
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xl hover:text-gray-800 transition"
+              >
+                <FaXTwitter />
+              </a>
+
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xl hover:text-blue-700 transition"
+              >
+                <FaLinkedinIn />
+              </a>
+
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xl hover:text-red-600 transition"
+              >
+                <FaYoutube />
+              </a>
+          
+            <Link
+              href={"/contact"}
+              className=" bg-secondary text-white hidden lg:block  ml-4 px-6 py-3 rounded-md border-2 border-white  font-medium hover:bg-secondary transition"
+            >
+              Book Free Assesment
             </Link>
+              </div>
 
             {/* Mobile menu button */}
             <button
@@ -243,15 +299,15 @@ export default function Navbar() {
               : "opacity-0 invisible -translate-y-4"
           }`}
         >
-          <div className="m-4 p-4 bg-gray-900 text-textprimary rounded-2xl">
+          <div className=" mt-12 p-4 bg-white text-black ">
             <div className="max-w-7xl mx-auto px-6 py-6">
               <div className="grid grid-cols-1 lg:grid-cols-5">
                 <div className="lg:col-span-1 pr-6  py-48">
                   <h3 className="text-3xl font-bold mb-4">Our Services</h3>
                   <p className="text-base text-gray-200 leading-relaxed">
                     No matter your role or goal{" "}
-                    <span className="text-textprimary font-bold">BAC</span> adapts
-                    to your needs
+                    <span className="text-textprimary font-bold">BAC</span>{" "}
+                    adapts to your needs
                   </p>
                 </div>
                 <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8 pt-12 text-start">
@@ -263,15 +319,15 @@ export default function Navbar() {
                         className="block text-lg font-semibold hover:text-textprimary transition"
                       >
                         {service.title}
-                     
-                      <ul className="list-disc pl-5 space-y-1 text-gray-300">
-                        {service.descriptionPoints.map((point, i) => (
-                          <li key={i} className="text-sm leading-relaxed">
-                            {point}
-                          </li>
-                        ))}
-                      </ul>
-                       </Link>
+
+                        <ul className="list-disc pl-5 space-y-1 text-gray-300">
+                          {service.descriptionPoints.map((point, i) => (
+                            <li key={i} className="text-sm leading-relaxed">
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </Link>
                     </div>
                   ))}
                 </div>
