@@ -81,8 +81,8 @@ export default function Navbar() {
               <Image
                 src="/images/LogoD.png"
                 alt="Booker Accounting Company Logo"
-                width={100}
-                height={100}
+                width={90}
+                height={90}
                 className="object-contain"
               />
             </Link>
@@ -107,9 +107,8 @@ export default function Navbar() {
                       <button className="px-4 py-2 flex items-center gap-1 text-md  font-semibold text-textsecondary hover:text-textprimary transition">
                         {link}
                         <svg
-                          className={`w-4 h-4 transition-transform duration-300 ${
-                            servicesOpen ? "rotate-180" : ""
-                          }`}
+                          className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""
+                            }`}
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -137,7 +136,7 @@ export default function Navbar() {
                 );
               })}
             </div>
-            <div className="hidden lg:flex justify-center items-center gap-2">
+            <div className="hidden lg:flex justify-center items-center gap-2 ">
               <a
                 href="https://facebook.com"
                 target="_blank"
@@ -183,9 +182,12 @@ export default function Navbar() {
                 <FaYoutube />
               </a>
 
+
+            </div>
+            <div>
               <Link
                 href="/contact"
-                className="bg-textsecondary text-white hidden rounded-md lg:block ml-4 px-4 py-2 border-2 border-white hover:border-textsecondary font-small hover:bg-white transition hover:text-textsecondary"
+                className="bg-textsecondary text-white text-sm hidden rounded-md lg:block px-4 py-2 border-2 border-white hover:border-textsecondary font-small hover:bg-white transition hover:text-textsecondary"
               >
                 Book Free Assessment
               </Link>
@@ -218,12 +220,11 @@ export default function Navbar() {
           </div>
 
           {/* --- Mobile Menu --- */}
-         <div
-            className={`fixed top-14 inset-0 z-50 lg:hidden transition-[opacity] duration-300 ease-in-out bg-white flex flex-col ${
-              isOpen
+          <div
+            className={`fixed top-14 inset-0 z-50 lg:hidden transition-[opacity] duration-300 ease-in-out bg-white flex flex-col ${isOpen
                 ? "opacity-100 pointer-events-auto"
                 : "opacity-0 pointer-events-none"
-            }`}
+              }`}
           >
             {/* Top Section: Nav Links (Takes up remaining space) */}
             <div className="flex-grow overflow-y-auto py-4">
@@ -346,11 +347,10 @@ export default function Navbar() {
         <div
           onMouseEnter={() => setServicesOpen(true)}
           onMouseLeave={() => setServicesOpen(false)}
-          className={` font-heading fixed top-0 left-0 right-0 z-40 transition-all duration-300 shadow-md ${
-            servicesOpen
+          className={` font-heading fixed top-0 left-0 right-0 z-40 transition-all duration-300 shadow-md ${servicesOpen
               ? "opacity-100 visible translate-y-0"
               : "opacity-0 invisible -translate-y-4"
-          }`}
+            }`}
         >
           <div className=" mt-12 p-4 bg-white text-black ">
             <div className="max-w-7xl mx-auto px-6 py-6">
