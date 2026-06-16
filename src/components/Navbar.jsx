@@ -81,8 +81,8 @@ export default function Navbar() {
               <Image
                 src="/images/LogoD.png"
                 alt="Booker Accounting Company Logo"
-                width={120}
-                height={120}
+                width={100}
+                height={100}
                 className="object-contain"
               />
             </Link>
@@ -137,12 +137,12 @@ export default function Navbar() {
                 );
               })}
             </div>
-            <div className="hidden lg:flex   justify-center items-center gap-2">
+            <div className="hidden lg:flex justify-center items-center gap-2">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl hover:text-blue-600 transition"
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-600 hover:text-white transition"
               >
                 <FaFacebookF />
               </a>
@@ -151,7 +151,7 @@ export default function Navbar() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl hover:text-pink-600 transition"
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-pink-600 hover:text-white transition"
               >
                 <FaInstagram />
               </a>
@@ -160,7 +160,7 @@ export default function Navbar() {
                 href="https://x.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl hover:text-gray-800 transition"
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-gray-800 hover:text-white transition"
               >
                 <FaXTwitter />
               </a>
@@ -169,7 +169,7 @@ export default function Navbar() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl hover:text-blue-700 transition"
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-700 hover:text-white transition"
               >
                 <FaLinkedinIn />
               </a>
@@ -178,18 +178,18 @@ export default function Navbar() {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl hover:text-red-600 transition"
+                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-red-600 hover:text-white transition"
               >
                 <FaYoutube />
               </a>
-          
-            <Link
-              href={"/contact"}
-              className=" bg-white text-textsecondary  hidden lg:block  ml-4 px-4 py-2  border-2 border-textprimary hover:border-white  font-small hover:bg-secondary transition hover:text-white"
-            >
-              Book Free Assesment
-            </Link>
-              </div>
+
+              <Link
+                href="/contact"
+                className="bg-textsecondary text-white hidden rounded-md lg:block ml-4 px-4 py-2 border-2 border-white hover:border-textsecondary font-small hover:bg-white transition hover:text-textsecondary"
+              >
+                Book Free Assessment
+              </Link>
+            </div>
 
             {/* Mobile menu button */}
             <button
@@ -218,73 +218,126 @@ export default function Navbar() {
           </div>
 
           {/* --- Mobile Menu --- */}
-          <div
-            className={`lg:hidden transition-[max-height,opacity] duration-300 ease-in-out rounded-lg text-center overflow-hidden will-change-[max-height,opacity] ${
+         <div
+            className={`fixed top-14 inset-0 z-50 lg:hidden transition-[opacity] duration-300 ease-in-out bg-white flex flex-col ${
               isOpen
-                ? "max-h-[520px] py-4 opacity-100 bg-white text-black"
-                : "max-h-0 opacity-0"
+                ? "opacity-100 pointer-events-auto"
+                : "opacity-0 pointer-events-none"
             }`}
           >
-            {NAV_LINKS.map((link) => {
-              const href = link === "Home" ? "/" : `/${link.toLowerCase()}`;
+            {/* Top Section: Nav Links (Takes up remaining space) */}
+            <div className="flex-grow overflow-y-auto py-4">
+              {NAV_LINKS.map((link) => {
+                const href = link === "Home" ? "/" : `/${link.toLowerCase()}`;
 
-              if (link === "Services") {
-                return (
-                  <div key={link} className="flex flex-col items-center">
-                    <button
-                      onClick={toggleMobileServices}
-                      className="w-full px-4 py-3 flex items-center justify-center gap-1 hover:text-textprimary font-medium transition"
-                    >
-                      Services
-                      <svg
-                        className={`w-4 h-4 transition-transform duration-300 ${
-                          servicesOpen ? "rotate-180" : ""
-                        }`}
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                if (link === "Services") {
+                  return (
+                    <div key={link} className="flex flex-col items-center">
+                      <button
+                        onClick={toggleMobileServices}
+                        className="w-full px-4 py-3 flex items-center justify-center gap-1 hover:text-textprimary font-medium transition"
                       >
-                        <path d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-
-                    <div
-                      className={`transition-[max-height,opacity] duration-300 overflow-hidden ${
-                        servicesOpen
-                          ? "max-h-[400px] opacity-100"
-                          : "max-h-0 opacity-0"
-                      } w-full text-start px-6`}
-                    >
-                      {processedServices.map((s) => (
-                        <Link
-                          key={s.title}
-                          href={s.link}
-                          onClick={closeAllMenus}
-                          className="block py-2 text-gray-700 hover:text-textprimary text-sm transition"
+                        Services
+                        <svg
+                          className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
-                          {s.title}
-                        </Link>
-                      ))}
+                          <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      <div
+                        className={`transition-[max-height,opacity] duration-300 overflow-hidden ${servicesOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"} w-full text-start px-6`}
+                      >
+                        {processedServices.map((s) => (
+                          <Link
+                            key={s.title}
+                            href={s.link}
+                            onClick={closeAllMenus}
+                            className="block py-2 text-textsecondary hover:text-textprimary text-sm transition"
+                          >
+                            {s.title}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                );
-              }
+                  );
+                }
 
-              return (
+                return (
+                  <Link
+                    key={link}
+                    href={href}
+                    onClick={closeAllMenus}
+                    className="block px-4 py-3 text-center hover:text-textprimary font-medium transition"
+                  >
+                    {link}
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Bottom Section: CTA and Socials (Pinned to bottom) */}
+            <div className="pb-8 border-t border-gray-100">
+              <div className="px-6 pt-5">
                 <Link
-                  key={link}
-                  href={href}
+                  href="/contact"
                   onClick={closeAllMenus}
-                  className="block px-4 py-3 hover:text-textprimary font-medium transition"
+                  className="block w-full text-center bg-secondary text-white font-medium py-3 rounded-md border border-secondary hover:bg-transparent hover:text-secondary transition duration-300"
                 >
-                  {link}
+                  Book Free Assessment
                 </Link>
-              );
-            })}
+              </div>
+
+              <div className="flex justify-center items-center gap-3 pt-5">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-600 hover:text-white transition"
+                >
+                  <FaFacebookF />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-pink-600 hover:text-white transition"
+                >
+                  <FaInstagram />
+                </a>
+                <a
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-black hover:text-white transition"
+                >
+                  <FaXTwitter />
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-700 hover:text-white transition"
+                >
+                  <FaLinkedinIn />
+                </a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-red-600 hover:text-white transition"
+                >
+                  <FaYoutube />
+                </a>
+              </div>
+            </div>
           </div>
+
         </div>
       </nav>
 
