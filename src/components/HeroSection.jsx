@@ -4,135 +4,261 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
+// Services Data with minimal grid structure matching Screenshot 2026-06-16 132201.jpg
+const services = [
+    {
+        title: "Corporate Tax Registration",
+        icon: (
+            <svg className="w-9 h-9 text-[#0c2136]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <circle cx="10" cy="9" r="1.5" strokeWidth={1.2} />
+            </svg>
+        ),
+    },
+    {
+        title: "Corporate Tax Filing",
+        icon: (
+            <svg className="w-9 h-9 text-[#0c2136]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+        ),
+    },
+    {
+        title: "VAT Registration",
+        icon: (
+            <svg className="w-9 h-9 text-[#0c2136]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+        ),
+    },
+    {
+        title: "VAT Return Filing",
+        icon: (
+            <svg className="w-9 h-9 text-[#0c2136]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 11H18.5" />
+            </svg>
+        ),
+    },
+    {
+        title: "Bookkeeping & Accounting",
+        icon: (
+            <svg className="w-9 h-9 text-[#0c2136]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+        ),
+    },
+    {
+        title: "Audit Support Services",
+        icon: (
+            <svg className="w-9 h-9 text-[#0c2136]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+        ),
+    },
+    {
+        title: "Company Formation",
+        icon: (
+            <svg className="w-9 h-9 text-[#0c2136]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+        ),
+    },
+];
+
 export default function HeroSection() {
-    // 1. Create a ref for the element whose scroll position we want to track
     const containerRef = useRef(null);
 
-    // 2. Get scroll progress for the container element
-    // target: The ref of the element to track scroll progress on.
-    // offset: Defines when the scroll animation should start and end.
-    // 'start start': starts when the top of the container hits the top of the viewport.
-    // 'end start': ends when the bottom of the container hits the top of the viewport.
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start start", "end start"], 
+        offset: ["start start", "end start"],
     });
 
-    // 3. Map the scroll progress (0 to 1) to the desired borderRadius value (0px to 50px)
     const borderRadius = useTransform(
         scrollYProgress,
-        [0, 0.4], // Scroll points: Start at 0% scroll, finish at 40% scroll down the container
-        ["0px", "80px"] // Output values: Start with 0px radius, end with 50px radius
+        [0, 0.3],
+        ["0px", "60px"]
     );
 
-    // 4. Map the scroll progress to a slight upward movement for the content for parallax effect (optional but nice)
-    const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-
+    const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
     return (
-        // Attach the ref to the main section element
-        <motion.section
-            ref={containerRef}
-            id="home"
-            // Use borderRadius style hook here
-            style={{ borderBottomLeftRadius: borderRadius, borderBottomRightRadius: borderRadius }}
-            className=" font-heading relative overflow-hidden min-h-screen flex items-center bg-primary text-white "
-        >
-            {/* Background Image with Continuous Zoom Animation */}
-            <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{
-                    duration: 10,
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                    repeatType: "mirror",
+        <div ref={containerRef} className="relative w-full bg-[#f8f9fa]">
+
+            {/* PART 1: Compact Navy Banner (Optimized height for Laptop screen visibility) */}
+            <motion.section
+                id="home"
+                style={{
+                    borderBottomLeftRadius: borderRadius,
+                    borderBottomRightRadius: borderRadius
                 }}
-                className="absolute inset-0"
+                className="relative overflow-hidden min-h-[420px] lg:min-h-[50vh] xl:min-h-[60vh] flex items-center bg-[#e6e9ed] text-white z-20 shadow-md"
             >
-                <Image
-                    src="/images/business5.webp"
-                    alt="Accounting Team"
-                    fill
-                    priority
-                    className="object-cover object-center"
-                />
-            </motion.div>
-
-            {/* Overlays */}
-            <div className="absolute inset-0 bg-black/60" />
-            <div className="absolute inset-0 bg-gradient-to-r from-dark-primary/90 via-dark-primary/70 to-transparent z-10" />
-
-            {/* Content with Scroll Transform for slight parallax */}
-            <motion.div 
-                style={{ y: contentY }} // Apply the upward scroll transformation
-                className="relative z-20 w-full min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-28"
-            >
-                <div className="max-w-7xl mx-auto text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.2, ease: "easeOut" }}
-                        className="max-w-4xl mx-auto"
-                    >
-                        {/* Headline */}
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight mb-6 sm:mb-8">
-                            <motion.span
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4, duration: 0.8 }}
-                                className="block text-white"
-                            >
-                                Strategic Expertise 
-                            </motion.span>
-
-                            <motion.span
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.8, duration: 0.8 }}
-                                className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-500 to-secondary animate-gradient"
-                            >
-                                Dedicated Advisors
-                            </motion.span>
-                        </h1>
-
-                        {/* Subtext */}
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 1.2, duration: 0.8 }}
-                            className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed"
-                        >
-                            At Booker Accounting, we deliver tailored, technology-driven solutions
-                            to drive your success in the UAE's dynamic financial landscape.
-                        </motion.p>
-
-                        {/* CTA Button */}
-                        <motion.a
-                            href="/contact"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 1.5, duration: 0.8 }}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.97 }}
-                            className="inline-block text-white text-lg font-semibold w-fit px-8 py-3 rounded-tl-full rounded-tr-full rounded-br-full border-2 hover:shadow-xl transition-all duration-300"
-                        >
-                            Get Started
-                        </motion.a>
-                    </motion.div>
+                {/* Background Image Setup */}
+                <div className="absolute inset-0 w-full h-full">
+                    <Image
+                        src="/images/banner_new.png"
+                        alt="Your Trusted Accounting Partner"
+                        fill
+                        priority
+                        className="object-cover object-center opacity-90"
+                    />
                 </div>
-            </motion.div>
 
+                {/* Overlays */}
+                <div className="absolute inset-0 bg-black/20 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0c2136]/95 via-[#0c2136]/80 to-transparent z-10" />
 
+                {/* Main Dynamic Grid Content */}
+                <motion.div
+                    style={{ y: contentY }}
+                    className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12"
+                >
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center">
 
-            {/* Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.8, duration: 0.8 }}
-                className="hidden sm:flex absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce"
-            >
-                {/* Scroll Down Icon (optional) */}
-            </motion.div>
-        </motion.section>
+                        {/* Copy Block */}
+                        <div className="lg:col-span-8 flex flex-col justify-center text-left mt-16">
+                            <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight leading-[1.2] mb-4">
+                                Your Trusted <br />
+                                <span className="text-white">Accounting Partner</span> <br />
+                                in the UAE
+                            </h1>
+
+                            <p className="text-xs sm:text-sm md:text-base text-gray-300 mb-6 max-w-lg leading-relaxed">
+                                From Compliance to Growth – We Simplify Your Finance, So You Can Focus on Your Business.
+                            </p>
+
+                            <a
+                                href="/contact"
+                                className="group inline-flex items-center justify-center gap-2 bg-[#d1b38c] hover:bg-[#c5a880] text-[#0c2136] text-xs md:text-sm font-bold w-fit px-5 py-3 rounded transition-all duration-300 shadow-md"
+                            >
+                                Book Free Assessment
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={2.5}
+                                    stroke="currentColor"
+                                    className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        {/* Badges Column Stack */}
+                        {/* Right side floating trust badges */}
+                        <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-end mt-24">
+                            <div className="flex flex-col space-y-6">
+                                {[
+                                    {
+                                        label: "500+",
+                                        desc: "Happy Clients",
+                                        icon: (
+                                            <svg className="w-7 h-7 text-[#d1b38c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
+                                        )
+                                    },
+                                    {
+                                        label: "Zoho",
+                                        desc: "Authorized Partner",
+                                        icon: (
+                                            <svg className="w-7 h-7 text-[#d1b38c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                                            </svg>
+                                        )
+                                    },
+                                    {
+                                        label: "UAE",
+                                        desc: "Compliance Experts",
+                                        icon: (
+                                            <svg className="w-7 h-7 text-[#d1b38c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                            </svg>
+                                        )
+                                    },
+                                    {
+                                        label: "10+ Years",
+                                        desc: "of Experience",
+                                        icon: (
+                                            <svg className="w-7 h-7 text-[#d1b38c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        )
+                                    }
+                                ].map((badge, idx) => (
+                                    <div key={idx} className="flex items-center gap-4 w-full">
+                                        <div className="flex-shrink-0">
+                                            {badge.icon}
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-sm md:text-base leading-tight text-white">{badge.label}</h4>
+                                            <p className="text-xs md:text-sm text-gray-300 whitespace-nowrap">{badge.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                    </div>
+                </motion.div>
+            </motion.section>
+
+            {/* PART 2: Services Section (Sits snug under the banner, instantly visible above-the-fold) */}
+            <section className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 py-8 lg:py-8 bg-[#f8f9fa]">
+
+                {/* Heading Block */}
+                <div className="text-center mb-4">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#0c2136]">
+                        Need <span className="relative inline-block text-[#d1b38c] pb-0.5 after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#d1b38c] after:left-0 after:bottom-0">Help</span> With?
+                    </h2>
+                    <p className="text-[11px] sm:text-xs text-gray-500 max-w-xl mx-auto mt-2 leading-relaxed">
+                        We provide end-to-end accounting, tax, and business advisory services tailored for UAE businesses.
+                    </p>
+                </div>
+
+                {/* Compact Row Matrix Grid Grid Container */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 items-stretch justify-center">
+                    {services.map((service, index) => (
+                        <div
+                            key={index}
+                            className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 flex flex-col items-center text-center justify-between hover:shadow-md transition-all duration-300 group cursor-pointer min-h-[145px]"
+                        >
+                            <div className="mb-2 transform group-hover:scale-105 transition-transform duration-300">
+                                {service.icon}
+                            </div>
+
+                            <h3 className="text-[11px] font-bold text-[#0c2136] leading-snug tracking-tight mb-1">
+                                {service.title}
+                            </h3>
+
+                            {/* Static gold border matching image mockup */}
+                            <div className="w-6 h-[2px] bg-[#d1b38c] mt-1" />
+                        </div>
+                    ))}
+                </div>
+
+                {/* Secondary CTA */}
+                <div className="text-center mt-8">
+                    <a
+                        href="/contact"
+                        className="inline-flex items-center justify-center gap-2 bg-[#0c2136] hover:bg-[#122e49] text-white text-xs md:text-sm font-bold px-6 py-3 rounded shadow-sm group transition-all duration-300"
+                    >
+                        Get Free Consultation
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2.5}
+                            stroke="currentColor"
+                            className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+
+            </section>
+        </div>
     );
 }

@@ -75,7 +75,7 @@ export default function Navbar() {
     <>
       <nav className="font-heading fixed top-0 left-0 w-full z-50  bg-white text-black ">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-18">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <Image
@@ -142,7 +142,7 @@ export default function Navbar() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-600 hover:text-white transition"
+                className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-600 hover:text-white transition"
               >
                 <FaFacebookF />
               </a>
@@ -151,7 +151,7 @@ export default function Navbar() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-pink-600 hover:text-white transition"
+                className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-pink-600 hover:text-white transition"
               >
                 <FaInstagram />
               </a>
@@ -160,7 +160,7 @@ export default function Navbar() {
                 href="https://x.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-gray-800 hover:text-white transition"
+                className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-gray-800 hover:text-white transition"
               >
                 <FaXTwitter />
               </a>
@@ -169,7 +169,7 @@ export default function Navbar() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-700 hover:text-white transition"
+                className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-700 hover:text-white transition"
               >
                 <FaLinkedinIn />
               </a>
@@ -178,7 +178,7 @@ export default function Navbar() {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-red-600 hover:text-white transition"
+                className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-red-600 hover:text-white transition"
               >
                 <FaYoutube />
               </a>
