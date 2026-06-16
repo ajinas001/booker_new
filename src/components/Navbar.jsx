@@ -73,7 +73,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 py-2 bg-white text-black ">
+      <nav className="font-heading fixed top-0 left-0 w-full z-50  bg-white text-black ">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
@@ -104,7 +104,7 @@ export default function Navbar() {
                         if (window.innerWidth >= 1024) setServicesOpen(false);
                       }}
                     >
-                      <button className="px-4 py-2 flex items-center gap-1 text-md font-medium hover:text-textprimary transition">
+                      <button className="px-4 py-2 flex items-center gap-1 text-md  font-semibold text-textsecondary hover:text-textprimary transition">
                         {link}
                         <svg
                           className={`w-4 h-4 transition-transform duration-300 ${
@@ -129,7 +129,7 @@ export default function Navbar() {
                   <Link
                     key={link}
                     href={href}
-                    className="px-4 py-2 text-md font-medium hover:text-textprimary transition relative group"
+                    className="px-4 py-2 text-md  font-semibold text-textsecondary hover:text-textprimary transition relative group"
                   >
                     {link}
                     <div className="absolute bottom-0 left-0 w-full h-0.5 bg-textprimary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
@@ -185,7 +185,7 @@ export default function Navbar() {
           
             <Link
               href={"/contact"}
-              className=" bg-secondary text-white hidden lg:block  ml-4 px-6 py-3 rounded-md border-2 border-white  font-medium hover:bg-secondary transition"
+              className=" bg-white text-textsecondary  hidden lg:block  ml-4 px-4 py-2  border-2 border-textprimary hover:border-white  font-small hover:bg-secondary transition hover:text-white"
             >
               Book Free Assesment
             </Link>
@@ -293,7 +293,7 @@ export default function Navbar() {
         <div
           onMouseEnter={() => setServicesOpen(true)}
           onMouseLeave={() => setServicesOpen(false)}
-          className={`absolute left-0 right-0 z-40 transition-all duration-300 ${
+          className={` font-heading fixed top-0 left-0 right-0 z-40 transition-all duration-300 shadow-md ${
             servicesOpen
               ? "opacity-100 visible translate-y-0"
               : "opacity-0 invisible -translate-y-4"
@@ -304,7 +304,7 @@ export default function Navbar() {
               <div className="grid grid-cols-1 lg:grid-cols-5">
                 <div className="lg:col-span-1 pr-6  py-48">
                   <h3 className="text-3xl font-bold mb-4">Our Services</h3>
-                  <p className="text-base text-gray-200 leading-relaxed">
+                  <p className="text-base text-gray-500 leading-relaxed">
                     No matter your role or goal{" "}
                     <span className="text-textprimary font-bold">BAC</span>{" "}
                     adapts to your needs
@@ -316,11 +316,11 @@ export default function Navbar() {
                       <Link
                         href={service.link}
                         onClick={closeAllMenus}
-                        className="block text-lg font-semibold hover:text-textprimary transition"
+                        className="block text-lg font-semibold text-textprimary  hover:text-textsecondary transition"
                       >
                         {service.title}
 
-                        <ul className="list-disc pl-5 space-y-1 text-gray-300">
+                        <ul className="list-disc pl-5 space-y-1 text-gray-500">
                           {service.descriptionPoints.map((point, i) => (
                             <li key={i} className="text-sm leading-relaxed">
                               {point}

@@ -1,15 +1,19 @@
-
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import LenisWrapper from "@/components/LenisWrapper";
 import LoadingScreen from "@/components/LoadingSreen";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
-
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -34,7 +38,6 @@ export const metadata = {
     "Booker Accounting and Consulting",
   ],
 
-  // ✅ THIS CONTROLS GOOGLE SEARCH ICON
   icons: {
     icon: "/favicon.png",
     apple: "/apple-touch-icon.png",
@@ -67,20 +70,18 @@ export const metadata = {
   },
 };
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
         className={`
-          ${geistSans.variable} 
-          ${geistMono.variable} 
-          font-sans 
+          ${poppins.variable}
+          ${inter.variable}
+          ${geistMono.variable}
+          
+      
           antialiased
         `}
-        style={{
-          fontFamily: '"cordiau", var(--font-geist-sans), sans-serif',
-        }}
       >
         <LenisWrapper>
           <script
@@ -98,7 +99,6 @@ export default function RootLayout({ children }) {
 
           {children}
         </LenisWrapper>
-
       </body>
     </html>
   );

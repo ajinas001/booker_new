@@ -36,7 +36,7 @@ export default function HeroSection() {
             id="home"
             // Use borderRadius style hook here
             style={{ borderBottomLeftRadius: borderRadius, borderBottomRightRadius: borderRadius }}
-            className="relative overflow-hidden min-h-screen flex items-center bg-primary text-white font-sans"
+            className=" font-heading relative overflow-hidden min-h-screen flex items-center bg-primary text-white "
         >
             {/* Background Image with Continuous Zoom Animation */}
             <motion.div
