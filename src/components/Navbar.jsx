@@ -2,13 +2,9 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaXTwitter,
-  FaYoutube,
-} from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+import { FaTiktok } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 // --- Static Data ---
 const SERVICES_DATA_RAW = [
   {
@@ -107,8 +103,9 @@ export default function Navbar() {
                       <button className="px-4 py-2 flex items-center gap-1 text-md  font-semibold text-textsecondary hover:text-textprimary transition">
                         {link}
                         <svg
-                          className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""
-                            }`}
+                          className={`w-4 h-4 transition-transform duration-300 ${
+                            servicesOpen ? "rotate-180" : ""
+                          }`}
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -156,12 +153,12 @@ export default function Navbar() {
               </a>
 
               <a
-                href="https://x.com"
+                href="https://www.tiktok.com/@yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-gray-800 hover:text-white transition"
               >
-                <FaXTwitter />
+                <FaTiktok />
               </a>
 
               <a
@@ -174,23 +171,21 @@ export default function Navbar() {
               </a>
 
               <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-red-600 hover:text-white transition"
+                href="mailto:info@example.com"
+                className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-gray-800 hover:text-white transition"
               >
-                <FaYoutube />
+                <MdEmail />
               </a>
-
-
             </div>
             <div>
-              <Link
-                href="/contact"
+              <a
+                href="https://wa.me/971567678156?text=Hello%20Booker%20Accounting%2C%20I%20would%20like%20assistance%20in%20making%20my%20business%20compliant%20and%20supporting%20its%20growth."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-textsecondary text-white text-sm hidden rounded-md lg:block px-4 py-2 border-2 border-white hover:border-textsecondary font-small hover:bg-white transition hover:text-textsecondary"
               >
                 Book Free Assessment
-              </Link>
+              </a>
             </div>
 
             {/* Mobile menu button */}
@@ -221,10 +216,11 @@ export default function Navbar() {
 
           {/* --- Mobile Menu --- */}
           <div
-            className={`fixed top-14 inset-0 z-50 lg:hidden transition-[opacity] duration-300 ease-in-out bg-white flex flex-col ${isOpen
+            className={`fixed top-14 inset-0 z-50 lg:hidden transition-[opacity] duration-300 ease-in-out bg-white flex flex-col ${
+              isOpen
                 ? "opacity-100 pointer-events-auto"
                 : "opacity-0 pointer-events-none"
-              }`}
+            }`}
           >
             {/* Top Section: Nav Links (Takes up remaining space) */}
             <div className="flex-grow overflow-y-auto py-4">
@@ -285,13 +281,14 @@ export default function Navbar() {
             {/* Bottom Section: CTA and Socials (Pinned to bottom) */}
             <div className="pb-8 border-t border-gray-100">
               <div className="px-6 pt-5">
-                <Link
-                  href="/contact"
-                  onClick={closeAllMenus}
+                <a
+                  href="https://wa.me/971567678156?text=Hello%20Booker%20Accounting%2C%20I%20would%20like%20assistance%20in%20making%20my%20business%20compliant%20and%20supporting%20its%20growth."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="block w-full text-center bg-secondary text-white font-medium py-3 rounded-md border border-secondary hover:bg-transparent hover:text-secondary transition duration-300"
                 >
                   Book Free Assessment
-                </Link>
+                </a>
               </div>
 
               <div className="flex justify-center items-center gap-3 pt-5">
@@ -311,14 +308,7 @@ export default function Navbar() {
                 >
                   <FaInstagram />
                 </a>
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-black hover:text-white transition"
-                >
-                  <FaXTwitter />
-                </a>
+
                 <a
                   href="https://linkedin.com"
                   target="_blank"
@@ -328,17 +318,23 @@ export default function Navbar() {
                   <FaLinkedinIn />
                 </a>
                 <a
-                  href="https://youtube.com"
+                  href="https://www.tiktok.com/@yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-red-600 hover:text-white transition"
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-black hover:text-white transition"
                 >
-                  <FaYoutube />
+                  <FaTiktok />
+                </a>
+
+                <a
+                  href="mailto:info@example.com"
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-600 hover:text-white transition"
+                >
+                  <MdEmail />
                 </a>
               </div>
             </div>
           </div>
-
         </div>
       </nav>
 
@@ -347,10 +343,11 @@ export default function Navbar() {
         <div
           onMouseEnter={() => setServicesOpen(true)}
           onMouseLeave={() => setServicesOpen(false)}
-          className={` font-heading fixed top-0 left-0 right-0 z-40 transition-all duration-300 shadow-md ${servicesOpen
+          className={` font-heading fixed top-0 left-0 right-0 z-40 transition-all duration-300 shadow-md ${
+            servicesOpen
               ? "opacity-100 visible translate-y-0"
               : "opacity-0 invisible -translate-y-4"
-            }`}
+          }`}
         >
           <div className=" mt-12 p-4 bg-white text-black ">
             <div className="max-w-7xl mx-auto px-6 py-6">
