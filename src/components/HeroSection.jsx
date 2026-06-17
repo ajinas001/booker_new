@@ -3,66 +3,46 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import {
+  HiOutlineDocumentText,
+  HiOutlinePencilSquare,
+  HiOutlineShieldCheck,
+  HiOutlineArrowPath,
+  HiOutlineCalculator,
+  HiOutlineClipboardDocumentCheck,
+  HiOutlineBuildingOffice2,
+} from "react-icons/hi2";
 
 // Services Data with minimal grid structure matching Screenshot 2026-06-16 132201.jpg
 const services = [
-    {
-        title: "Corporate Tax Registration",
-        icon: (
-            <svg className="w-9 h-9 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                <circle cx="10" cy="9" r="1.5" strokeWidth={1.2} />
-            </svg>
-        ),
-    },
-    {
-        title: "Corporate Tax Filing",
-        icon: (
-            <svg className="w-9 h-9 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-            </svg>
-        ),
-    },
-    {
-        title: "VAT Registration",
-        icon: (
-            <svg className="w-9 h-9 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-            </svg>
-        ),
-    },
-    {
-        title: "VAT Return Filing",
-        icon: (
-            <svg className="w-9 h-9 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 11H18.5" />
-            </svg>
-        ),
-    },
-    {
-        title: "Bookkeeping & Accounting",
-        icon: (
-            <svg className="w-9 h-9 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-        ),
-    },
-    {
-        title: "Audit Support Services",
-        icon: (
-            <svg className="w-9 h-9 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-            </svg>
-        ),
-    },
-    {
-        title: "Company Formation",
-        icon: (
-            <svg className="w-9 h-9 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
-        ),
-    },
+  {
+    title: "Corporate Tax Registration",
+    icon: <HiOutlineDocumentText className="w-12 h-12 text-black" />,
+  },
+  {
+    title: "Corporate Tax Filing",
+    icon: <HiOutlinePencilSquare className="w-12 h-12 text-black" />,
+  },
+  {
+    title: "VAT Registration",
+    icon: <HiOutlineShieldCheck className="w-12 h-12 text-black" />,
+  },
+  {
+    title: "VAT Return Filing",
+    icon: <HiOutlineArrowPath className="w-12 h-12 text-black" />,
+  },
+  {
+    title: "Bookkeeping & Accounting",
+    icon: <HiOutlineCalculator className="w-12 h-12 text-black" />,
+  },
+  {
+    title: "Audit Support Services",
+    icon: <HiOutlineClipboardDocumentCheck className="w-12 h-12 text-black" />,
+  },
+  {
+    title: "Company Formation",
+    icon: <HiOutlineBuildingOffice2 className="w-12 h-12 text-black" />,
+  },
 ];
 
 export default function HeroSection() {
@@ -94,9 +74,21 @@ export default function HeroSection() {
                 className="relative overflow-hidden min-h-[420px] lg:min-h-[50vh] xl:min-h-[60vh] flex items-center bg-[#e6e9ed] text-white z-20 shadow-md"
             >
                 {/* Background Image Setup */}
-                <div className="absolute inset-0 w-full h-full">
+                {/* Desktop Image */}
+                <div className="absolute inset-0 w-full h-full hidden md:block">
                     <Image
-                        src="/images/banner_new.png"
+                        src="/images/newbanner.png"
+                        alt="Your Trusted Accounting Partner"
+                        fill
+                        priority
+                        className="object-cover object-center opacity-90"
+                    />
+                </div>
+
+                {/* Mobile Image */}
+                <div className="absolute inset-0 w-full h-full block md:hidden">
+                    <Image
+                        src="/images/mobilebanner.png"
                         alt="Your Trusted Accounting Partner"
                         fill
                         priority
@@ -105,8 +97,14 @@ export default function HeroSection() {
                 </div>
 
                 {/* Overlays */}
+                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/20 z-10" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-transparent z-10" />
+
+
+                <div className="absolute inset-y-0 left-0 w-2/4 bg-gradient-to-r from-black/95 to-transparent z-10" />
+
+
+                <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black/95 to-transparent z-10" />
 
                 {/* Main Dynamic Grid Content */}
                 <motion.div
@@ -210,7 +208,7 @@ export default function HeroSection() {
                 {/* Heading Block */}
                 <div className="text-center mb-4">
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-black">
-                        Need <span className="relative inline-block text-textprimary pb-3 after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-textprimary after:left-0 after:bottom-0">Help</span> With?
+                        Need <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-textsecondary after:left-0 after:bottom-0">Help</span> With?
                     </h2>
                     <p className="text-[11px] sm:text-xs md:text-lg text-gray-500 max-w-7xl mx-auto m-3 leading-relaxed">
                         We provide end-to-end accounting, tax, and business advisory services tailored for UAE businesses.
@@ -228,7 +226,7 @@ export default function HeroSection() {
                                 {service.icon}
                             </div>
 
-                            <h3 className="text-[11px] font-bold text-black leading-snug tracking-tight mb-1">
+                            <h3 className="text-[15px] font-bold text-black  tracking-tight mb-1">
                                 {service.title}
                             </h3>
 
@@ -238,7 +236,7 @@ export default function HeroSection() {
                     ))}
                 </div>
 
-               
+
             </section>
         </div>
     );

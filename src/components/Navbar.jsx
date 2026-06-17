@@ -84,7 +84,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center space-x-1">
+            <div className="hidden lg:flex items-center ps-0 xl:ps-20  space-x-1">
               {NAV_LINKS.map((link) => {
                 const href = link === "Home" ? "/" : `/${link.toLowerCase()}`;
 
@@ -100,7 +100,7 @@ export default function Navbar() {
                         if (window.innerWidth >= 1024) setServicesOpen(false);
                       }}
                     >
-                      <button className="px-4 py-2 flex items-center gap-1 text-md  font-semibold text-textsecondary hover:text-textprimary transition">
+                      <button className="px-2 xl:px-4 py-2 flex items-center gap-1 text-md  font-semibold text-textsecondary hover:text-textprimary transition">
                         {link}
                         <svg
                           className={`w-4 h-4 transition-transform duration-300 ${
@@ -125,7 +125,7 @@ export default function Navbar() {
                   <Link
                     key={link}
                     href={href}
-                    className="px-4 py-2 text-md  font-semibold text-textsecondary hover:text-textprimary transition relative group"
+                    className="px-2 xl:px-4 py-2 text-md  font-semibold text-textsecondary hover:text-textprimary transition relative group"
                   >
                     {link}
                     <div className="absolute bottom-0 left-0 w-full h-0.5 bg-textprimary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
@@ -182,7 +182,7 @@ export default function Navbar() {
                 href="https://wa.me/971567678156?text=Hello%20Booker%20Accounting%2C%20I%20would%20like%20assistance%20in%20making%20my%20business%20compliant%20and%20supporting%20its%20growth."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-textsecondary text-white text-sm hidden rounded-md lg:block px-4 py-2 border-2 border-white hover:border-textsecondary font-small hover:bg-white transition hover:text-textsecondary"
+                className="bg-textsecondary text-white text-sm hidden rounded-md lg:block px-4 py-3 border-2 border-white hover:border-textsecondary font-small hover:bg-white transition hover:text-textsecondary"
               >
                 Book Free Assessment
               </a>

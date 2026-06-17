@@ -24,6 +24,7 @@ import Call from '@/components/Call';
 import Testimonials from '@/components/Testimonials';
 import ServicesPopup from '@/components/ServicesPopup';
 import Faq from '@/components/Faq';
+import FloatingActions from '@/components/FloatingActions';
 
 const BookerAccountingWebsite = () => {
 
@@ -34,7 +35,7 @@ const BookerAccountingWebsite = () => {
       <Navbar />
       <LoadingScreen />
       <HeroSection />
-      <MainAchievements />
+      {/* <MainAchievements /> */}
       <HomeAboutTimeline />
       <MainVisionSection />
 
@@ -51,7 +52,8 @@ const BookerAccountingWebsite = () => {
       <Faq />
       <ContactSection />
       <ScrollToTop />
-      <FloatingMenuButton />
+      <FloatingActions/>
+      {/* <FloatingMenuButton /> */}
       <Footer />
     </div>
   );
