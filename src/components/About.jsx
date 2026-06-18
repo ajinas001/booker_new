@@ -2,11 +2,12 @@
 import React, { useRef } from "react";
 import { Layers, TrendingUp, Compass, Globe } from "lucide-react";
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 
 // Define the colors consistent with your service component
 const SECONDARY_COLOR = "bg-cyan-800";
 const ACCENT_COLOR_TEXT = "text-cyan-600";
-const NEUTRAL_BG = "bg-[#f5f5f0]";
+const NEUTRAL_BG = "bg-white";
 const DARK_BG = "bg-secondary"; // Assuming 'secondary' is defined in your Tailwind config
 
 // Placeholder Image Paths (Update these to your working URLs)
@@ -69,11 +70,11 @@ const CoreIdentity = () => (
   <AnimatedContentBlock className={`p-8 md:p-12 text-gray-900 min-h-[400px]`}>
     <motion.h2
       variants={itemVariants}
-      className="text-4xl md:text-5xl font-light mb-4"
+      className="text-3xl md:text-3xl lg:text-4xl font-semibold  mb-4"
     >
       Who We Are
     </motion.h2>
-    <motion.p variants={itemVariants} className="text-lg leading-relaxed mb-6">
+    <motion.p variants={itemVariants} className="sm:text-md md:text-lg leading-relaxed mb-6">
       Our team is more than just a group of accountants; we are a strategic
       unit. We combine expert minds with the power of cutting-edge AI Tools to
       ensure accuracy and drive measurable results.
@@ -84,7 +85,7 @@ const CoreIdentity = () => (
     >
       <Layers size={30} className={ACCENT_COLOR_TEXT} />
       <p className="font-semibold text-gray-700 text-sm">
-        Client-first mindset, local insight, and lasting relationships based on
+        Client first mindset, local insight, and lasting relationships based on
         trust.
       </p>
     </motion.div>
@@ -102,11 +103,11 @@ const MissionVision = () => (
     </motion.p>
     <motion.h3
       variants={itemVariants}
-      className="text-4xl md:text-5xl  font-semibold mt-6 mb-2"
+      className="text-3xl md:text-3xl lg:text-4xl font-semibold mt-6 mb-2"
     >
       Our Mission
     </motion.h3>
-    <motion.p variants={itemVariants} className="text-base text-gray-700">
+    <motion.p variants={itemVariants} className="sm:text-md md:text-lg text-gray-700">
       To deliver brilliance through expert financial insights, maintain perfect
       balance (compliance), and build strong foundations for confident,
       sustainable growth.
@@ -114,11 +115,11 @@ const MissionVision = () => (
 
     <motion.h3
       variants={itemVariants}
-      className="text-4xl md:text-5xl  font-semibold mt-6 mb-2"
+      className="text-3xl md:text-3xl lg:text-4xl font-semibold mt-6 mb-2"
     >
       Our Vision
     </motion.h3>
-    <motion.p variants={itemVariants} className="text-base text-gray-700">
+    <motion.p variants={itemVariants} className="sm:text-md md:text-lg text-gray-700">
       To become the most trusted and forward-thinking financial partner,
       empowering businesses through expert accounting, strategic advisory, and
       AI-driven innovation.
@@ -137,13 +138,13 @@ const SellingPoints = () => (
     </motion.p>
     <motion.ul variants={containerVariants} className="space-y-6">
       <motion.li
-        variants={listItemVariants}
+        variants={itemVariants}
         className="flex items-start space-x-3"
       >
-        <TrendingUp size={32} className={ACCENT_COLOR_TEXT} />
+        {/* <TrendingUp size={32} className={ACCENT_COLOR_TEXT} /> */}
         <div>
-          <strong className="text-2xl md:text-3xl ">Specialized UAE Focus:</strong>
-          <p className="text-base text-gray-700">
+          <strong className="text-3xl md:text-3xl lg:text-4xl font-semibold ">Specialized UAE Focus:</strong>
+          <p className="sm:text-md md:text-lg text-gray-700">
             We are purpose-built to serve privately owned companies and
             entrepreneurs in the UAE, focusing on profitability and strategic
             tax planning.
@@ -151,26 +152,26 @@ const SellingPoints = () => (
         </div>
       </motion.li>
       <motion.li
-        variants={listItemVariants}
+        variants={itemVariants}
         className="flex items-start space-x-3"
       >
-        <Globe size={32} className={ACCENT_COLOR_TEXT} />
+        {/* <Globe size={32} className={ACCENT_COLOR_TEXT} /> */}
         <div>
-          <strong className="text-2xl md:text-3xl">Proven Local Expertise:</strong>
-          <p className="text-base text-gray-700">
+          <strong className="text-3xl md:text-3xl lg:text-4xl font-semibold">Proven Local Expertise:</strong>
+          <p className="sm:text-md md:text-lg text-gray-700">
             Offering deep local knowledge and a comprehensive understanding of
             business regulations and compliance throughout Uae.
           </p>
         </div>
       </motion.li>
       <motion.li
-        variants={listItemVariants}
+        variants={itemVariants}
         className="flex items-start space-x-3"
       >
-        <Compass size={32} className={ACCENT_COLOR_TEXT} />
+        {/* <Compass size={32} className={ACCENT_COLOR_TEXT} /> */}
         <div>
-          <strong className="text-2xl md:text-3xl ">Customized Solutions:</strong>
-          <p className="text-base text-gray-700">
+          <strong className="text-3xl md:text-3xl lg:text-4xl font-semibold ">Customized Solutions:</strong>
+          <p className="sm:text-md md:text-lg text-gray-700">
             We implement tailored accounting, bookkeeping, and tax strategies
             designed specifically for your business needs.
           </p>
@@ -220,18 +221,16 @@ const AboutUsFlow = () => {
       {/* Header with Motion */}
       <motion.header
         ref={headerRef}
-        className="max-w-7xl mx-auto text-center mb-20"
+        className="max-w-7xl mx-auto text-center mb-8"
         variants={headerVariants}
         initial="hidden"
         animate={isHeaderInView ? "visible" : "hidden"}
       >
-        <h1 className="text-5xl md:text-7xl font-light text-gray-900 mb-4">
-          The{" "}
-          <span className="font-semibold">
-            <span className="text-secondary">BAC</span> Difference
-          </span>
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto">
+
+        <h2 className="text-3xl md:text-3xl lg:text-4xl font-extrabold text-black">
+          The <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-textsecondary after:left-0 after:bottom-0">BAC</span> Difference.
+        </h2>
+        <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl px-4 mx-auto m-3 leading-relaxed">
           A Strategic Force Behind Your Numbers: Driven by expertise. Focused on
           strategy. Committed to your growth.
         </p>
@@ -289,11 +288,15 @@ const AboutUsFlow = () => {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
       >
-        <button
-          className={`w-fit px-12 py-4 rounded-tl-full rounded-tr-full rounded-br-full border-2 border-white ${DARK_BG} text-white text-lg font-light hover:opacity-90 transition-opacity`}
+        <Link href="https://wa.me/971567678156?text=Hello%20Booker%20Accounting%2C%20I%20would%20like%20assistance%20in%20making%20my%20business%20compliant%20and%20supporting%20its%20growth."
         >
-          Schedule Your Strategic Consultation
-        </button>
+          <button
+
+            className={`w-fit px-12 py-3 rounded-md border-2 border-white ${DARK_BG} text-white text-lg font-light hover:border-textsecondary font-small hover:bg-white  hover:text-textsecondary`}
+          >
+            Schedule Your Strategic Consultation
+          </button>
+        </Link>
       </motion.div>
     </section>
   );

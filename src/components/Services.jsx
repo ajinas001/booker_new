@@ -129,7 +129,7 @@ const services = [
 /* ---------------------- MAIN COMPONENT ---------------------- */
 export default function AccountingServices() {
   return (
-    <div className="min-h-screen bg-[#f5f5f0] p-4 md:p-8">
+    <div className="min-h-screen bg-white p-4 md:p-8">
       <section className="py-12 px-6 md:px-16">
         <h1 className="text-4xl md:text-6xl font-light text-gray-900 leading-tight">
           Business Consultants <br />

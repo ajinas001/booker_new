@@ -207,16 +207,16 @@ export default function HeroSection() {
 
                 {/* Heading Block */}
                 <div className="text-center mb-4">
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-black">
+                    <h2 className="text-3xl md:text-3xl lg:text-4xl font-extrabold text-black">
                         Need <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-textsecondary after:left-0 after:bottom-0">Help</span> With?
                     </h2>
-                    <p className="text-[11px] sm:text-xs md:text-lg text-gray-500 max-w-7xl mx-auto m-3 leading-relaxed">
+                    <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl mx-auto m-3 leading-relaxed">
                         We provide end-to-end accounting, tax, and business advisory services tailored for UAE businesses.
                     </p>
                 </div>
 
                 {/* Compact Row Matrix Grid Grid Container */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 items-stretch justify-center">
+                <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 items-stretch justify-center">
                     {services.map((service, index) => (
                         <div
                             key={index}
@@ -226,9 +226,9 @@ export default function HeroSection() {
                                 {service.icon}
                             </div>
 
-                            <h3 className="text-[15px] font-bold text-black  tracking-tight mb-1">
+                            <h5 className="text-[15px]  text-black  tracking-tight mb-1">
                                 {service.title}
-                            </h3>
+                            </h5>
 
                             {/* Static gold border matching image mockup */}
                             <div className="w-6 h-[2px] bg-textprimary mt-1" />

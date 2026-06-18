@@ -38,7 +38,7 @@ const BookerAccountingWebsite = () => {
       <HeroSection />
       {/* <MainAchievements /> */}
       <HomeAboutTimeline />
-      <MainVisionSection />
+      {/* <MainVisionSection /> */}
 
       <Services />
       <MotoSwiper />
