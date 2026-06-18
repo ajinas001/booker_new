@@ -231,7 +231,7 @@ export default function HeroSection() {
                             </h5>
 
                             {/* Static gold border matching image mockup */}
-                            <div className="w-6 h-[2px] bg-textprimary mt-1" />
+                            <div className="w-6 h-[2px] bg-textsecondary mt-1" />
                         </div>
                     ))}
                 </div>
