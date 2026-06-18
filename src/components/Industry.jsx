@@ -1,313 +1,248 @@
 "use client";
-
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  TrendingUp, Building2, Droplets, Utensils, Stethoscope,
+  Factory, Laptop, Briefcase, Landmark, Truck, GraduationCap, Sparkles,
+} from "lucide-react";
 
 const industries = [
   {
-    id: "01",
-    title: "SMEs & Startups",
-    description:
-      "We support emerging businesses with tailored accounting, compliance, and advisory services that help establish strong financial foundations and sustainable growth.",
+    title: "Trading & Import/Export",
+    icon: TrendingUp,
+    subtitle: "Cross-border finance built for volume and velocity.",
+    tags: [
+      "Retail Trading Companies",
+      "Wholesale Distributors",
+      "Import/Export Businesses",
+      "General Trading Companies",
+    ],
+    accent: "secondary",
   },
   {
-    id: "02",
-    title: "Real Estate & Construction",
-    description:
-      "From project audits to tax structuring, we assist developers and contractors in maintaining transparency, compliance, and profitability across every project.",
+    title: "Construction & Real Estate",
+    icon: Building2,
+    subtitle: "Project accounting that keeps pace with every milestone.",
+    tags: [
+      "Construction Companies",
+      "Real Estate Developers",
+      "Property Management Firms",
+      "Engineering Contractors",
+    ],
+    accent: "black",
   },
   {
-    id: "03",
-    title: "Retail & Trading",
-    description:
-      "We offer bookkeeping, VAT compliance, and financial planning services for trading and retail firms to improve cash flow and business performance.",
+    title: "Oil & Gas Industry",
+    icon: Droplets,
+    subtitle: "Precision reporting for high-stakes energy operations.",
+    tags: [
+      "Exploration & Production Companies",
+      "Oilfield Service Providers",
+      "Energy Contractors",
+      "Industrial Suppliers",
+    ],
+    accent: "secondary",
   },
   {
-    id: "04",
-    title: "Manufacturing",
-    description:
-      "Our team provides cost control, budgeting, and compliance support to help manufacturers enhance efficiency and profitability.",
+    title: "Hospitality & Tourism",
+    icon: Utensils,
+    subtitle: "Revenue intelligence from bookings to balance sheet.",
+    tags: [
+      "Hotels & Hotel Apartments",
+      "Restaurants & Cafés",
+      "Travel Agencies",
+      "Tourism Operators",
+    ],
+    accent: "black",
   },
   {
-    id: "05",
+    title: "Healthcare & Medical",
+    icon: Stethoscope,
+    subtitle: "Compliant financial systems for patient-first operations.",
+    tags: [
+      "Clinics & Hospitals",
+      "Medical Centers",
+      "Pharmacies",
+      "Healthcare Service Providers",
+    ],
+    accent: "secondary",
+  },
+  {
+    title: "Manufacturing & Industrial",
+    icon: Factory,
+    subtitle: "End-to-end costing from raw materials to finished goods.",
+    tags: [
+      "Factories & Production Units",
+      "Industrial Manufacturers",
+      "Packaging Companies",
+      "Heavy Industry Operators",
+    ],
+    accent: "black",
+  },
+  {
+    title: "Technology & IT",
+    icon: Laptop,
+    subtitle: "Scalable finance for companies moving at startup speed.",
+    tags: [
+      "Software Companies",
+      "IT Service Providers",
+      "SaaS Businesses",
+      "E-commerce Platforms",
+    ],
+    accent: "secondary",
+  },
+  {
     title: "Professional Services",
-    description:
-      "We help consultants, agencies, and service-based businesses streamline financial operations and maintain compliance with UAE regulations.",
+    icon: Briefcase,
+    subtitle: "Time-to-invoice tracking and utilization analytics.",
+    tags: [
+      "Law Firms",
+      "Consultancy Firms",
+      "Marketing Agencies",
+      "Engineering Consultants",
+    ],
+    accent: "black",
   },
   {
-    id: "06",
-    title: "Free Zone Entities",
-    description:
-      "We provide accounting, audit, and tax support to UAE free zone companies, ensuring compliance while maximizing the benefits of your business setup.",
+    title: "Financial Services",
+    icon: Landmark,
+    subtitle: "Regulatory-ready books for licensed and exempt firms.",
+    tags: [
+      "Insurance Brokers",
+      "Financial Advisory Firms",
+      "Investment Companies",
+      "Fintech Startups",
+    ],
+    accent: "secondary",
+  },
+  {
+    title: "Transportation & Logistics",
+    icon: Truck,
+    subtitle: "Fleet economics and freight margins at a glance.",
+    tags: [
+      "Freight & Shipping Companies",
+      "Logistics Providers",
+      "Cargo & Supply Chain Firms",
+      "Transport Operators",
+    ],
+    accent: "black",
+  },
+  {
+    title: "Education & Training",
+    icon: GraduationCap,
+    subtitle: "Fee management and grant compliance made simple.",
+    tags: [
+      "Schools & Training Institutes",
+      "Coaching Centers",
+      "Professional Development Academies",
+    ],
+    accent: "secondary",
+  },
+  {
+    title: "SMEs & Startups",
+    icon: Sparkles,
+    subtitle: "Founder-friendly finance that grows with your ambition.",
+    tags: [
+      "Small & Medium Enterprises",
+      "Startups Across All Industries",
+      "Freelancers & Entrepreneurs",
+    ],
+    accent: "black",
   },
 ];
 
-// Fixed Text reveal animation component
-const TextReveal = ({ children, delay = 0 }) => {
+function Tag({ label }) {
   return (
-    <motion.div
-      initial={{ 
-        y: "100%",
-        opacity: 0 
-      }}
-      whileInView={{ 
-        y: 0,
-        opacity: 1 
-      }}
-      transition={{
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
-        delay
-      }}
-      viewport={{ once: true, margin: "-50px" }}
-      className="overflow-hidden"
-    >
-      {children}
-    </motion.div>
+    <span className="text-[11px] uppercase tracking-wider font-semibold px-4 py-2 rounded-md bg-purpletint text-stone-900 border border-purpletint">
+      {label}
+    </span>
   );
-};
+}
 
-// Single line text reveal with mask
-const SingleTextReveal = ({ text, delay = 0, className = "" }) => {
-  return (
-    <div className="overflow-hidden">
-      <motion.span
-        initial={{ y: "100%" }}
-        whileInView={{ y: 0 }}
-        transition={{
-          duration: 0.8,
-          ease: [0.25, 0.1, 0.25, 1],
-          delay
-        }}
-        viewport={{ once: true, margin: "-50px" }}
-        className={`block ${className}`}
-      >
-        {text}
-      </motion.span>
-    </div>
-  );
-};
-
-export default function IndustriesSection() {
-  // Container variants for staggered children
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  // Label animation
-  const labelVariants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.8,
-      y: 20 
-    },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 15
-      }
-    }
-  };
-
-  // Item animation
-  const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 40 
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 80,
-        damping: 15,
-        duration: 0.8
-      }
-    }
-  };
-
-  // Number animation
-  const numberVariants = {
-    hidden: { 
-      scale: 0,
-      opacity: 0
-    },
-    visible: { 
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 15
-      }
-    }
-  };
+export default function PremiumIndustries() {
+  const [active, setActive] = useState(0);
+  const activeItem = industries[active];
 
   return (
-    <section className="bg-primary text-foreground">
-      <div className="mx-4 sm:mx-8 lg:mx-20 xl:mx-32 px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        {/* Label with animation */}
-        <motion.div
-          variants={labelVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          whileHover={{
-            scale: 1.05,
-            backgroundColor: "rgba(28, 94, 106, 0.1)",
-            transition: { duration: 0.2 }
-          }}
-          className="inline-block border border-secondary text-secondary text-sm  font-medium w-fit px-8 py-3 rounded-tl-full rounded-tr-full rounded-br-full uppercase tracking-widest mb-16 cursor-pointer"
-        >
-          Industries We Serve
-        </motion.div>
-
-        {/* Heading with fixed text reveal animation */}
-        <div className="mb-20 md:mb-24">
-          <div className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-10">
-            <SingleTextReveal 
-              text="Tailored expertise for" 
-              delay={0.1}
-              className="block mb-3"
-            />
-            <SingleTextReveal 
-              text="every business sector." 
-              delay={0.3}
-              className="block text-secondary"
-            />
+    <section className="bg-white min-h-screen py-24">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* --- MOBILE VIEW: Simple Stacked Cards --- */}
+        <div className="lg:hidden">
+          <div className="mb-12">
+            <h2 className="text-4xl font-light text-textsecondary mb-4">Industries <span className="block font-medium">We Serve</span></h2>
+            <p className="text-stone-600 text-base leading-relaxed">Booker Accounting works with a wide range of industries across the UAE, providing tailored accounting, tax, audit, and compliance solutions.</p>
           </div>
-          
-          {/* Animated border */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="h-px bg-gradient-to-r from-transparent via-secondary to-transparent mt-10"
-          />
+          <div className="flex flex-col gap-6">
+            {industries.map((item, idx) => (
+              <div key={idx} className="bg-white rounded-[2rem] p-8 border border-stone-200 shadow-sm">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-stone-900 flex items-center justify-center text-white">
+                    <item.icon size={22} />
+                  </div>
+                  <h3 className="text-xl font-medium text-stone-900">{item.title}</h3>
+                </div>
+                <p className="text-stone-500 text-sm mb-6 leading-relaxed">{item.subtitle}</p>
+                <div className="flex flex-wrap gap-2">
+                  {item.tags.map((tag) => <Tag key={tag} label={tag} />)}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Industry Rows Container */}
-        <motion.div 
-          className="divide-y divide-gray-300/20"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {industries.map((industry, index) => (
-            <motion.div
-              key={industry.id}
-              variants={itemVariants}
-              whileHover={{
-                backgroundColor: "rgba(13, 26, 32, 0.03)",
-                transition: { duration: 0.3 }
-              }}
-              className="flex flex-col md:flex-row items-start md:items-center justify-between py-10 md:py-14 gap-6 md:gap-10 lg:gap-12 rounded-sm px-6 md:px-8 -mx-6 md:-mx-8 cursor-pointer group"
-            >
-              {/* Left side: Number + Title */}
-              <div className="flex items-start md:items-center gap-6 md:gap-10 md:w-2/5 lg:w-1/3">
-                <motion.h3 
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold text-secondary flex-shrink-0"
-                  variants={numberVariants}
-                  whileHover={{
-                    scale: 1.1,
-                    transition: { duration: 0.2 }
-                  }}
+        {/* --- DESKTOP VIEW: Sticky Layout --- */}
+        <div className="hidden lg:grid grid-cols-12 gap-16">
+          <div className="col-span-5 relative">
+            <div className="sticky top-24">
+              <div className="mb-12">
+                <h2 className="text-5xl font-light text-textsecondary mb-6 tracking-tight">
+                  Industries <span className="block font-medium">We Serve</span>
+                </h2>
+                <p className="text-stone-600 text-lg leading-relaxed max-w-md">
+                  Booker Accounting works with a wide range of industries across the UAE, providing tailored accounting, tax, audit, and compliance solutions.
+                </p>
+              </div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="bg-gradient-to-br from-gray-900 to-teal-900 rounded-xl p-12 text-white shadow-2xl min-h-[420px] flex flex-col justify-between"
                 >
-                  {industry.id}
-                </motion.h3>
-                <div className="min-h-[60px] flex items-center">
-                  <div className="overflow-hidden">
-                    <motion.h4 
-                      initial={{ y: "100%" }}
-                      whileInView={{ y: 0 }}
-                      transition={{
-                        duration: 0.7,
-                        ease: [0.25, 0.1, 0.25, 1],
-                        delay: 0.2 + index * 0.1
-                      }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      className="text-xl md:text-2xl lg:text-3xl font-light text-primary-black group-hover:text-secondary transition-colors duration-300"
-                    >
-                      {industry.title}
-                    </motion.h4>
+                  <div>
+                    <activeItem.icon size={48} className="text-white mb-8" strokeWidth={1.5} />
+                    <h3 className="text-3xl font-light mb-4">{activeItem.title}</h3>
+                    <p className="text-stone-300 text-base leading-relaxed">{activeItem.subtitle}</p>
                   </div>
-                </div>
-              </div>
-
-              {/* Right side: Description */}
-              <div className="md:w-3/5 lg:w-2/3 md:pl-4">
-                <div className="overflow-hidden">
-                  <motion.p 
-                    initial={{ y: "100%" }}
-                    whileInView={{ y: 0 }}
-                    transition={{
-                      duration: 0.7,
-                      ease: [0.25, 0.1, 0.25, 1],
-                      delay: 0.4 + index * 0.1
-                    }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="text-primary-black/80 text-base md:text-lg lg:text-xl leading-relaxed group-hover:text-primary-black transition-colors duration-300"
-                  >
-                    {industry.description}
-                  </motion.p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA Section with animations */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true, margin: "-50px" }}
-          className="text-center mt-20 md:mt-24 pt-16 md:pt-20 border-t border-gray-300/20"
-        >
-          <motion.div
-            whileHover={{ 
-              scale: 1.02,
-              backgroundColor: "rgba(13, 26, 32, 0.05)"
-            }}
-            className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-6 px-6 py-6 rounded-sm"
-          >
-            <div className="overflow-hidden">
-              <motion.span
-                initial={{ y: "100%" }}
-                whileInView={{ y: 0 }}
-                transition={{ duration: 0.7, delay: 0.7 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="text-lg md:text-xl text-primary-black font-light block"
-              >
-                Ready to transform your financial strategy?
-              </motion.span>
+                  <div className="text-gray-100 font-mono text-sm pt-8 border-t border-gray-100">
+                    {String(active + 1).padStart(2, "0")} / {String(industries.length).padStart(2, "0")}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
-            <div className="overflow-hidden">
-              <motion.span
-                initial={{ y: "100%" }}
-                whileInView={{ y: 0 }}
-                transition={{ duration: 0.7, delay: 0.9 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="text-secondary text-lg md:text-xl font-medium block"
+          </div>
+
+          <div className="col-span-7 pt-12">
+            {industries.map((item, idx) => (
+              <motion.div
+                key={idx}
+                onViewportEnter={() => setActive(idx)}
+                viewport={{ margin: "-20% 0px -60% 0px" }}
+                className="mb-32 last:mb-20 border-l border-stone-300 pl-10"
               >
-                Get started →
-              </motion.span>
-            </div>
-          </motion.div>
-        </motion.div>
+                <h3 className="text-2xl font-light text-textsecondary mb-8">{item.title}</h3>
+                <div className="flex flex-wrap gap-2.5">
+                  {item.tags.map((tag) => (
+                    <Tag key={tag} label={tag} />
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

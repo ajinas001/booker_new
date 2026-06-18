@@ -25,6 +25,7 @@ import Testimonials from '@/components/Testimonials';
 import ServicesPopup from '@/components/ServicesPopup';
 import Faq from '@/components/Faq';
 import FloatingActions from '@/components/FloatingActions';
+import LeadMagnet from '@/components/LeadMagnet';
 
 const BookerAccountingWebsite = () => {
 
@@ -42,6 +43,7 @@ const BookerAccountingWebsite = () => {
       <Services />
       <MotoSwiper />
       <IndustriesSection />
+      <LeadMagnet/>
       {/* <ServicesPopup/> */}
       <OurProcess />
       <Testimonials />

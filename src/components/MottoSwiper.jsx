@@ -55,7 +55,7 @@ const partnerItems = [
 
 const MotoSwiper = () => {
   return (
-    <section className="w-full bg-gray-200 py-24 px-6 ">
+    <section className="w-full bg-purpletint py-24 px-6 ">
       <div className="max-w-7xl mx-auto text-start">
         <motion.div
           className="mb-16 max-w-4xl"
@@ -86,9 +86,9 @@ const MotoSwiper = () => {
           slidesPerView={1}
           spaceBetween={40}
           breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            640: { slidesPerView: 2},
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 5 },
           }}
           className="pb-10 py-20"
         >

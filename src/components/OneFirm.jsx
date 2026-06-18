@@ -142,7 +142,7 @@ const Card = ({ step, index, range, targetScale, progress }) => {
         scale,
         top: `calc(5vh + ${index * 25}px)`,
       }}
-      className="sticky h-[500px] w-full rounded-3xl bg-secondary text-white p-12 mb-6"
+      className="sticky h-[500px] w-full rounded-3xl bg-gradient-to-br from-gray-900 to-teal-900 text-white p-12 mb-6"
     >
       <div className="flex h-full flex-col justify-between">
         <div className="flex items-start justify-between">

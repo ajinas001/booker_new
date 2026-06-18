@@ -180,7 +180,7 @@ export default function Testimonials() {
                 variants={cardSlideUpVariant}
                 whileHover={{ scale: 1.01, transition: { duration: 0.3 } }}
                 // Card background and border for light theme match
-                className="p-10 bg-gray-200  rounded-3xl cursor-pointer h-full flex flex-col" // Removed justify-between
+                className="p-10 bg-purpletint  rounded-3xl cursor-pointer h-full flex flex-col" // Removed justify-between
               >
                 {/* Name and Date - Top of card */}
                 <div className="mb-6">
@@ -258,7 +258,7 @@ export default function Testimonials() {
         {/* SECTION 4: Client Benefits (Checklist) */}
 
         {/* Client Benefits */}
-        <div className="bg-gray-200 p-16 py-4 md:py-16 rounded-3xl  space-y-8 mb-8 ">
+        <div className="bg-purpletint p-16 py-4 md:py-16 rounded-3xl  space-y-8 mb-8 ">
           <h3 className="text-2xl font-bold text-gray-900 mb-6">
             What Our Clients Actually Get
           </h3>

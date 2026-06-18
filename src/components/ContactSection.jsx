@@ -86,7 +86,8 @@ export default function ContactSection() {
 
                 <Link
                   href="/contact"
-                  className=" w-fit  rounded-tl-full rounded-tr-full rounded-br-full border-2 inline-block px-10 py-4 hover:text-white  bordeer-secondary bg- text-secondary rounded-md hover:bg-neutral-700 transition"
+                  className=" w-fit  rounded-xl border-2 inline-block px-8 py-3 hover:text-white  bordeer-secondary bg- text-secondary rounded-md hover:bg-neutral-700 transition"
+                  // className=" w-fit  rounded-tl-full rounded-tr-full rounded-br-full border-2 inline-block px-10 py-4 hover:text-white  bordeer-secondary bg- text-secondary rounded-md hover:bg-neutral-700 transition"
                 >
                   Let's talk
                 </Link>
