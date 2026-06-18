@@ -11,7 +11,7 @@ export default function LeadMagnet() {
           
           {/* Left Content */}
           <div className="max-w-2xl">
-            <span className="inline-block text-sm font-medium text-black/70 mb-4">
+            <span className="inline-block text-sm font-medium text-textsecondary mb-4">
               FREE RESOURCES & GUIDES
             </span>
 
@@ -48,7 +48,7 @@ export default function LeadMagnet() {
             </div>
 
             {/* Download Card */}
-            <div className="bg-black text-white rounded-2xl p-5 min-w-[320px]">
+            <div className="bg-textsecondary text-white rounded-2xl p-5 px-0 md:px-8 ">
               <h4 className="font-semibold mb-2">
                 UAE Corporate Tax Guide
               </h4>

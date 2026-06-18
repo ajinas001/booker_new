@@ -70,8 +70,9 @@ const StarRating = ({ rating }) => (
     {[...Array(5)].map((_, i) => (
       <Star
         key={i}
-        className={`w-4 h-4 ${i < rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
-          }`}
+        className={`w-4 h-4 ${
+          i < rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
+        }`}
         strokeWidth={1}
       />
     ))}
@@ -154,15 +155,13 @@ export default function Testimonials() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {/* Using a font class that closely matches the image's "Success Stories" style */}
-            <h2 className="text-4xl md:text-6xl c font-normal text-gray-900 mb-8 tracking-tight leading-none ">
+            <h2 className="text-3xl md:text-3xl lg:text-4xl font-semibold text-black">
               Success{" "}
-              <span className="font-['Playfair_Display',_serif] italic text-secondary">
+              <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full  after:bg-textsecondary after:left-0 after:bottom-0">
                 Stories
               </span>
             </h2>
-            {/* Keeping this description for context, adjust as needed */}
-            <p className="text-xl text-gray-600">
+            <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl  mx-auto  leading-relaxed">
               Hear directly from our valued clients.
             </p>
           </motion.div>

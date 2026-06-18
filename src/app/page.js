@@ -26,6 +26,7 @@ import ServicesPopup from '@/components/ServicesPopup';
 import Faq from '@/components/Faq';
 import FloatingActions from '@/components/FloatingActions';
 import LeadMagnet from '@/components/LeadMagnet';
+import FloatingService from '@/components/FloatingService';
 
 const BookerAccountingWebsite = () => {
 
@@ -55,6 +56,7 @@ const BookerAccountingWebsite = () => {
       <ContactSection />
       <ScrollToTop />
       <FloatingActions/>
+      <FloatingService/>
       {/* <FloatingMenuButton /> */}
       <Footer />
     </div>

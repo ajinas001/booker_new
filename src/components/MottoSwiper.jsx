@@ -69,7 +69,7 @@ const MotoSwiper = () => {
            <h2 className="text-3xl md:text-3xl lg:text-4xl font-semibold text-black">
           Our <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full  after:bg-textsecondary after:left-0 after:bottom-0">Collaborators</span>
         </h2>
-        <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl px-4 mx-auto m-3 leading-relaxed">
+        <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl  mx-auto  leading-relaxed">
          We proudly collaborate with industry-leading freezones to empower
             businesses to establish and expand with confidence.
         </p>

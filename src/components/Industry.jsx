@@ -177,7 +177,7 @@ export default function PremiumIndustries() {
             {industries.map((item, idx) => (
               <div key={idx} className="bg-white rounded-[2rem] p-8 border border-stone-200 shadow-sm">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-stone-900 flex items-center justify-center text-white">
+                  <div className="w-12 h-12 rounded-2xl bg-textsecondary flex items-center justify-center text-white">
                     <item.icon size={22} />
                   </div>
                   <h3 className="text-xl font-medium text-stone-900">{item.title}</h3>

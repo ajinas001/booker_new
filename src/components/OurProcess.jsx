@@ -117,16 +117,13 @@ export default function OurProcess() {
           viewport={{ once: true, amount: 0.2 }}
         >
           {/* Using a font class that closely matches the image's "Success Stories" style */}
-          <h2 className="text-4xl md:text-6xl font-normal text-gray-900 mb-8 tracking-tight leading-none font-bold">
-            Our{" "}
-            <span className="font-['Playfair_Display',_serif] italic text-secondary">
-              Process
-            </span>
-          </h2>
-          {/* Keeping this description for context, adjust as needed */}
-          <p className="text-xl text-gray-600">
-            A clear, strategic process that powers your business forward.
-          </p>
+          
+          <h2 className="text-3xl md:text-3xl lg:text-4xl font-semibold text-black">
+          Our <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full  after:bg-textsecondary after:left-0 after:bottom-0">Process</span>
+        </h2>
+        <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl  mx-auto  leading-relaxed">
+         A clear, strategic process that powers your business forward.
+        </p>
         </motion.div>
 
         <div className="space-y-8">
@@ -148,7 +145,7 @@ export default function OurProcess() {
                       {item.num}.
                     </span>
 
-                    <span className="text-xl md:text-3xl font-semibold text-textsecondary">
+                    <span className="text-md md:text-xl lg:2xl font-semibold text-textsecondary">
                       {item.title}
                     </span>
 
@@ -160,7 +157,7 @@ export default function OurProcess() {
                   </div>
 
                   {/* Description always visible */}
-                  <p className="mt-2 ml-10 text-gray-600 text-base md:text-lg">
+                  <p className="mt-2 ml-10 text-gray-600 text-xs md:text-md lg:text-lg">
                     {item.description}
                   </p>
                 </div>
