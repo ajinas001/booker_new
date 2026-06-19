@@ -50,7 +50,7 @@ const BookerAccountingWebsite = () => {
       <OurProcess />
       <Testimonials />
       <Call />
-      <VideoResources/>
+      {/* <VideoResources/> */}
       {/* <Dashboard/> */}
       {/* <Whychoose /> */}
       <OneFirm />

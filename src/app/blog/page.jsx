@@ -113,7 +113,7 @@ export default function BlogPage() {
               We believe business owners deserve clear and practical guidance.
               That's why we share valuable insights, compliance updates, and
               expert advice to help you stay compliant, make confident
-              decisions, and grow your business successfully."
+              decisions, and grow your business successfully.
             </motion.p>
           </div>
         </section>
