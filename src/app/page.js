@@ -27,6 +27,7 @@ import Faq from '@/components/Faq';
 import FloatingActions from '@/components/FloatingActions';
 import LeadMagnet from '@/components/LeadMagnet';
 import FloatingService from '@/components/FloatingService';
+import VideoResources from '@/components/VideoResources';
 
 const BookerAccountingWebsite = () => {
 
@@ -49,6 +50,7 @@ const BookerAccountingWebsite = () => {
       <OurProcess />
       <Testimonials />
       <Call />
+      <VideoResources/>
       {/* <Dashboard/> */}
       {/* <Whychoose /> */}
       <OneFirm />

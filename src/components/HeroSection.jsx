@@ -127,7 +127,7 @@ export default function HeroSection() {
 
                             <a
                                 href="/contact"
-                                className="group inline-flex items-center justify-center gap-2 bg-textsecondary hover:bg-[#c5a880] text-white text-xs md:text-sm font-bold w-fit px-5 py-3 rounded transition-all duration-300 shadow-md"
+                                className="group inline-flex items-center justify-center gap-2 bg-textsecondary hover:bg-white hover:text-textsecondary text-white text-xs md:text-sm font-bold w-fit px-5 py-3 rounded transition-all duration-300 shadow-md"
                             >
                                 Book Free Assessment
                                 <svg

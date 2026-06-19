@@ -4,6 +4,7 @@ import {
   FaLinkedinIn,
   FaWhatsapp,
   FaInstagram,
+  FaFacebook,
   FaEnvelope,
 } from "react-icons/fa6";
 import Image from "next/image";
@@ -43,6 +44,11 @@ const socialLinks = [
     icon: FaEnvelope,
     href: "mailto:info@bookeraccounting.com",
     label: "Email",
+  },
+  {
+    icon: FaFacebook,
+    href: "#",
+    label: "Facebook",
   },
 ];
 

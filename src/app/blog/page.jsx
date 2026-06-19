@@ -21,16 +21,16 @@ export default function BlogPage() {
       role: "Booker Accounting and Consulting",
       date: "5 November, 2025",
       imageUrl: "/images/e-invoice.webp",
-      
+
       color: "bg-indigo-600",
       icon: FileText,
     },
     {
       id: 2,
       href: "/offshore",
-      title:
-        "UAE Offshore Corporate TaxRegistration",
-        description:"A comprehensive guide to understanding corporate tax registration for offshore companies in the UAE's evolving tax framework",
+      title: "UAE Offshore Corporate TaxRegistration",
+      description:
+        "A comprehensive guide to understanding corporate tax registration for offshore companies in the UAE's evolving tax framework",
       author: "Head of Content ",
       role: "Booker Accounting and Consulting",
       date: "4 November, 2025",
@@ -110,8 +110,10 @@ export default function BlogPage() {
               transition={{ duration: 0.9 }}
               className="text-xl md:text-2xl text-gray-300 max-w-3xl"
             >
-              Dive into our latest research, actionable guides, and expert
-              opinions on performance marketing and ad creative strategies.
+              We believe business owners deserve clear and practical guidance.
+              That's why we share valuable insights, compliance updates, and
+              expert advice to help you stay compliant, make confident
+              decisions, and grow your business successfully."
             </motion.p>
           </div>
         </section>
@@ -119,92 +121,95 @@ export default function BlogPage() {
         {/* ✅ BLOG SECTION */}
         <section className="max-w-7xl mx-auto px-6 py-20">
           <div className="text-center mb-14">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
-              Latest Insights
+            <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-black">
+              Latest{" "}
+              <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full  after:bg-textsecondary after:left-0 after:bottom-0">
+                Insights
+              </span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              All the posts you need to succeed.
+            <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl  mx-auto  leading-relaxed">
+              Helping businesses grow through knowledge, compliance, and
+              informed decision-making."
             </p>
           </div>
 
           {/* Blog Grid */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10">
-  {POSTS.map((post) => {
-    const Icon = post.icon;
-    return (
-      <motion.div
-        key={post.id}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="bg-white rounded-2xl overflow-hidden transition-all border border-gray-200"
-      >
-        {/* Image */}
-        <div className="relative h-64 overflow-hidden">
-          <Image
-            src={post.imageUrl}
-            alt={post.title}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover object-center transition-transform duration-700 hover:scale-105"
-          />
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10">
+            {POSTS.map((post) => {
+              const Icon = post.icon;
+              return (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="bg-white rounded-2xl overflow-hidden transition-all border border-gray-200"
+                >
+                  {/* Image */}
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={post.imageUrl}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
 
-        {/* Content */}
-        <div className="p-6 flex flex-col h-full">
-          <h3 className="text-xl font-bold leading-snug mb-3 text-textsecondary">
-            {post.title}
-          </h3>
+                  {/* Content */}
+                  <div className="p-6 flex flex-col h-full">
+                    <h3 className="text-xl font-bold leading-snug mb-3 text-textsecondary">
+                      {post.title}
+                    </h3>
 
-          {/* Description (NEW — no design change) */}
-          <p className="text-lg text-black leading-relaxed">
-            {post.description}
-          </p>
+                    {/* Description (NEW — no design change) */}
+                    <p className="text-lg text-black leading-relaxed">
+                      {post.description}
+                    </p>
 
-          {/* Author Info */}
-          <div className="flex items-center gap-3 mt-4">
-            <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center text-white ${post.color}`}
-            >
-              <Icon className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">{post.author}</p>
-              <p className="text-xs text-gray-500">{post.role}</p>
-            </div>
+                    {/* Author Info */}
+                    <div className="flex items-center gap-3 mt-4">
+                      <div
+                        className={`w-10 h-10 rounded-full flex items-center justify-center text-white ${post.color}`}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold">{post.author}</p>
+                        <p className="text-xs text-gray-500">{post.role}</p>
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-gray-500 mt-4 pt-4 border-t border-gray-200">
+                      {post.date}
+                    </p>
+
+                    {/* Read More */}
+                    <Link
+                      href={`/blog/${post.href}`}
+                      className="mt-6 inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-semibold transition-colors group"
+                    >
+                      Read More
+                      <svg
+                        className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
-
-          <p className="text-sm text-gray-500 mt-4 pt-4 border-t border-gray-200">
-            {post.date}
-          </p>
-
-          {/* Read More */}
-          <Link
-            href={`/blog/${post.href}`}
-            className="mt-6 inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-semibold transition-colors group"
-          >
-            Read More
-            <svg
-              className="w-5 h-5 transition-transform group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </Link>
-        </div>
-      </motion.div>
-    );
-  })}
-</div>
-
         </section>
 
         {/* ✅ FOOTER SECTION */}
