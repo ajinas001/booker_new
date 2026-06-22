@@ -28,6 +28,7 @@ import FloatingActions from '@/components/FloatingActions';
 import LeadMagnet from '@/components/LeadMagnet';
 import FloatingService from '@/components/FloatingService';
 import VideoResources from '@/components/VideoResources';
+import IndustryDetailPage from '@/components/Industries';
 
 const BookerAccountingWebsite = () => {
 
@@ -44,6 +45,7 @@ const BookerAccountingWebsite = () => {
 
       <Services />
       <MotoSwiper />
+      {/* <IndustryDetailPage/> */}
       <IndustriesSection />
       <LeadMagnet/>
       {/* <ServicesPopup/> */}

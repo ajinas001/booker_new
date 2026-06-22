@@ -4,45 +4,55 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import {
-  HiOutlineDocumentText,
-  HiOutlinePencilSquare,
-  HiOutlineShieldCheck,
-  HiOutlineArrowPath,
-  HiOutlineCalculator,
-  HiOutlineClipboardDocumentCheck,
-  HiOutlineBuildingOffice2,
+    HiOutlineDocumentText,
+    HiOutlineReceiptPercent,
+    HiOutlineQrCode,
+    HiOutlineShieldCheck,
+    HiOutlineCalculator,
+    HiOutlineClipboardDocumentCheck,
+    HiOutlineBuildingOffice,
 } from "react-icons/hi2";
+import Link from "next/link";
 
 // Services Data with minimal grid structure matching Screenshot 2026-06-16 132201.jpg
 const services = [
-  {
-    title: "Corporate Tax Registration",
-    icon: <HiOutlineDocumentText className="w-12 h-12 text-black" />,
-  },
-  {
-    title: "Corporate Tax Filing",
-    icon: <HiOutlinePencilSquare className="w-12 h-12 text-black" />,
-  },
-  {
-    title: "VAT Registration",
-    icon: <HiOutlineShieldCheck className="w-12 h-12 text-black" />,
-  },
-  {
-    title: "VAT Return Filing",
-    icon: <HiOutlineArrowPath className="w-12 h-12 text-black" />,
-  },
-  {
-    title: "Bookkeeping & Accounting",
-    icon: <HiOutlineCalculator className="w-12 h-12 text-black" />,
-  },
-  {
-    title: "Audit Support Services",
-    icon: <HiOutlineClipboardDocumentCheck className="w-12 h-12 text-black" />,
-  },
-  {
-    title: "Company Formation",
-    icon: <HiOutlineBuildingOffice2 className="w-12 h-12 text-black" />,
-  },
+    {
+        title: "Tax Services",
+        href: "/services/tax-services",
+        icon: <HiOutlineDocumentText className="w-12 h-12 text-black" />,
+    },
+    {
+        title: "VAT Services",
+        href: "/services/vat-services",
+        icon: <HiOutlineReceiptPercent className="w-12 h-12 text-black" />,
+    },
+    {
+        title: "E-Invoicing",
+        href: "/services/e-invoicing",
+        icon: <HiOutlineQrCode className="w-12 h-12 text-black" />,
+    },
+    {
+        title: "AML Compliance",
+        href: "/services/aml-compliance",
+        icon: <HiOutlineShieldCheck className="w-12 h-12 text-black" />,
+    },
+    {
+        title: "Accounting & Bookkeeping",
+        href: "/services/accounting-bookkeeping",
+        icon: <HiOutlineCalculator className="w-12 h-12 text-black" />,
+    },
+    {
+        title: "Audit and Assurance",
+        href: "/services/audit-assurance",
+        icon: (
+            <HiOutlineClipboardDocumentCheck className="w-12 h-12 text-black" />
+        ),
+    },
+    {
+        title: "Business Support Services",
+        href: "/services/business-support",
+        icon: <HiOutlineBuildingOffice className="w-12 h-12 text-black" />,
+    },
 ];
 
 export default function HeroSection() {
@@ -217,22 +227,21 @@ export default function HeroSection() {
 
                 {/* Compact Row Matrix Grid Grid Container */}
                 <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 items-stretch justify-center">
+
                     {services.map((service, index) => (
-                        <div
-                            key={index}
-                            className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 flex flex-col items-center text-center justify-between hover:shadow-md transition-all duration-300 group cursor-pointer min-h-[145px]"
-                        >
-                            <div className="mb-2 transform group-hover:scale-105 transition-transform duration-300">
-                                {service.icon}
+                        <Link key={index} href={service.href}>
+                            <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 flex flex-col items-center justify-between text-center hover:shadow-md transition-all duration-300 group cursor-pointer min-h-[145px]">
+                                <div className="mb-2 transform group-hover:scale-105 transition-transform duration-300">
+                                    {service.icon}
+                                </div>
+
+                                <h5 className="text-[15px] text-black tracking-tight mb-1">
+                                    {service.title}
+                                </h5>
+
+                                <div className="w-6 h-[2px] bg-textsecondary mt-1" />
                             </div>
-
-                            <h5 className="text-[15px]  text-black  tracking-tight mb-1">
-                                {service.title}
-                            </h5>
-
-                            {/* Static gold border matching image mockup */}
-                            <div className="w-6 h-[2px] bg-textsecondary mt-1" />
-                        </div>
+                        </Link>
                     ))}
                 </div>
 

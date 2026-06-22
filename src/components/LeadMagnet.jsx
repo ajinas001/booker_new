@@ -48,7 +48,7 @@ export default function LeadMagnet() {
             </div>
 
             {/* Download Card */}
-            <div className="bg-textsecondary text-white rounded-2xl p-5 px-0 md:px-8 ">
+            <div className="bg-textsecondary text-white rounded-2xl p-5 px-4 md:px-8 ">
               <h4 className="font-semibold mb-2">
                 UAE Corporate Tax Guide
               </h4>
@@ -64,7 +64,7 @@ export default function LeadMagnet() {
                   href="https://instagram.com/bookeraccounting"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full border border-white/20 rounded-xl py-3 text-sm hover:bg-white/10 transition"
+                  className="flex items-center justify-center gap-2 w-full border border-white/20 rounded-xl py-3 px-8 text-sm hover:bg-white/10 transition"
                 >
                   <Instagram size={16} />
                   Step 1: Follow on Instagram

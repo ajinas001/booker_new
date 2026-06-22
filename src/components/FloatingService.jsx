@@ -4,42 +4,50 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   HiOutlineDocumentText,
-  HiOutlinePencilSquare,
+  HiOutlineReceiptPercent,
+  HiOutlineQrCode,
   HiOutlineShieldCheck,
-  HiOutlineArrowPath,
   HiOutlineCalculator,
   HiOutlineClipboardDocumentCheck,
-  HiOutlineBuildingOffice2,
+  HiOutlineBuildingOffice,
 } from "react-icons/hi2";
+import Link from "next/link";
 
 const services = [
   {
-    title: "Tax Reg",
+    title: "Tax",
+    href: "/services/tax-services",
     icon: HiOutlineDocumentText,
   },
   {
-    title: "Tax Filing",
-    icon: HiOutlinePencilSquare,
+    title: "VAT",
+    href: "/services/vat-services",
+    icon: HiOutlineReceiptPercent,
   },
   {
-    title: "VAT Reg",
+    title: "E-Invoice",
+    href: "/services/e-invoicing",
+    icon: HiOutlineQrCode,
+  },
+  {
+    title: "AML",
+    href: "/services/aml-compliance",
     icon: HiOutlineShieldCheck,
   },
   {
-    title: "VAT Filing",
-    icon: HiOutlineArrowPath,
-  },
-  {
     title: "Accounting",
+    href: "/services/accounting-bookkeeping",
     icon: HiOutlineCalculator,
   },
   {
     title: "Audit",
+    href: "/services/audit-assurance",
     icon: HiOutlineClipboardDocumentCheck,
   },
   {
-    title: "Company",
-    icon: HiOutlineBuildingOffice2,
+    title: "Business",
+    href: "/services/business-support",
+    icon: HiOutlineBuildingOffice,
   },
 ];
 
@@ -78,8 +86,9 @@ export default function FloatingService() {
                 const Icon = service.icon;
 
                 return (
-                  <button
+                  <Link
                     key={index}
+                    href={service.href}
                     className="flex flex-col items-center gap-1 sm:gap-1.5 md:gap-2 flex-shrink-0"
                   >
                     <div className="rounded-lg bg-[#f4f7f6] p-1.5 transition-all duration-300 sm:rounded-xl sm:p-2 md:p-2.5">
@@ -89,7 +98,7 @@ export default function FloatingService() {
                     <span className="whitespace-nowrap text-[8px] font-semibold uppercase tracking-wide text-[#1a3c34] sm:text-[9px] md:text-[10px]">
                       {service.title}
                     </span>
-                  </button>
+                  </Link>
                 );
               })}
             </div>
