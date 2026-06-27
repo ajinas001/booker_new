@@ -31,6 +31,7 @@ import VideoResources from '@/components/VideoResources';
 import IndustryDetailPage from '@/components/Industries';
 import Samplesection from '@/components/Sample';
 import BlogHome from '@/components/BlogHome';
+import ReelsSection from '@/components/Reels';
 
 const BookerAccountingWebsite = () => {
 
@@ -53,8 +54,9 @@ const BookerAccountingWebsite = () => {
       <Samplesection/>
       {/* <ServicesPopup/> */}
       <OurProcess />
+      <ReelsSection/>
       <Testimonials />
-      <Call />
+      {/* <Call /> */}
       {/* <VideoResources/> */}
       {/* <Dashboard/> */}
       {/* <Whychoose /> */}

@@ -70,9 +70,8 @@ const StarRating = ({ rating }) => (
     {[...Array(5)].map((_, i) => (
       <Star
         key={i}
-        className={`w-4 h-4 ${
-          i < rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
-        }`}
+        className={`w-4 h-4 ${i < rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
+          }`}
         strokeWidth={1}
       />
     ))}
@@ -167,7 +166,7 @@ export default function Testimonials() {
           </motion.div>
 
           <motion.div
-            className="grid md:grid-cols-3 gap-10"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -177,33 +176,59 @@ export default function Testimonials() {
               <motion.div
                 key={idx}
                 variants={cardSlideUpVariant}
-                whileHover={{ scale: 1.01, transition: { duration: 0.3 } }}
-                // Card background and border for light theme match
-                className="p-10 bg-purpletint  rounded-3xl cursor-pointer h-full flex flex-col" // Removed justify-between
+                whileHover={{
+                  y: -6,
+                  transition: { duration: 0.3, ease: [0.25, 1, 0.5, 1] }
+                }}
+                className="group relative p-8 md:p-10 bg-gradient-to-b from-neutral-50 to-neutral-100/50 hover:from-white hover:to-neutral-50/30 rounded-[2.5rem] border border-neutral-200/50 hover:border-[#1f626d]/30 shadow-sm hover:shadow-2xl hover:shadow-[#1f626d]/5 transition-all duration-500 cursor-pointer h-full flex flex-col justify-between overflow-hidden"
               >
-                {/* Name and Date - Top of card */}
-                <div className="mb-6">
-                  <h4 className="text-gray-900 text-xl font-bold tracking-wide leading-tight">
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-gray-800 text-sm italic mt-1">
-                    {/* {testimonial.place} */}
+                {/* Subtle Ambient Brand Glow Background Effect */}
+                <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#1f626d]/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                {/* Core Content Body */}
+                <div className="relative z-10 flex-1 flex flex-col">
+
+                  {/* Upper Info Row */}
+                  <div className="mb-6 flex items-start justify-between gap-4">
+                    <div>
+                      <h4 className="text-neutral-900 text-lg md:text-xl font-black tracking-tight leading-snug">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-[#1f626d] text-[10px] font-bold tracking-[0.15em] uppercase mt-1">
+                        Verified Client
+                      </p>
+                    </div>
+
+                    {/* Luxury Minimalist Serif Quote Mark Accent */}
+                    <span className="text-5xl font-serif font-black text-[#1f626d]/10 select-none leading-none -mt-3">
+                      “
+                    </span>
+                  </div>
+
+                  {/* Testimonial Main Copy block */}
+                  <p className="text-[15px] md:text-base text-neutral-600/95 font-medium leading-relaxed mb-8 grow italic">
+                    "{testimonial.text}"
                   </p>
+
                 </div>
 
-                {/* Testimonial Quote */}
-                <p className="text-lg text-gray-800 mb-8 leading-relaxed grow">
-                  {" "}
-                  {/* Adjusted text size */}"{testimonial.text}"
-                </p>
+                {/* ================= PURE LUXURY GLASSMORPHISM FOOTER PANEL ================= */}
+                <div className="relative z-10 mt-auto p-4 bg-white/40 backdrop-blur-md rounded-2xl border-t border-t-white/60 border border-neutral-200/40 shadow-[0_4px_24px_rgba(0,0,0,0.02)] flex items-center justify-between gap-4 transition-colors duration-300 group-hover:bg-white/60">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-neutral-400 text-[9px] font-bold tracking-widest uppercase">
+                      Client Rating
+                    </span>
+                    <StarRating rating={testimonial.rating} />
+                  </div>
 
-                {/* Rating - Bottom of card, matching exact style */}
-                <div className="pt-6 border-t border-gray-200">
-                  <p className="text-gray-700 text-base font-semibold">
-                    Rating
-                  </p>
-                  <StarRating rating={testimonial.rating} />
+                  {/* Micro Glass Score Tag */}
+                  <div className="bg-white/80 border border-neutral-200/60 px-3 py-1.5 rounded-xl shadow-sm">
+                    <span className="text-xs font-black text-[#1f626d] tracking-wider">
+                      {testimonial.rating.toFixed(1)}
+                    </span>
+                  </div>
                 </div>
+
               </motion.div>
             ))}
           </motion.div>

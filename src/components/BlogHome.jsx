@@ -2,141 +2,188 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Mock data reflecting your exact layout titles from "Screenshot 2026-06-26 112327.jpg"
-const mainFeaturedPost = {
-  title: "BLOOMING VELOCITY A LEADER IN HEALTHCARE MARKETING SHINES AT THE AEEDC 2025 EVENT IN DUBAI",
-  excerpt: "AEEDC 2025 At Blooming...",
-  image: "/images/service.webp", 
-  href: "/blog/aeedc-2025"
-};
-
-const secondaryPosts = [
-  {
-    title: "DIGITAL MARKETING TRENDS IN DUBAI, UAE",
-    excerpt: "In the ever-evolving...",
-    image: "/images/handshake.webp",
-    href: "/blog/digital-marketing-trends",
-    size: "large"
-  },
-  {
-    title: "THE MOST STRIKING BRANDING TRENDS IN 2023",
-    excerpt: "The trends Are you curious...",
-    image: "/images/img.webp",
-    href: "/blog/branding-trends",
-    size: "small"
-  },
-  {
-    title: "WHY BLOOMING VELOCITY IS ONE OF THE BEST MARKETING AGENCIES IN THE UAE",
-    excerpt: "One of the Best Marketing...",
-    image: "/images/office-workers.webp",
-    href: "/blog/best-marketing-agency",
-    size: "small"
-  }
-];
-
 export default function BlogHome() {
+  const POSTS = [
+    {
+      id: 1,
+      href: "/blog/e-invoice",
+      title: "UAE E-INVOICING TRANSFORMATION & MANDATORY STRATEGY",
+      excerpt: "Understanding the UAE’s mandatory e-invoicing rollout, compliance requirements, timelines, and its impact on businesses.",
+      image: "/images/e-invoice.webp",
+    },
+    {
+      id: 2,
+      href: "/blog/offshore",
+      title: "UAE OFFSHORE CORPORATE TAX REGISTRATION PRACTICES",
+      excerpt: "A comprehensive guide to understanding corporate tax registration for offshore companies in the UAE's evolving tax framework.",
+      image: "/images/tax.webp",
+    },
+    {
+      id: 3,
+      href: "/blog/e-invoicing",
+      title: "THE PAPER TRAIL ENDS HERE : WHY E-INVOICING IS NO LONGER OPTIONAL?",
+      excerpt: "Slow payments, manual errors, and compliance risk are symptoms of the same root cause paper-based invoicing. Here's what the shift looks like.",
+      image: "/images/office-workers.webp",
+    }
+  ];
+
+  const mainFeaturedPost = POSTS[0];
+  const secondaryPostLarge = POSTS[1];
+  const secondaryPostSmall = POSTS[2];
+
   return (
-    <section className="bg-white text-slate-900 py-20 px-6 md:px-12 lg:px-16">
+    <section className="bg-white text-slate-900 py-16 px-6 md:px-12 lg:px-16 selection:bg-[#1f626d]/20 selection:text-[#1f626d]">
       <div className="max-w-7xl mx-auto">
-        
-        {/* Modern Section Header */}
-        <div className="flex flex-col items-center mb-16">
-          <h2 className="text-xs font-bold tracking-[0.3em] uppercase text-slate-500 mb-3">
-            Our Insights
+
+        {/* Minimalist Editorial Section Header */}
+        <div className="flex flex-col items-center mb-12 text-center">
+          <span className="text-[11px] text-[#1f626d] tracking-[0.25em] font-bold uppercase mb-2">
+            Corporate Insights
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight text-neutral-900 ">
+            Latest <span className="text-[#1f626d]">Blogs</span>
           </h2>
-          <h3 className="text-4xl md:text-5xl font-extrabold tracking-tight uppercase text-slate-900">
-            Blogs
-          </h3>
-          <div className="h-[3px] w-12 bg-white mt-4 rounded-full" />
+          <div className="h-[3px] w-12 bg-[#1f626d] mt-4 rounded-full" />
         </div>
 
-        {/* Dynamic Editorial Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          
-          {/* LEFT: Massive Highlight Hero Card */}
-          <div className="lg:col-span-6 group relative flex flex-col justify-end min-h-[500px] md:min-h-[600px] rounded-3xl overflow-hidden bg-slate-50 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
-            <div className="absolute inset-0 w-full h-full">
-              <Image 
-                src={mainFeaturedPost.image} 
-                alt={mainFeaturedPost.title}
-                fill
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-              />
-              {/* Neutral dark gradient layer for safe contrast overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
-            </div>
-            
-            {/* Overlay Content */}
-            <div className="relative z-10 p-8 md:p-10 text-white">
-              <Link href={mainFeaturedPost.href} className="block">
-                <h4 className="text-xl md:text-2xl font-bold tracking-wide leading-snug uppercase text-white group-hover:text-white transition-colors duration-200">
-                  {mainFeaturedPost.title}
-                </h4>
-                <p className="mt-3 text-sm text-slate-300 font-medium">
-                  {mainFeaturedPost.excerpt}
-                </p>
-              </Link>
-            </div>
-          </div>
+        {/* Dynamic Bento Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-          {/* RIGHT: Compound Layout Grid Column */}
-          <div className="lg:col-span-6 flex flex-col gap-8 justify-between">
-            
-            {/* Top Row: Wide Secondary Card */}
-            {secondaryPosts.filter(p => p.size === 'large').map((post, idx) => (
-              <div key={idx} className="group relative flex flex-col justify-end h-[240px] md:h-[280px] rounded-3xl overflow-hidden bg-slate-50 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
-                <div className="absolute inset-0">
-                  <Image 
-                    src={post.image} 
-                    alt={post.title}
+          {/* LEFT: Highlight Hero Card (Article 1) */}
+          {mainFeaturedPost && (
+            <div className="lg:col-span-6 group relative flex flex-col justify-end min-h-[500px] md:min-h-[600px] rounded-[2rem] overflow-hidden bg-neutral-900 border border-neutral-200/40 shadow-sm hover:shadow-2xl transition-all duration-300">
+              <div className="absolute inset-0 w-full h-full z-0">
+                <Image
+                  src={mainFeaturedPost.image}
+                  alt={mainFeaturedPost.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center group-hover:scale-103 transition-transform duration-500 ease-out will-change-transform"
+                  priority
+                />
+                {/* Multi-layered cinematic gradient for text protection */}
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
+              </div>
+
+              {/* Glassmorphism Lower Content Plate */}
+              <div className="relative z-10 m-5 p-6 md:p-8 bg-neutral-950/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
+                <Link href={mainFeaturedPost.href} className="block group/link">
+                  <span className="text-[10px] font-bold tracking-widest text-teal-400 uppercase mb-2 block">
+                    Featured Analysis
+                  </span>
+                  <h4 className="text-lg md:text-xl font-bold tracking-wide leading-snug uppercase text-white group-hover/link:text-teal-300 transition-colors duration-200">
+                    {mainFeaturedPost.title}
+                  </h4>
+                  <p className="mt-3 text-xs md:text-sm text-neutral-200 line-clamp-2 font-normal opacity-90">
+                    {mainFeaturedPost.excerpt}
+                  </p>
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* RIGHT: Compound Layout Column */}
+          <div className="lg:col-span-6 flex flex-col gap-6 justify-between">
+
+            {/* Top Row: Secondary Large Card (Article 2) */}
+            {secondaryPostLarge && (
+              <div className="group relative flex flex-col justify-end h-[260px] md:h-[286px] rounded-[2rem] overflow-hidden bg-neutral-900 border border-neutral-200/40 shadow-sm hover:shadow-2xl transition-all duration-300">
+                <div className="absolute inset-0 z-0">
+                  <Image
+                    src={secondaryPostLarge.image}
+                    alt={secondaryPostLarge.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out will-change-transform"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
                 </div>
-                <div className="relative z-10 p-6 md:p-8 text-white">
-                  <Link href={post.href}>
-                    <h4 className="text-lg md:text-xl font-bold tracking-wide uppercase text-white group-hover:text-white transition-colors">
-                      {post.title}
+
+                {/* Inline Premium Glass Plate */}
+                <div className="relative z-10 m-4 p-5 md:p-6 bg-neutral-950/40 backdrop-blur-md rounded-xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
+                  <Link href={secondaryPostLarge.href} className="group/sub">
+                    <h4 className="text-base md:text-lg font-bold tracking-wide uppercase text-white group-hover/sub:text-teal-300 transition-colors duration-200">
+                      {secondaryPostLarge.title}
                     </h4>
-                    <p className="mt-2 text-xs text-slate-300">
-                      {post.excerpt}
+                    <p className="mt-2 text-xs text-neutral-200 line-clamp-2 font-normal opacity-90">
+                      {secondaryPostLarge.excerpt}
                     </p>
                   </Link>
                 </div>
               </div>
-            ))}
+            )}
 
-            {/* Bottom Row: Side-by-Side Dual Column Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {secondaryPosts.filter(p => p.size === 'small').map((post, idx) => (
-                <div key={idx} className="group relative flex flex-col justify-end h-[240px] md:h-[280px] rounded-3xl overflow-hidden bg-slate-50 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
-                  <div className="absolute inset-0">
-                    <Image 
-                      src={post.image} 
-                      alt={post.title}
+            {/* Bottom Row: Two Balanced Action Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              {/* Left Column: Small Article Card (Article 3) */}
+              {secondaryPostSmall && (
+                <div className="group relative flex flex-col justify-end h-[250px] md:h-[286px] rounded-[2rem] overflow-hidden bg-neutral-900 border border-neutral-200/40 shadow-sm hover:shadow-2xl transition-all duration-300">
+                  <div className="absolute inset-0 z-0">
+                    <Image
+                      src={secondaryPostSmall.image}
+                      alt={secondaryPostSmall.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                      className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out will-change-transform"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/50 to-transparent" />
                   </div>
-                  <div className="relative z-10 p-6 text-white">
-                    <Link href={post.href}>
-                      <h4 className="text-sm md:text-base font-bold tracking-wide leading-snug uppercase text-white group-hover:text-white transition-colors line-clamp-3">
-                        {post.title}
+
+                  {/* Micro Glass Card Base */}
+                  <div className="relative z-10 m-4 p-4 bg-neutral-950/50 backdrop-blur-md rounded-xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
+                    <Link href={secondaryPostSmall.href} className="group/mini">
+                      <h4 className="text-xs md:text-sm font-bold tracking-wide leading-snug uppercase text-white group-hover:mini:text-teal-300 transition-colors duration-200 line-clamp-3">
+                        {secondaryPostSmall.title}
                       </h4>
-                      <p className="mt-2 text-xs text-slate-300 line-clamp-1">
-                        {post.excerpt}
+                      <p className="mt-1.5 text-[11px] text-neutral-300 line-clamp-2 font-normal opacity-85">
+                        {secondaryPostSmall.excerpt}
                       </p>
                     </Link>
                   </div>
                 </div>
-              ))}
-            </div>
+              )}
 
-          </div>
+              {/* Right Column: Premium Action Trigger Dashboard Block */}
+              <div className="group relative flex flex-col justify-between h-[250px] md:h-[286px] rounded-[2rem] p-6 bg-gradient-to-br from-neutral-950 via-neutral-900 to-[#1f626d]/30 border border-neutral-800 shadow-xl overflow-hidden">
+                {/* Minimalist ambient background light orb */}
+                <div className="absolute -right-12 -top-12 w-40 h-40 bg-[#1f626d]/20 rounded-full blur-2xl pointer-events-none group-hover:bg-[#1f626d]/30 transition-all duration-500" />
 
-        </div>
+                <div className="relative z-10">
+                  <span className="text-[9px] font-bold tracking-widest text-teal-400 uppercase bg-white/[0.04] border border-white/5 px-2.5 py-1 rounded-md shadow-sm">
+                    Knowledge Hub
+                  </span>
+                  <h4 className="text-base font-bold text-white tracking-wide mt-5 leading-snug uppercase">
+                    Explore all corporate insights
+                  </h4>
+                  <p className="text-xs text-neutral-400 mt-2 line-clamp-3 font-normal leading-relaxed">
+                    Stay ahead of corporate compliance timelines, asset strategy maps, and legal updates in the UAE.
+                  </p>
+                </div>
+
+                <div className="pt-2 relative z-10">
+                  <Link
+                    href="/blog"
+                    className="inline-flex w-full items-center justify-between px-4 py-3 bg-white hover:bg-neutral-100 text-neutral-950 font-bold text-xs tracking-wide rounded-xl shadow-md transition-colors duration-200 focus:outline-none"
+                  >
+                    <span>View More Articles</span>
+                    <svg
+                      className="w-4 h-4 text-neutral-950 transform transition-transform duration-200 group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+
+            </div> {/* End of Bottom Grid */}
+          </div> {/* End of Right Column Layout */}
+        </div> {/* End of Bento System */}
+
       </div>
     </section>
   );
