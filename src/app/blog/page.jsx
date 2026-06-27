@@ -6,9 +6,9 @@ import Link from "next/link";
 import { Newspaper } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import FloatingMenuButton from "@/components/FloatingMenuButton";
-import ScrollToTop from "@/components/ScrollToTop";
+
 import { useRef } from "react";
+import FloatingService from "@/components/FloatingService";
 
 export default function BlogPage() {
   const headerRef = useRef(null);
@@ -98,7 +98,7 @@ export default function BlogPage() {
                   Home
                 </Link>
                 <span>›</span>
-                <span className="text-teal-400 font-medium">Blog</span>
+                <span className="text-textprimary font-medium">Blog</span>
               </div>
             </motion.div>
 
@@ -108,7 +108,7 @@ export default function BlogPage() {
               transition={{ duration: 0.8 }}
               className="text-5xl md:text-7xl font-bold leading-tight mb-6"
             >
-              Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">Blogs</span>
+              Latest <span className="text-transparent bg-clip-text bg-textprimary">Blogs</span>
             </motion.h1>
 
             <motion.p
@@ -249,8 +249,7 @@ export default function BlogPage() {
 
         </section>
 
-        <ScrollToTop />
-        <FloatingMenuButton />
+        <FloatingService/>
         <Footer />
       </div>
     </>

@@ -370,9 +370,9 @@ export default function Navbar() {
                       >
                         {service.title}
 
-                        <ul className="list-disc pl-5 space-y-1 text-gray-500">
+                        <ul className="list-disc pl-5 space-y-1  ">
                           {service.descriptionPoints.map((point, i) => (
-                            <li key={i} className="text-sm leading-relaxed">
+                            <li key={i} className="text-sm leading-relaxed text-gray-500 hover:text-textprimary">
                               {point}
                             </li>
                           ))}

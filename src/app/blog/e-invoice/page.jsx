@@ -8,6 +8,8 @@ import ContactSection from "@/components/ContactSection";
 import ScrollToTop from "@/components/ScrollToTop";
 import FloatingMenuButton from "@/components/FloatingMenuButton";
 import Footer from "@/components/Footer";
+import FloatingActions from "@/components/FloatingActions";
+import FloatingService from "@/components/FloatingService";
 
 const BlogPage = () => {
   const { scrollYProgress } = useScroll();
@@ -266,8 +268,8 @@ const BlogPage = () => {
         </main>
 
         <ContactSection />
-        <ScrollToTop />
-        <FloatingMenuButton />
+       <FloatingActions/>
+       <FloatingService/>
         <Footer />
       </div>
     </>
