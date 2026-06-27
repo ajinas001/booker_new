@@ -465,16 +465,16 @@ export default function AuditAssurancePage() {
               viewport={{ once: true }}
             >
               <SectionLabel>Our Approach</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
                 Beyond Compliance,{" "}
-                <span className="text-teal-700">Towards Excellence</span>
+                <span className="text-textsecondary">Towards Excellence</span>
               </h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-4">
+              <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-4">
                 At BAC, audits are more than a legal requirement — they are a
                 strategic opportunity. We don't just verify numbers; we uncover
                 what they mean for your business.
               </p>
-              <p className="text-gray-500 text-lg leading-relaxed mb-8">
+              <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-8">
                 Our approach is thorough, transparent, and tailored to your
                 industry. From identifying operational risks to validating
                 financial accuracy, BAC equips leadership with clarity to act
@@ -489,7 +489,7 @@ export default function AuditAssurancePage() {
                   { value: "100%", label: "ISA compliant" },
                 ].map((s) => (
                   <div key={s.label}>
-                    <p className="text-3xl font-extrabold text-teal-700 mb-1">
+                    <p className="text-xl md:text-3xl font-extrabold text-textsecondary  mb-1">
                       {s.value}
                     </p>
                     <p className="text-sm text-gray-400 font-medium">{s.label}</p>
@@ -518,7 +518,7 @@ export default function AuditAssurancePage() {
               </div>
               {/* Floating badge */}
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-4 max-w-[220px]">
-                <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-textsecondary flex items-center justify-center flex-shrink-0">
                   <CheckCircle className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -545,7 +545,7 @@ export default function AuditAssurancePage() {
               className="mb-16 max-w-2xl"
             >
               <SectionLabel>Our Audit Services</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                 Comprehensive Solutions for Every Business Need
               </h2>
             </motion.div>
@@ -582,7 +582,7 @@ export default function AuditAssurancePage() {
                 </div>
 
                 {/* Corner label */}
-                <div className="absolute top-5 right-5 bg-teal-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
+                <div className="absolute top-5 right-5 bg-textsecondary text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
                   Assurance
                 </div>
               </motion.div>
@@ -599,7 +599,7 @@ export default function AuditAssurancePage() {
                 <SectionLabel>Assurance Services</SectionLabel>
                 <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
                   Strengthen Confidence.{" "}
-                  <span className="text-teal-700">Enhance Transparency.</span>
+                  <span className="text-textsecondary">Enhance Transparency.</span>
                 </h2>
                 <p className="text-gray-500 text-lg leading-relaxed mb-10">
                   Our assurance services go beyond audit preparation. We evaluate
@@ -624,13 +624,13 @@ export default function AuditAssurancePage() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="p-5 rounded-2xl border border-gray-100 bg-gray-50 hover:border-teal-200 hover:bg-teal-50 transition-colors duration-200"
+                        className="p-5 rounded-xl border border-purpletint bg-gray-100  hover:bg-purpletint transition-colors duration-200"
                       >
-                        <Icon className="w-5 h-5 text-teal-600 mb-3" strokeWidth={1.8} />
-                        <h4 className="font-bold text-gray-900 text-sm mb-1">
+                        <Icon className="w-5 h-5 text-textsecondary mb-3" />
+                        <h4 className="font-semibold text-gray-900 text-sm md:text-lg mb-1">
                           {pillar.title}
                         </h4>
-                        <p className="text-gray-500 text-xs leading-relaxed">
+                        <p className="text-gray-500 text-xs md:text-md leading-relaxed">
                           {pillar.body}
                         </p>
                       </motion.div>
@@ -641,8 +641,8 @@ export default function AuditAssurancePage() {
         </section>
 
         {/* ── IFRS ─────────────────────────────────────────────────────────── */}
-        <section className="py-20 md:py-32 bg-gray-950">
-          <div className="max-w-7xl mx-auto px-6 md:px-16">
+        <section className="  ">
+          <div className=" rounded-2xl py-8 md:py-20 max-w-7xl mx-auto px-6 md:px-16 bg-gradient-to-br from-gray-900 to-teal-900">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left */}
               <motion.div
@@ -651,26 +651,26 @@ export default function AuditAssurancePage() {
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                <span className="inline-block text-xs font-semibold uppercase tracking-[0.18em] text-teal-400 bg-teal-400/10 border border-teal-400/20 px-4 py-1.5 rounded-full mb-6">
+                <span className="inline-block text-xs font-base  tracking-[0.18em] text-textprimary bg-teal-400/10 border border-teal-400/20 px-4 py-1.5 rounded-full mb-6">
                   Global Standards
                 </span>
-                <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+                <h2 className="text-3xl md:text-4xl font-abold text-white leading-tight mb-2">
                   IFRS Advisory
                 </h2>
-                <p className="text-gray-400 text-lg leading-relaxed mb-4">
+                <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-4">
                   Consistent financial reporting under International Financial
                   Reporting Standards (IFRS) is essential — particularly for UAE
                   businesses operating internationally or seeking foreign
                   investment.
                 </p>
-                <p className="text-gray-400 text-lg leading-relaxed mb-10">
+                <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-10">
                   BAC's IFRS advisory team provides expert guidance to prepare
                   compliant, transparent financial statements that meet global
                   expectations.
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+                  className="inline-flex items-center gap-2 bg-textsecondary hover:bg-purpletint text-white hover:text-textsecondary px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
                 >
                   Get IFRS Support
                   <ArrowRight className="w-4 h-4" />
@@ -696,8 +696,8 @@ export default function AuditAssurancePage() {
                     viewport={{ once: true }}
                     className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-5 hover:border-teal-500/40 hover:bg-teal-900/20 transition-all duration-200"
                   >
-                    <CheckCircle className="w-5 h-5 text-teal-400 flex-shrink-0" />
-                    <span className="text-white font-medium text-base">{item}</span>
+                    <CheckCircle className="w-5 h-5 text-textprimary flex-shrink-0" />
+                    <span className="text-white font-medium text-base ">{item}</span>
                   </motion.div>
                 ))}
               </motion.div>
@@ -716,9 +716,14 @@ export default function AuditAssurancePage() {
               className="text-center mb-16"
             >
               <SectionLabel>Why Choose Us</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-                Why Businesses Trust BAC
-              </h2>
+          
+               <h2 className="text-3xl md:text-3xl lg:text-4xl font-semibold text-black">
+              Why Businesses Trust{" "}
+              <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full  after:bg-textsecondary after:left-0 after:bottom-0">
+                BAC
+              </span>
+            </h2>
+           
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -732,10 +737,10 @@ export default function AuditAssurancePage() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="group text-center p-8 rounded-2xl border border-gray-100 hover:border-teal-200 hover:shadow-md transition-all duration-300"
+                    className="group text-center p-8 rounded-2xl border border-gray-100 bg-gray-100 hover:bg-purpletint hover:border-  transition-all duration-300"
                   >
-                    <div className="w-14 h-14 bg-teal-50 group-hover:bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors duration-200">
-                      <Icon className="w-7 h-7 text-teal-600" strokeWidth={1.6} />
+                    <div className="w-14 h-14 bg-white group-hover:bg-purpletint rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors duration-200">
+                      <Icon className="w-7 h-7 text-textsecondary" strokeWidth={1.6} />
                     </div>
                     <h3 className="font-bold text-gray-900 text-lg mb-3">
                       {item.title}
