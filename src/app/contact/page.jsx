@@ -51,7 +51,7 @@ export default function ContactPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/img3.webp"
+            src="/images/contactus.webp"
             alt="Contact Background"
             fill
             priority

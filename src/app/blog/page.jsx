@@ -71,7 +71,7 @@ export default function BlogPage() {
             className="absolute inset-0 will-change-transform"
           >
             <Image
-              src="/images/img3.webp"
+              src="/images/blog.webp"
               alt="Blog Background"
               fill
               priority

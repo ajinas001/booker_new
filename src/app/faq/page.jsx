@@ -137,7 +137,7 @@ export default function FAQPage() {
           className="absolute inset-0 will-change-transform"
         >
           <Image
-            src="/images/img3.webp"
+            src="/images/faq.webp"
             alt="Business Advisory Service"
             priority
             fill

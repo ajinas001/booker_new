@@ -53,7 +53,7 @@ const PremiumReelsLight = () => {
                 {/* ================= EDITORIAL INSTAGRAM HEADER ================= */}
                 <div className="flex flex-col md:flex-row items-center justify-between border-b border-neutral-100 pb-10 mb-14 gap-6">
                     <div className="flex flex-col md:flex-row items-center gap-5 text-center md:text-left">
-                        <div className="w-14 h-14 rounded-2xl bg-textsecondary flex items-center justify-center text-white shadow-lg shadow-rose-500/10">
+                        <div className="w-14 h-14 rounded-2xl bg-teritory flex items-center justify-center text-white shadow-lg shadow-rose-500/10">
                             <FaInstagram size={26} />
                         </div>
                         <div>

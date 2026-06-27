@@ -685,7 +685,7 @@ const AboutPageTimeline = () => {
             className="absolute inset-0"
           >
             <Image
-              src="/images/img3.webp"
+              src="/images/about.webp"
               alt="Blog"
               fill
               priority
