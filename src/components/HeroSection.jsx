@@ -3,58 +3,48 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import {
-    HiOutlineDocumentText,
-    HiOutlineReceiptPercent,
-    HiOutlineQrCode,
-    HiOutlineShieldCheck,
-    HiOutlineCalculator,
-    HiOutlineClipboardDocumentCheck,
-    HiOutlineBuildingOffice,
-} from "react-icons/hi2";
 import Link from "next/link";
+import { 
+    HiOutlineClipboardDocumentCheck, 
+    HiOutlineDocumentText, 
+    HiOutlineCalculator, 
+    HiOutlineBriefcase, 
+    HiOutlineBuildingOffice, 
+    HiOutlineShieldCheck 
+} from "react-icons/hi2";
 
-// Services Data with minimal grid structure matching Screenshot 2026-06-16 132201.jpg
 const services = [
     {
-        title: "Tax Services",
-        href: "/services/tax-services",
-        icon: <HiOutlineDocumentText className="w-12 h-12 text-black" />,
+        title: "Audit & Assurance",
+        href: "/audit-assurance",
+        icon: <HiOutlineClipboardDocumentCheck className="w-14 h-14 text-black" />,
     },
     {
-        title: "VAT Services",
-        href: "/services/vat-services",
-        icon: <HiOutlineReceiptPercent className="w-12 h-12 text-black" />,
+        title: "Taxation",
+        href: "/taxation",
+        icon: <HiOutlineDocumentText className="w-14 h-14 text-black" />,
     },
     {
-        title: "E-Invoicing",
-        href: "/services/e-invoicing",
-        icon: <HiOutlineQrCode className="w-12 h-12 text-black" />,
+        title: "Accounting and Bookkeeping",
+        href: "/accounting-bookkeeping",
+        icon: <HiOutlineCalculator className="w-14 h-14 text-black" />,
     },
     {
-        title: "AML Compliance",
-        href: "/services/aml-compliance",
-        icon: <HiOutlineShieldCheck className="w-12 h-12 text-black" />,
+        title: "Business Advisory Service",
+        href: "/business-advisory",
+        icon: <HiOutlineBriefcase className="w-14 h-14 text-black" />,
     },
     {
-        title: "Accounting & Bookkeeping",
-        href: "/services/accounting-bookkeeping",
-        icon: <HiOutlineCalculator className="w-12 h-12 text-black" />,
+        title: "Business Support Service",
+        href: "/business-support",
+        icon: <HiOutlineBuildingOffice className="w-14 h-14 text-black" />,
     },
     {
-        title: "Audit and Assurance",
-        href: "/services/audit-assurance",
-        icon: (
-            <HiOutlineClipboardDocumentCheck className="w-12 h-12 text-black" />
-        ),
-    },
-    {
-        title: "Business Support Services",
-        href: "/services/business-support",
-        icon: <HiOutlineBuildingOffice className="w-12 h-12 text-black" />,
+        title: "Anti Money Laundering",
+        href: "/aml",
+        icon: <HiOutlineShieldCheck className="w-14 h-14 text-black" />,
     },
 ];
-
 export default function HeroSection() {
     const containerRef = useRef(null);
 
@@ -226,25 +216,23 @@ export default function HeroSection() {
                 </div>
 
                 {/* Compact Row Matrix Grid Grid Container */}
-                <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 items-stretch justify-center">
-
-                    {services.map((service, index) => (
-                        <Link key={index} href={service.href}>
-                            <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 flex flex-col items-center justify-between text-center hover:shadow-md transition-all duration-300 group cursor-pointer min-h-[145px]">
-                                <div className="mb-2 transform group-hover:scale-105 transition-transform duration-300">
-                                    {service.icon}
-                                </div>
-
-                                <h5 className="text-[15px] text-black tracking-tight mb-1">
-                                    {service.title}
-                                </h5>
-
-                                <div className="w-6 h-[2px] bg-textsecondary mt-1" />
-                            </div>
-                        </Link>
-                    ))}
+               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 justify-center justify-items-center w-full max-w-7xl mx-auto">
+    {services.map((service, index) => (
+        <Link key={index} href={service.href} className="w-full max-w-[200px]">
+            <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 flex flex-col items-center justify-between text-center hover:shadow-md transition-all duration-300 group cursor-pointer min-h-[145px] h-full">
+                <div className="mb-2 transform group-hover:scale-105 transition-transform duration-300">
+                    {service.icon}
                 </div>
 
+                <h5 className="text-[15px] text-black tracking-tight mb-1">
+                    {service.title}
+                </h5>
+
+                <div className="w-6 h-[2px] bg-textsecondary mt-1" />
+            </div>
+        </Link>
+    ))}
+</div>
 
             </section>
         </div>

@@ -29,6 +29,8 @@ import LeadMagnet from '@/components/LeadMagnet';
 import FloatingService from '@/components/FloatingService';
 import VideoResources from '@/components/VideoResources';
 import IndustryDetailPage from '@/components/Industries';
+import Samplesection from '@/components/Sample';
+import BlogHome from '@/components/BlogHome';
 
 const BookerAccountingWebsite = () => {
 
@@ -48,6 +50,7 @@ const BookerAccountingWebsite = () => {
       {/* <IndustryDetailPage/> */}
       <IndustriesSection />
       <LeadMagnet/>
+      <Samplesection/>
       {/* <ServicesPopup/> */}
       <OurProcess />
       <Testimonials />
@@ -55,6 +58,7 @@ const BookerAccountingWebsite = () => {
       {/* <VideoResources/> */}
       {/* <Dashboard/> */}
       {/* <Whychoose /> */}
+      <BlogHome/>
       <OneFirm />
       <Faq />
       <ContactSection />

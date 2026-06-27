@@ -4,6 +4,8 @@ import "./globals.css";
 
 import LenisWrapper from "@/components/LenisWrapper";
 import LoadingScreen from "@/components/LoadingSreen";
+import FloatingService from "@/components/FloatingService";
+import FloatingActions from "@/components/FloatingActions";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -98,6 +100,8 @@ export default function RootLayout({ children }) {
           />
 
           {children}
+          <FloatingActions />
+          <FloatingService />
         </LenisWrapper>
       </body>
     </html>

@@ -1,54 +1,69 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Users, FileText, BarChart2 } from "lucide-react";
+import { Newspaper } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import FloatingMenuButton from "@/components/FloatingMenuButton";
 import ScrollToTop from "@/components/ScrollToTop";
+import { useRef } from "react";
 
 export default function BlogPage() {
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true });
+
+  // Header/Main Title variants (smoother animation for the big text)
+  const headerVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   const POSTS = [
     {
-      href: "/e-invoice",
       id: 1,
-      title: "UAE E-Invoicing Transformation",
+      href: "/e-invoice",
+      title: "UAE E-Invoicing Transformation & Mandatory Strategy",
       description:
-        "Understanding the UAE’s mandatory e-invoicing rollout, compliance requirements, timelines, and its impact on businesses",
+        "Understanding the UAE’s mandatory e-invoicing rollout, compliance requirements, timelines, and its impact on businesses.",
       author: "Content Writer",
-      role: "Booker Accounting and Consulting",
-      date: "5 November, 2025",
       imageUrl: "/images/e-invoice.webp",
-
-      color: "bg-indigo-600",
-      icon: FileText,
+      readTime: "",
     },
     {
       id: 2,
       href: "/offshore",
-      title: "UAE Offshore Corporate TaxRegistration",
+      title: "UAE Offshore Corporate Tax Registration Practices",
       description:
-        "A comprehensive guide to understanding corporate tax registration for offshore companies in the UAE's evolving tax framework",
-      author: "Head of Content ",
-      role: "Booker Accounting and Consulting",
-      date: "4 November, 2025",
+        "A comprehensive guide to understanding corporate tax registration for offshore companies in the UAE's evolving tax framework.",
+      author: "Content Writer",
       imageUrl: "/images/tax.webp",
-      category: "Ad Creative",
-      category2: "Performance",
-      color: "bg-teal-500",
-      icon: Users,
+      readTime: "",
+    },
+    {
+      id: 3,
+      href: "/e-invoicing",
+      title: "The Paper Trail Ends Here : Why E-Invoicing Is No Longer Optional?",
+      description:
+        "Slow payments, manual errors, and compliance risk are symptoms of the same root cause  paper-based invoicing. Here's what the shift to e-invoicing actually looks like, and why the businesses moving now will have a significant structural advantage.",
+      author: "Content Writer ",
+      imageUrl: "/images/office-workers.webp",
+      readTime: "9 Min Read",
     },
   ];
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 text-gray-900">
-        {/* ✅ HERO SECTION */}
+      <div className="min-h-screen bg-white text-slate-900 font-sans">
+
+        {/* ✅ HERO BACKGROUND SECTION */}
         <section className="relative overflow-hidden text-white bg-black">
-          {/* Background */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -57,7 +72,7 @@ export default function BlogPage() {
           >
             <Image
               src="/images/img3.webp"
-              alt="Blog"
+              alt="Blog Background"
               fill
               priority
               sizes="100vw"
@@ -71,7 +86,6 @@ export default function BlogPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-black/80 pointer-events-none" />
           </motion.div>
 
-          {/* Text Content */}
           <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -80,14 +94,10 @@ export default function BlogPage() {
               className="mb-6"
             >
               <div className="text-sm md:text-lg flex flex-wrap text-gray-300 gap-x-2">
-                <Link
-                  href="/"
-                  className="text-white hover:text-textprimary transition-colors"
-                >
+                <Link href="/" className="text-white hover:text-textsecondary transition-colors">
                   Home
                 </Link>
                 <span>›</span>
-
                 <span className="text-teal-400 font-medium">Blog</span>
               </div>
             </motion.div>
@@ -98,10 +108,7 @@ export default function BlogPage() {
               transition={{ duration: 0.8 }}
               className="text-5xl md:text-7xl font-bold leading-tight mb-6"
             >
-              Latest{" "}
-              <span className="text-transparent bg-clip-text bg-textprimary">
-                Blogs
-              </span>
+              Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">Blogs</span>
             </motion.h1>
 
             <motion.p
@@ -110,109 +117,138 @@ export default function BlogPage() {
               transition={{ duration: 0.9 }}
               className="text-xl md:text-2xl text-gray-300 max-w-3xl"
             >
-              We believe business owners deserve clear and practical guidance.
-              That's why we share valuable insights, compliance updates, and
-              expert advice to help you stay compliant, make confident
-              decisions, and grow your business successfully.
+              We believe business owners deserve clear and practical guidance. That's why we share valuable insights, compliance updates, and expert advice to help you stay compliant.
             </motion.p>
           </div>
         </section>
 
-        {/* ✅ BLOG SECTION */}
-        <section className="max-w-7xl mx-auto px-6 py-20">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-black">
-              Latest{" "}
-              <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full  after:bg-textsecondary after:left-0 after:bottom-0">
-                Insights
-              </span>
-            </h2>
-            <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl  mx-auto  leading-relaxed">
-              Helping businesses grow through knowledge, compliance, and
-              informed decision-making."
-            </p>
-          </div>
+        {/* ✅ DYNAMIC NEW INSIGHTS / MAIN GRID SECTION */}
+        <section className="max-w-7xl mx-auto px-6 py-24 bg-white">
 
-          {/* Blog Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10">
-            {POSTS.map((post) => {
-              const Icon = post.icon;
-              return (
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="bg-white rounded-2xl overflow-hidden transition-all border border-gray-200"
-                >
-                  {/* Image */}
-                  <div className="relative h-64 overflow-hidden">
+          {/* Centered Top Badge & Header Typography Framework */}
+          {/* <div className="text-center mb-16 flex flex-col items-center">
+           
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+              Explore Our Blog
+            </h2>
+            
+            <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto leading-relaxed font-normal">
+              Dive into our blog for expert insights, tips, and industry trends to elevate your business operations and compliance management journey.
+            </p>
+          </div> */}
+          <motion.header
+            ref={headerRef}
+            className="max-w-7xl mx-auto text-center mb-8"
+            variants={headerVariants}
+            initial="hidden"
+            animate={isHeaderInView ? "visible" : "hidden"}
+          >
+
+            <h2 className="text-3xl md:text-3xl lg:text-4xl font-extrabold text-black">
+              Explore <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-textsecondary after:left-0 after:bottom-0">Our</span> Blog.
+            </h2>
+            <p className=" sm:text-md md:text-lg text-gray-500 max-w-7xl px-4 mx-auto m-3 leading-relaxed">
+              Dive into our blog for expert insights, tips, and industry trends to elevate your business operations and compliance management journey.
+
+            </p>
+          </motion.header>
+
+          {/* Clean Three-Column Grid Setup */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {POSTS.map((post) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 group"
+              >
+                {/* Visual Image Container with Balanced Border-Radius Padding */}
+                <div className="p-3 pb-0">
+                  <Link href={`/blog${post.href}`} className="relative block h-56 w-full overflow-hidden rounded-2xl bg-gray-100">
                     <Image
                       src={post.imageUrl}
                       alt={post.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-center transition-transform duration-500 group-hover:scale-103"
                     />
-                  </div>
+                  </Link>
+                </div>
 
-                  {/* Content */}
-                  <div className="p-6 flex flex-col h-full">
-                    <h3 className="text-xl font-bold leading-snug mb-3 text-textsecondary">
+                {/* Info Text Area Block */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <Link href={`/blog${post.href}`} className="block mb-2">
+                    <h3 className="text-base font-semibold leading-snug text-slate-900 group-hover:text-textsecondary transition-colors line-clamp-2">
                       {post.title}
                     </h3>
+                  </Link>
 
-                    {/* Description (NEW — no design change) */}
-                    <p className="text-lg text-black leading-relaxed">
-                      {post.description}
-                    </p>
+                  <p className="text-xs text-gray-400 leading-relaxed font-normal line-clamp-2 mb-3">
+                    {post.description}
+                  </p>
 
-                    {/* Author Info */}
-                    <div className="flex items-center gap-3 mt-4">
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center text-white ${post.color}`}
-                      >
-                        <Icon className="w-5 h-5" />
+                  {/* Clean Modern Inline "Read More" Trigger */}
+                  <Link
+                    href={`/blog${post.href}`}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-textsecondary hover:text-teal-700 transition-colors w-fit mb-6"
+                  >
+                    <span>Read Article</span>
+                    <svg
+                      className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </Link>
+
+                  {/* Clean Footer Profile Row */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
+                    <div className="flex items-center gap-2.5">
+                      <div className="relative w-7 h-7 rounded-full overflow-hidden bg-slate-200">
+                        <div className="w-full h-full bg-slate-300 flex items-center justify-center text-[10px] font-bold text-slate-600">
+                          {post.author.charAt(0)}
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-semibold">{post.author}</p>
-                        <p className="text-xs text-gray-500">{post.role}</p>
-                      </div>
+                      <span className="text-xs font-medium text-slate-700">{post.author}</span>
                     </div>
 
-                    <p className="text-sm text-gray-500 mt-4 pt-4 border-t border-gray-200">
-                      {post.date}
-                    </p>
-
-                    {/* Read More */}
-                    <Link
-                      href={`/blog/${post.href}`}
-                      className="mt-6 inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 font-semibold transition-colors group"
-                    >
-                      Read More
-                      <svg
-                        className="w-5 h-5 transition-transform group-hover:translate-x-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </Link>
+                    {/* Muted Accent Time Tag */}
+                    <span className="text-[11px] font-medium text-gray-500 bg-gray-50 px-2.5 py-1 rounded-md border border-gray-100">
+                      {post.readTime}
+                    </span>
                   </div>
-                </motion.div>
-              );
-            })}
+                </div>
+              </motion.div>
+            ))}
           </div>
+
+          {/* Centered Secondary Nav Call-To-Action Button */}
+          {/* <div className="mt-16 flex justify-center">
+            <Link 
+              href="/blog" 
+              className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-200 bg-white hover:bg-gray-50 text-slate-700 font-medium text-xs rounded-xl shadow-sm transition-all duration-200 group"
+            >
+              <span>View All Blogs</span>
+              <svg
+                className="w-3.5 h-3.5 text-gray-500 transition-transform group-hover:translate-x-0.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </Link>
+          </div> */}
+
         </section>
 
-        {/* ✅ FOOTER SECTION */}
         <ScrollToTop />
         <FloatingMenuButton />
         <Footer />
