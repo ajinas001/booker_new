@@ -1,334 +1,679 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+
+import Head from "next/head";
 import ContactSection from "@/components/ContactSection";
+import FloatingMenuButton from "@/components/FloatingMenuButton";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import FloatingMenuButton from "@/components/FloatingMenuButton";
 import ScrollToTop from "@/components/ScrollToTop";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  CheckCircle,
+  ChevronRight,
+  ArrowRight,
+  Users,
+  Cloud,
+  ClipboardCheck,
+  BarChart3,
+  Package,
+  BookOpen,
+  Globe,
+  Zap,
+  Scale,
+  MessageSquare,
+  ShieldCheck,
+  Plus,
+  Minus,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRef, useState } from "react";
 
-const offerings = [
+// ─── Static data ──────────────────────────────────────────────────────────────
+
+const services = [
   {
+    id: 1,
+    icon: BookOpen,
+    title: "Accounts Regulation",
+    tag: "Compliance",
+    desc: "Books maintained in strict accordance with UAE Commercial Companies Law, free zone requirements, and applicable regulatory frameworks.",
+    highlights: [
+      "Maintenance of books of accounts in line with UAE law",
+      "Compliance with free zone and mainland regulatory requirements",
+      "Statutory record-keeping and document management",
+      "Chart of accounts setup and structuring for compliance",
+      "Regulatory filing support and deadline management",
+      "Review and remediation of non-compliant records",
+    ],
+    forWhom:
+      "All UAE-registered businesses including mainland companies, free zone entities, and branches of foreign companies.",
+  },
+  {
+    id: 2,
+    icon: Cloud,
+    title: "Cloud Accounting Services",
+    tag: "Technology",
+    desc: "Real-time financial data via Xero, QuickBooks, and Zoho Books — automated, accurate, accessible from anywhere.",
+    highlights: [
+      "Cloud platform setup and onboarding (Xero, QuickBooks, Zoho Books)",
+      "Migration from manual or legacy systems to cloud",
+      "Automated transaction recording and bank reconciliation",
+      "Real-time dashboards and financial reporting",
+      "Multi-currency and multi-entity accounting",
+      "AI-powered bookkeeping insights and automation",
+    ],
+    forWhom:
+      "Startups, growing SMEs, and businesses replacing manual spreadsheets or legacy desktop software.",
+  },
+  {
+    id: 3,
+    icon: ClipboardCheck,
+    title: "Audit Preparation & Support",
+    tag: "Readiness",
+    desc: "Clean, complete, and fully audit-ready books — well before your auditors arrive. No scramble, no stress.",
+    highlights: [
+      "Pre-audit review and gap analysis",
+      "Reconciliation of accounts and ledgers",
+      "Preparation and organization of supporting documents",
+      "Resolution of discrepancies and journal adjustments",
+      "Liaison with external auditors on your behalf",
+      "Post-audit support and recommendations implementation",
+    ],
+    forWhom:
+      "Companies requiring statutory audits, businesses preparing for investor or bank audits.",
+  },
+  {
+    id: 4,
+    icon: BarChart3,
     title: "Accounting & Financial Reporting",
-    details:
-      "Complete management of your general ledger, accounts payable/receivable, and generation of financial statements (P&L, Balance Sheet, Cash Flow).",
+    tag: "IFRS",
+    desc: "Timely, IFRS-compliant financial reports that give you a true picture of business performance for better decisions.",
+    highlights: [
+      "Preparation of profit & loss statements",
+      "Balance sheet and cash flow statement preparation",
+      "Monthly, quarterly, and annual management accounts",
+      "IFRS-compliant financial statement preparation",
+      "Variance analysis and financial commentary",
+      "Consolidated financial reporting for group entities",
+    ],
+    forWhom:
+      "Business owners, CFOs, boards, and management teams needing accurate, timely financial reports.",
   },
   {
-    title: "Cloud-Based Accounting Solutions",
-    details:
-      "Implementation and support of cloud accounting platforms like QuickBooks & Xero — real-time financial access from anywhere.",
-  },
-  {
-    title: "Audit Preparation & Compliance Support",
-    details:
-      "Preparation and organization of required documents for audits, ensuring full compliance with UAE regulations.",
-  },
-  {
-    title: "Chart of Accounts & Compliance Structuring",
-    details:
-      "Design and optimization of chart of accounts aligned with UAE Corporate Tax & VAT regulations.",
-  },
-  {
-    title: "Inventory & Fixed Asset Verification",
-    details:
-      "Physical verification and reconciliation of inventory & fixed assets ensuring accurate asset valuation.",
+    id: 5,
+    icon: Package,
+    title: "Inventory & Asset Verification",
+    tag: "Stock & Assets",
+    desc: "Systematic inventory counts and asset verification ensuring your records reflect exactly what you own.",
+    highlights: [
+      "Physical inventory count and stock reconciliation",
+      "Fixed asset register review and verification",
+      "Identification of obsolete, damaged, or unrecorded assets",
+      "Valuation review and depreciation schedule accuracy checks",
+      "System-to-physical reconciliation reporting",
+      "Recommendations for improved stock and asset controls",
+    ],
+    forWhom:
+      "Retail businesses, manufacturers, trading companies, warehouses, and businesses with significant inventory.",
   },
 ];
 
-const features = [
+const whyChoose = [
   {
-    icon: (
-      <svg
-        className="w-12 h-12 text-teal-500"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      >
-        <path
-          d="M12 3l8 4v5c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V7l8-4z"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    description:
-      "Local expertise with global standards (IFRS, UAE VAT, Corporate Tax)",
+    icon: Globe,
+    title: "Local + Global Expertise",
+    body: "Deep UAE regulatory knowledge combined with international standards (IFRS, UAE VAT, Corporate Tax).",
   },
   {
-    icon: (
-      <svg
-        className="w-12 h-12 text-teal-500"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      >
-        <path
-          d="M3 17l6-6 4 4 7-7"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="M14 4h7v7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    description: "Scalable solutions for startups, SMEs, and large businesses",
+    icon: Zap,
+    title: "Cloud-First Approach",
+    body: "AI-powered tools and leading cloud platforms to automate tasks, reduce errors, and give real-time visibility.",
   },
   {
-    icon: (
-      <svg
-        className="w-12 h-12 text-teal-500"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      >
-        <path d="M7 8h10M7 12h6" strokeLinecap="round" strokeLinejoin="round" />
-        <path
-          d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="M15 16l2 2 3-3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    description: "Transparent pricing & reliable communication",
+    icon: Scale,
+    title: "Scalable Solutions",
+    body: "From a startup's first registration to an SME growing across multiple entities — our services scale with you.",
   },
   {
-    icon: (
-      <svg
-        className="w-12 h-12 text-teal-500"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      >
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 8l3 4-3 4-3-4 3-4z" fill="currentColor" />
-      </svg>
-    ),
-    description: "AI-powered insights & automation",
+    icon: MessageSquare,
+    title: "Transparent Communication",
+    body: "No jargon, no hidden surprises. You always know what we're doing, why, and what it means for your business.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Always Audit-Ready",
+    body: "Books maintained to the standard expected by external auditors — so there's no scramble when the time comes.",
   },
 ];
+
+const platforms = ["Xero", "QuickBooks", "Zoho Books"];
+
+// ─── Animation variants ───────────────────────────────────────────────────────
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function SectionLabel({ children }) {
+  return (
+    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 mb-3">
+      {children}
+    </p>
+  );
+}
+
+function ServiceAccordionItem({ service, index, open, onToggle }) {
+  const Icon = service.icon;
+  return (
+    <motion.div
+      variants={fadeUp}
+      custom={index * 0.4}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-40px" }}
+      className="border-b border-gray-100 last:border-0"
+    >
+      <button
+        onClick={onToggle}
+        aria-expanded={open}
+        className="w-full flex items-center justify-between gap-6 py-6 text-left group"
+      >
+        {/* Left: number + icon + title */}
+        <div className="flex items-center gap-5 flex-1 min-w-0">
+          <span className="text-xs font-semibold text-gray-300 w-6 flex-shrink-0 tabular-nums">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <div className="w-9 h-9 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0 group-hover:bg-teal-100 transition-colors duration-150">
+            <Icon className="w-4 h-4 text-teal-700" strokeWidth={1.7} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <span className="text-base md:text-lg font-semibold text-gray-900 leading-snug">
+              {service.title}
+            </span>
+          </div>
+        </div>
+
+        {/* Right: tag + toggle */}
+        <div className="flex items-center gap-4 flex-shrink-0">
+          <span className="hidden sm:block text-[10px] font-semibold uppercase tracking-widest text-gray-400 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-full">
+            {service.tag}
+          </span>
+          <div className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:border-teal-300 group-hover:text-teal-600 transition-colors duration-150 flex-shrink-0">
+            {open ? <Minus className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
+          </div>
+        </div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="pb-6 pl-[3.25rem] md:pl-[4.25rem] pr-4">
+              <p className="text-sm text-gray-500 leading-relaxed mb-5">
+                {service.desc}
+              </p>
+              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5 mb-5">
+                {service.highlights.map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-2 text-xs text-gray-600 leading-relaxed"
+                  >
+                    <CheckCircle className="w-3.5 h-3.5 text-teal-500 mt-0.5 flex-shrink-0" />
+                    {h}
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-start gap-2 text-[11px] text-gray-400 leading-relaxed pt-4 border-t border-gray-100">
+                <Users className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-gray-300" />
+                {service.forWhom}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function AccountingPage() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const heroRef = useRef(null);
+  const [openId, setOpenId] = useState(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <>
+      <Head>
+        <title>Accounting & Bookkeeping Services — BAC</title>
+        <meta
+          name="description"
+          content="Expert accounting and bookkeeping services for UAE businesses — cloud accounting, IFRS financial reporting, audit preparation, inventory verification, and accounts regulation."
+        />
+        <meta
+          name="keywords"
+          content="accounting UAE, bookkeeping Dubai, IFRS reporting, cloud accounting Xero QuickBooks, audit preparation UAE"
+        />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://yourdomain.com/services/accounting" />
+        <meta property="og:title" content="Accounting & Bookkeeping Services — BAC" />
+        <meta
+          property="og:description"
+          content="Accurate books, compliant reporting, better business control. End-to-end accounting for UAE businesses."
+        />
+        <meta property="og:type" content="website" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "BAC Accounting & Bookkeeping",
+              url: "https://yourdomain.com/services/accounting",
+              description:
+                "End-to-end accounting and bookkeeping solutions built for UAE businesses.",
+            }),
+          }}
+        />
+      </Head>
 
-    <Navbar/>
-      {/* Hero Section */}
-      <section className="relative overflow-hidden text-white bg-black">
-        {/* Background */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0 will-change-transform"
+      <div className="bg-white text-gray-800 antialiased">
+        <Navbar />
+
+        {/* ── HERO ─────────────────────────────────────────────────────────── */}
+        <section
+          ref={heroRef}
+          className="relative h-[92vh] min-h-[580px] flex items-end overflow-hidden"
         >
-          <Image
-            src="/images/img3.webp"
-            alt="Accounting & Bookkeeping"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center transform-gpu"
-            style={{
-              WebkitTransform: "translateZ(0)",
-              backfaceVisibility: "hidden",
-              transformStyle: "preserve-3d",
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-black/80 pointer-events-none" />
-        </motion.div>
-
-        {/* Text Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-6"
+            style={{ y: heroY }}
+            className="absolute inset-0 will-change-transform"
           >
-            <div className="text-sm md:text-lg flex flex-wrap text-gray-300 gap-x-2">
-              <Link
-                href="/"
-                className="text-white hover:text-textprimary transition-colors"
-              >
-                Home
-              </Link>
-              <span>›</span>
-              <span>Services</span>
-              <span>›</span>
-              <span className="text-textprimary font-medium">
-                Accounting & Bookkeeping
-              </span>
-            </div>
+            <Image
+              src="/images/img3.webp"
+              alt="Accounting & Bookkeeping"
+              priority
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold leading-tight mb-6"
+          {/* Breadcrumb */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            className="absolute top-28 left-6 md:left-16 z-10 flex items-center gap-2 text-sm text-gray-300"
           >
-            Accounting &{" "}
-            <span className="text-transparent bg-clip-text bg-textprimary">
-              Bookkeeping
+            <Link href="/" className="hover:text-white transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5" />
+            <span>Services</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+            <span className="text-teal-400 font-medium">
+              Accounting & Bookkeeping
             </span>
-          </motion.h1>
+          </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="text-xl md:text-2xl text-gray-300 max-w-3xl"
+          {/* Hero text */}
+          <motion.div
+            style={{ opacity: heroOpacity }}
+            className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 pb-20 md:pb-28 w-full"
           >
-            End-to-end accounting and bookkeeping solutions that ensure
-            financial accuracy, compliance, and better business control.
-          </motion.p>
-        </div>
-      </section>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-teal-400 text-sm font-semibold uppercase tracking-[0.2em] mb-5"
+            >
+              BAC Accounting & Bookkeeping
+            </motion.p>
 
-      {/* Intro Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:space-x-12 items-center">
-          <div className="lg:w-1/2 mb-12 lg:mb-0 space-y-6">
-            <p className="text-lg text-gray-600">
-              In today’s fast-moving business environment, accurate bookkeeping
-              and compliant financial reporting are the backbone of sustainable
-              growth.
-            </p>
-            <p className="text-lg text-gray-600">
-              We offer expert bookkeeping and accounting services that combine
-              local insights, global standards, and cloud-based technology.
-            </p>
-          </div>
-          <div className="lg:w-1/2 relative rounded-xl overflow-hidden shadow-md">
-            <Image
-              src="/images/accounting.webp"
-              alt="Accounting team"
-              width={600}
-              height={500}
-              className="object-cover w-full h-full transform-gpu"
-            />
-          </div>
-        </div>
-      </section>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.2 }}
+              className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
+            >
+              Accurate Books.
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-200">
+                Better Control.
+              </span>
+            </motion.h1>
 
-      {/* Offerings Accordion */}
-      <section className="max-w-7xl mx-auto pb-20 px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl md:text-5xl font-bold mb-12"
-        >
-          BAC Accounting &{" "}
-          <span className="text-transparent bg-clip-text bg-textsecondary">
-            Compliance Offering
-          </span>
-        </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-lg md:text-xl text-gray-300 max-w-xl mb-10"
+            >
+              End-to-end accounting and bookkeeping solutions built for UAE
+              businesses — local expertise, IFRS standards, cloud-first
+              technology.
+            </motion.p>
 
-        <div className="space-y-6">
-          {offerings.map((item, index) => (
-            <div key={index} className="border-b border-gray-300 pb-4">
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="flex items-center justify-between w-full text-left"
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex flex-wrap gap-4"
+            >
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
               >
-                <div className="flex items-baseline gap-4">
-                  <span className="text-gray-400 italic text-lg font-light">
-                    {String(index + 1).padStart(2, "0")}.
-                  </span>
-                  <span className="text-lg md:text-2xl font-medium">
-                    {item.title}
-                  </span>
-                </div>
-                <span className="text-2xl font-light">
-                  {openIndex === index ? "–" : "+"}
-                </span>
-              </button>
+                Get Free Consultation
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a
+                href="#services"
+                className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+              >
+                Explore Services
+              </a>
+            </motion.div>
+          </motion.div>
+        </section>
 
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden mt-3 ml-12 text-gray-600 text-base md:text-lg leading-relaxed"
-                  >
-                    {item.details}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Callout Section */}
-      <div className="relative rounded-3xl overflow-hidden  mx-8 md:mx-20 p-6 md:p-12">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/business.webp"
-            alt="Professional bookkeeping service"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-transparent" />
-        </div>
-        <div className="relative z-10 p-8 md:p-16 max-w-xl">
-          <h2 className="text-white text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Professional{" "}
-            <span className="font-light text-white/80">
-              Bookkeeping Services
-            </span>
-          </h2>
-          <p className="text-white/90 text-lg leading-relaxed">
-            Your business's financial health depends on accurate bookkeeping. We
-            ensure every transaction is recorded correctly and compliant with
-            UAE VAT & Corporate Tax laws.
-          </p>
-        </div>
-      </div>
-
-      {/* Why Choose Us */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h3 className="text-4xl md:text-5xl font-bold mb-6">Why Choose Us</h3>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Experience the clarity and confidence of working with expert
-            accountants.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-4 gap-12">
-          {features.map((feature, index) => (
-            <div key={index} className="text-center">
-              <div className="flex justify-center mb-6">{feature.icon}</div>
-              <p className="text-gray-700 leading-relaxed text-base">
-                {feature.description}
+        {/* ── INTRO ─────────────────────────────────────────────────────────── */}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-16 grid lg:grid-cols-2 gap-16 items-center">
+            {/* Text */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <SectionLabel>Who We Are</SectionLabel>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                Beyond Recording.{" "}
+                <span className="text-teal-700">Real Financial Clarity.</span>
+              </h2>
+              <p className="text-gray-500 text-lg leading-relaxed mb-4">
+                In today's fast-moving business environment, accurate
+                bookkeeping and compliant financial reporting are the backbone
+                of sustainable growth.
               </p>
-            </div>
-          ))}
-        </div>
-      </section>
+              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                At BAC, we go beyond recording transactions — we give you a
+                clear, real-time picture of your financial health so you can
+                make better decisions, faster.
+              </p>
 
-      <ContactSection />
-      <FloatingMenuButton/>
-      <ScrollToTop/>
-      <Footer />
+              {/* Platform pills */}
+              <div className="flex flex-wrap gap-3 mb-10">
+                {platforms.map((p) => (
+                  <span
+                    key={p}
+                    className="px-4 py-2 text-sm font-medium text-teal-700 bg-teal-50 border border-teal-100 rounded-full"
+                  >
+                    {p}
+                  </span>
+                ))}
+              </div>
+
+              {/* Stat row */}
+              <div className="flex gap-10 border-t border-gray-100 pt-8">
+                {[
+                  { value: "5", label: "Core service areas" },
+                  { value: "IFRS", label: "Compliant reporting" },
+                  { value: "Cloud", label: "First approach" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <p className="text-3xl font-extrabold text-teal-700 mb-1">
+                      {s.value}
+                    </p>
+                    <p className="text-sm text-gray-400 font-medium">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Image */}
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
+                <Image
+                  src="/images/accounting.webp"
+                  alt="Accounting team at work"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              {/* Floating badge */}
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-4 max-w-[230px]">
+                <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-900 leading-snug">
+                    Always Audit-Ready
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">
+                    IFRS-compliant books
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── SERVICES ACCORDION ───────────────────────────────────────────── */}
+        <section id="services" className="py-20 md:py-32 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-6 md:px-16">
+            <div className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
+              {/* Sticky label column */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="lg:sticky lg:top-28"
+              >
+                <SectionLabel>Our Services</SectionLabel>
+                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                  Complete Accounting Solutions
+                </h2>
+                <p className="text-gray-500 text-base leading-relaxed mb-8">
+                  From day-to-day transaction recording to full financial
+                  statement preparation — we handle every layer of your
+                  accounting function.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-teal-700 hover:text-teal-900 transition-colors"
+                >
+                  Talk to an accountant
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+
+              {/* Accordion list */}
+              <div className="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-100 px-6 md:px-8">
+                {services.map((service, index) => (
+                  <ServiceAccordionItem
+                    key={service.id}
+                    service={service}
+                    index={index}
+                    open={openId === service.id}
+                    onToggle={() =>
+                      setOpenId((prev) =>
+                        prev === service.id ? null : service.id
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── CALLOUT BANNER ───────────────────────────────────────────────── */}
+        <section className="py-10 md:py-14 px-6 md:px-16">
+          <div className="max-w-7xl mx-auto">
+            <div className="relative rounded-3xl overflow-hidden min-h-[320px] flex items-center">
+              <Image
+                src="/images/business.webp"
+                alt="Professional bookkeeping service"
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-950/60 to-transparent" />
+
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="relative z-10 p-10 md:p-16 max-w-lg"
+              >
+                <p className="text-teal-400 text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+                  Bookkeeping
+                </p>
+                <h2 className="text-white text-3xl md:text-4xl font-extrabold leading-tight mb-4">
+                  Every Transaction.
+                  <br />
+                  <span className="font-light text-white/70">
+                    Recorded Correctly.
+                  </span>
+                </h2>
+                <p className="text-white/80 text-base leading-relaxed mb-8">
+                  Your business's financial health depends on accurate
+                  bookkeeping. We ensure every transaction is compliant with UAE
+                  VAT & Corporate Tax laws.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors duration-200"
+                >
+                  Get Started
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── WHY BAC ──────────────────────────────────────────────────────── */}
+        <section className="py-20 md:py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-16">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <SectionLabel>Why Choose Us</SectionLabel>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+                Why Businesses Trust BAC
+              </h2>
+            </motion.div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {whyChoose.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    custom={i * 0.25}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="group text-center p-7 rounded-2xl border border-gray-100 hover:border-teal-200 hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="w-12 h-12 bg-teal-50 group-hover:bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors duration-200">
+                      <Icon className="w-6 h-6 text-teal-600" strokeWidth={1.6} />
+                    </div>
+                    <h3 className="font-bold text-gray-900 text-sm mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-xs leading-relaxed">
+                      {item.body}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ── CTA BAND ─────────────────────────────────────────────────────── */}
+        <section className="bg-teal-700 py-16 px-6 md:px-16">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+                Ready for Accounting That Actually Works?
+              </h2>
+              <p className="text-teal-200 text-lg">
+                Clean daily bookkeeping to full IFRS-compliant statements —
+                BAC handles it all.
+              </p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="flex-shrink-0"
+            >
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white text-teal-700 hover:bg-teal-50 font-bold px-8 py-4 rounded-full text-sm transition-colors duration-200 shadow-lg"
+              >
+                Let's Talk
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        <ContactSection />
+        <ScrollToTop />
+        <FloatingMenuButton />
+        <Footer />
+      </div>
     </>
   );
 }

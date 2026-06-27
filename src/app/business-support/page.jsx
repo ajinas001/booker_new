@@ -1,285 +1,524 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Building,
-  FileCheck,
+  Building2,
+  FileCheck2,
   XCircle,
   FileText,
-  Users,
+  Users2,
+  Globe2,
+  ArrowRight,
+  CheckCircle2,
 } from "lucide-react";
-import {
-  LuSettings2,
-  LuMapPinned,
-  LuRocket,
-  LuShieldCheck,
-} from "react-icons/lu";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import FloatingMenuButton from "@/components/FloatingMenuButton";
 import ScrollToTop from "@/components/ScrollToTop";
+
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+const stats = [
+  { value: "500+", label: "Companies Formed" },
+  { value: "15+", label: "Free Zones Covered" },
+  { value: "98%", label: "Client Retention" },
+  { value: "24h", label: "Avg. Response Time" },
+];
+
 const featureItems = [
-  {
-    icon: <LuSettings2 className="text-teal-500 text-2xl" />,
-    text: "Expert guidance on entity setup & structuring",
-  },
-  {
-    icon: <LuMapPinned className="text-teal-500 text-2xl" />,
-    text: "Freezone, Mainland & Offshore formation",
-  },
-  {
-    icon: <LuRocket className="text-teal-500 text-2xl" />,
-    text: "End-to-end PRO & visa processing support",
-  },
-  {
-    icon: <LuShieldCheck className="text-teal-500 text-2xl" />,
-    text: "Compliance, secretarial & governance",
-  },
+  "Expert guidance on entity setup & structuring",
+  "Freezone, Mainland & Offshore formation",
+  "End-to-end PRO & visa processing support",
+  "Compliance, secretarial & governance",
+  "ICV score optimization for contracts",
+  "Dedicated relationship management",
 ];
 
 const services = [
   {
     id: 1,
-    icon: Building,
+    icon: Building2,
+    tag: "Formation",
     title: "Mainland Company Formation",
     description:
-      "Full assistance with licensing and registration for conducting business across the local market.",
+      "Full assistance with DED licensing, local sponsorship structuring, and registration to operate freely across the UAE local market.",
+    accent: "#14B8A6",
   },
   {
     id: 2,
-    icon: Building,
+    icon: Globe2,
+    tag: "Freezone",
     title: "Freezone Business Setup",
     description:
-      "Streamlined processes for 100% foreign ownership and specialized free zone benefits.",
+      "Streamlined onboarding for 100% foreign ownership, repatriation of profits, and specialized free zone incentives across 40+ zones.",
+    accent: "#6366F1",
   },
   {
     id: 3,
-    icon: FileCheck,
+    icon: FileCheck2,
+    tag: "Compliance",
     title: "Company Secretarial Service",
     description:
-      "Ensuring regulatory compliance, corporate governance, and maintenance of statutory records.",
+      "Regulatory compliance, board resolutions, statutory record maintenance, and annual filings handled by experienced professionals.",
+    accent: "#F59E0B",
   },
   {
     id: 4,
     icon: XCircle,
-    title: "Liquidation / De-registration",
+    tag: "Closure",
+    title: "Liquidation & De-registration",
     description:
-      "Managing the complex official process for closing down or de-registering a business entity.",
+      "Managed wind-down of business entities including debt settlement coordination, cancellation filings, and government clearances.",
+    accent: "#EF4444",
   },
   {
     id: 5,
     icon: FileText,
+    tag: "Advisory",
     title: "ICV Consultancy",
     description:
-      "Support for increasing your In-Country Value (ICV) score to qualify for government and semi-government contracts.",
+      "Strategic support for maximising your In-Country Value score to qualify for lucrative government and semi-government contracts.",
+    accent: "#10B981",
   },
   {
     id: 6,
-    icon: Users,
-    title: "PRO Service",
+    icon: Users2,
+    tag: "PRO",
+    title: "PRO Services",
     description:
-      "Public Relations Officer (PRO) services for government liaison, visa processing, and document clearance.",
+      "End-to-end government liaison covering visa processing, Emirates ID, labour cards, trade licence renewals, and document attestation.",
+    accent: "#8B5CF6",
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
+const process = [
+  { step: "01", title: "Discovery Call", desc: "We assess your goals, structure, and jurisdiction requirements." },
+  { step: "02", title: "Proposal & Plan", desc: "Tailored roadmap with timeline, costs, and entity recommendations." },
+  { step: "03", title: "Documentation", desc: "We prepare and review all government and legal paperwork." },
+  { step: "04", title: "Submission & Follow-up", desc: "We file, track, and coordinate until approvals are secured." },
+];
+
+// ─── ANIMATION VARIANTS ──────────────────────────────────────────────────────
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, staggerChildren: 0.15 },
-  },
+    transition: { duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  }),
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.7 } },
 };
 
-function BusinessSupportPage() {
+// ─── COMPONENT ───────────────────────────────────────────────────────────────
+
+export default function BusinessSupportPage() {
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
   return (
     <>
-    <Navbar/>
-      {/* ✅ HERO SECTION (iOS optimized) */}
-      <section className="relative text-white overflow-hidden will-change-transform">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0"
-        >
-          {/* ✅ Next.js Image handles memory better than CSS background on iOS */}
-          <div className="relative w-full h-full">
-            <Image
-              src="/images/img3.webp"
-              alt="Business support background"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center pointer-events-none select-none"
-              style={{
-                transform: "translate3d(0,0,0)",
-                backfaceVisibility: "hidden",
-              }}
-            />
-          </div>
+      <Navbar />
 
-          {/* ✅ Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-black/80" />
+      {/* ═══════════════════════════════════════════
+          HERO
+      ═══════════════════════════════════════════ */}
+      <section
+        ref={heroRef}
+        className="relative min-h-[92vh] flex items-end overflow-hidden bg-[#0A1628]"
+      >
+        {/* Parallax background */}
+        <motion.div style={{ y: heroY }} className="absolute inset-0 will-change-transform">
+          <Image
+            src="/images/img3.webp"
+            alt="Business support background"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-30 pointer-events-none select-none"
+          />
         </motion.div>
 
-        {/* ✅ Foreground content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center md:text-left">
+        {/* Gradient vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628]/80 via-transparent to-transparent" />
+
+        {/* Decorative teal glow */}
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-teal-500/10 blur-[120px] pointer-events-none" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-24 pt-40 w-full">
+          {/* Breadcrumb */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-6"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0}
+            className="mb-8 flex items-center gap-2 text-sm text-gray-400"
           >
-            <div className="text-sm md:text-lg flex justify-center md:justify-start text-gray-300 flex-wrap gap-x-2">
-              <Link href="/">
-                <span className="text-white hover:text-textprimary transition-colors">
-                  Home
-                </span>
-              </Link>
-              &nbsp;›&nbsp;<span>Services</span>&nbsp;›&nbsp;
-              <span className="text-textprimary font-medium">
-                Business Support Service
-              </span>
-            </div>
+            <Link href="/" className="hover:text-teal-400 transition-colors">Home</Link>
+            <span>/</span>
+            <span>Services</span>
+            <span>/</span>
+            <span className="text-teal-400 font-medium">Business Support</span>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold leading-tight mb-6"
-          >
-            Business{" "}
-            <span className="text-transparent bg-clip-text bg-textprimary">
-              Support Service
-            </span>
-          </motion.h1>
+          <div className="max-w-4xl">
+            {/* Eyebrow */}
+            <motion.span
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={1}
+              className="inline-block mb-5 px-4 py-1.5 rounded-full border border-teal-500/40 bg-teal-500/10 text-teal-400 text-xs font-semibold tracking-widest uppercase"
+            >
+              UAE Business Formation Experts
+            </motion.span>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto md:mx-0"
+            <motion.h1
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-6"
+            >
+              Business
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-300">
+                Support Service
+              </span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={3}
+              className="text-lg sm:text-xl text-gray-300 max-w-2xl leading-relaxed mb-10"
+            >
+              Simplified Setup. Seamless Operations. Continuous Compliance.
+              <br className="hidden sm:block" />
+              We handle the complexities so you can focus on growth.
+            </motion.p>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={4}
+              className="flex flex-wrap gap-4"
+            >
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-white font-semibold text-base transition-all duration-200 shadow-lg shadow-teal-500/30 hover:shadow-teal-400/40 hover:-translate-y-0.5"
+              >
+                Get Started <ArrowRight className="w-4 h-4" />
+              </a>
+              <a
+                href="#services"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-white/20 hover:border-teal-400/50 text-white font-semibold text-base transition-all duration-200 hover:bg-white/5"
+              >
+                Explore Services
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Stat bar */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={5}
+            className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10"
           >
-            Simplified Setup. Seamless Operations. Continuous Compliance.
-          </motion.p>
+            {stats.map(({ value, label }) => (
+              <div key={label} className="bg-white/5 px-6 py-5 text-center">
+                <p className="text-2xl sm:text-3xl font-extrabold text-white">{value}</p>
+                <p className="text-xs text-gray-400 mt-1 font-medium">{label}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* ✅ ABOUT SECTION */}
-      <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:space-x-12 items-center">
-        
-        {/* LEFT CONTENT */}
-        <div className="lg:w-1/2 mb-12 lg:mb-0">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
-            Your Partner in <br />
-            <span className="text-textsecondary">
-              Business Growth & Compliance
-            </span>
-          </h2>
-
-          <p className="text-lg text-gray-600 mb-8">
-            From company setup to compliance, we handle complexities so you can
-            focus on growth.
-          </p>
-
-          <p className="text-lg text-gray-600 mb-10">
-            Our advisory team ensures your business stays structured, compliant,
-            and takes advantage of UAE's economic benefits.
-          </p>
-
-          {/* FEATURES */}
-          <div className="grid grid-cols-2 gap-y-6">
-            {featureItems.map((item, i) => (
-              <div key={i} className="flex items-center space-x-3">
-                {item.icon}
-                <p className="text-base font-medium text-gray-700">
-                  {item.text}
+      {/* ═══════════════════════════════════════════
+          ABOUT / INTRO
+      ═══════════════════════════════════════════ */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
+          {/* Image side */}
+          <motion.div
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
+              <Image
+                src="/images/business-support.webp"
+                alt="Business support UAE"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+              {/* Floating badge */}
+              <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-xl px-5 py-4 shadow-xl border border-gray-100">
+                <p className="text-xs font-semibold text-teal-600 uppercase tracking-wider mb-0.5">
+                  Trusted by 500+ businesses
+                </p>
+                <p className="text-sm text-gray-600">
+                  From solo entrepreneurs to multinational corporations across the UAE.
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+            {/* Accent block */}
+            <div className="absolute -top-4 -left-4 w-24 h-24 rounded-xl bg-teal-500/15 border border-teal-400/20 -z-10" />
+            <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-xl bg-indigo-500/10 border border-indigo-400/20 -z-10" />
+          </motion.div>
 
-        {/* RIGHT IMAGE */}
-        <div className="lg:w-1/2">
-          <div className="overflow-hidden rounded-xl shadow-lg">
-            <Image
-              width={600}
-              height={500}
-              src="/images/business-support.webp"
-              alt="Business support UAE"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
+          {/* Text side */}
+          <div>
+            <motion.span
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="inline-block mb-4 text-xs font-bold tracking-widest uppercase text-teal-600"
+            >
+              Who We Are
+            </motion.span>
 
-      {/* ✅ SERVICES GRID */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-20 px-6">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="max-w-7xl mx-auto"
-        >
-          <div className="text-center mb-20">
-            <h3 className="text-4xl md:text-5xl font-bold mb-6">
+            <motion.h2
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-6"
+            >
+              Your Partner in{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">
+                Business Growth
+              </span>{" "}
+              & Compliance
+            </motion.h2>
+
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={2}
+              className="text-gray-600 text-lg leading-relaxed mb-4"
+            >
+              Navigating the UAE's regulatory landscape can be overwhelming. Our
+              advisory team cuts through the complexity — from initial entity
+              selection to ongoing compliance — so your energy stays on what
+              matters: building your business.
+            </motion.p>
+
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={3}
+              className="text-gray-600 text-lg leading-relaxed mb-10"
+            >
+              Whether you're launching a startup or restructuring an enterprise,
+              we bring deep local expertise and a network across every major
+              jurisdiction in the UAE.
+            </motion.p>
+
+          
+          </div>
+          
+        </div>
+          {/* Feature checklist */}
+            <div className="max-w-7xl mx-auto px-6">
+              <motion.ul
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={4}
+              className="grid sm:grid-cols-2 gap-x-6 gap-y-3"
+            >
+              {featureItems.map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700 font-medium">
+                  <CheckCircle2 className="w-4 h-4 mt-0.5 text-teal-500 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
+            </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          SERVICES GRID
+      ═══════════════════════════════════════════ */}
+      <section id="services" className="py-24 bg-[#F8FAFC]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          {/* Header */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mb-16 max-w-2xl"
+          >
+            <span className="inline-block mb-4 text-xs font-bold tracking-widest uppercase text-teal-600">
+              What We Offer
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
               Business Support Services
-            </h3>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Essential services for company setup, maintenance, and compliance.
+            </h2>
+            <p className="text-gray-500 text-lg">
+              Essential services covering every stage of your business lifecycle
+              in the UAE.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {services.map(({ id, icon: Icon, title, description }) => (
+          {/* Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map(({ id, icon: Icon, tag, title, description, accent }, i) => (
               <motion.div
                 key={id}
-                variants={cardVariants}
-                whileHover={{
-                  scale: 1.03,
-                  transition: { duration: 0.3 },
-                }}
-                className="relative p-10 rounded-3xl bg-secondary text-white overflow-hidden border border-gray-200"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                custom={i * 0.5}
+                whileHover={{ y: -4, transition: { duration: 0.25 } }}
+                className="group relative bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden"
               >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 0.15 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute inset-0 bg-gradient-to-br from-teal-400 via-cyan-400 to-blue-500 rounded-3xl"
+                {/* Subtle top accent line */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}
                 />
 
-                <div className="relative z-10 flex flex-col gap-5">
-                  <Icon className="h-14 w-14 opacity-90" />
-                  <h3 className="text-2xl font-bold">{title}</h3>
-                  <p className="text-base leading-relaxed">{description}</p>
+                {/* Tag */}
+                <span
+                  className="inline-block mb-5 px-3 py-1 rounded-full text-xs font-semibold"
+                  style={{ color: accent, background: `${accent}18` }}
+                >
+                  {tag}
+                </span>
+
+                {/* Icon */}
+                <div
+                  className="mb-5 w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{ background: `${accent}15` }}
+                >
+                  <Icon className="w-6 h-6" style={{ color: accent }} />
+                </div>
+
+                <h3 className="text-lg font-bold text-gray-900 mb-3 leading-snug">{title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+
+                {/* Hover arrow */}
+                <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ color: accent }}>
+                  Learn more <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          PROCESS
+      ═══════════════════════════════════════════ */}
+      <section className="py-24 bg-[#0A1628] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mb-16 text-center"
+          >
+            <span className="inline-block mb-4 text-xs font-bold tracking-widest uppercase text-teal-400">
+              How It Works
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
+              Our Process
+            </h2>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            {/* Connecting line */}
+            <div className="absolute top-8 left-[12.5%] right-[12.5%] h-px bg-teal-500/20 hidden lg:block" />
+
+            {process.map(({ step, title, desc }, i) => (
+              <motion.div
+                key={step}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i * 0.6}
+                className="relative"
+              >
+                {/* Step circle */}
+                <div className="w-16 h-16 rounded-full bg-teal-500/10 border border-teal-500/30 flex items-center justify-center mb-6 mx-auto lg:mx-0">
+                  <span className="text-teal-400 font-extrabold text-sm tracking-wider">{step}</span>
+                </div>
+
+                <h3 className="text-white font-bold text-lg mb-2 text-center lg:text-left">{title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-left">{desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          CTA BAND
+      ═══════════════════════════════════════════ */}
+      <section id="contact" className="py-20 bg-gradient-to-br from-teal-500 to-cyan-500">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto px-6 text-center"
+        >
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-5 leading-tight">
+            Ready to Set Up Your Business in the UAE?
+          </h2>
+          <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+            Talk to an expert today. We'll map out the best structure, jurisdiction,
+            and timeline for your specific goals — at no obligation.
+          </p>
+          <a
+            href="#contact-form"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-teal-600 font-bold text-base hover:bg-gray-50 transition-all duration-200 shadow-lg hover:-translate-y-0.5"
+          >
+            Book a Free Consultation <ArrowRight className="w-5 h-5" />
+          </a>
         </motion.div>
       </section>
 
-      <ContactSection />
-      <ScrollToTop/>
-      <FloatingMenuButton/>
+      <div id="contact-form">
+        <ContactSection />
+      </div>
+
+      <ScrollToTop />
+      <FloatingMenuButton />
       <Footer />
     </>
   );
 }
-
-export default BusinessSupportPage;

@@ -1,10 +1,12 @@
 "use client";
 
+import Head from "next/head";
 import ContactSection from "@/components/ContactSection";
 import FloatingMenuButton from "@/components/FloatingMenuButton";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import { motion } from "framer-motion";
+import ScrollToTop from "@/components/ScrollToTop";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
   FileText,
   Shield,
@@ -12,369 +14,739 @@ import {
   Briefcase,
   Layers,
   ClipboardCheck,
+  CheckCircle,
+  ChevronRight,
+  ArrowRight,
+  Users,
+  Globe,
+  Building2,
+  AlertCircle,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useState } from "react";
 
-export default function Page() {
+// ─── Static data ─────────────────────────────────────────────────────────────
+
+const taxServices = [
+  {
+    id: 1,
+    icon: Building2,
+    title: "Corporate Tax",
+    tag: "Advisory",
+    desc: "End-to-end corporate tax support — from FTA registration to ongoing compliance and strategic planning.",
+    highlights: [
+      "Corporate tax registration with the FTA",
+      "Tax return preparation and timely filing",
+      "Tax exposure assessment and risk review",
+      "Identification of applicable exemptions and reliefs",
+      "Strategic tax planning and business structuring",
+      "Deferred tax accounting and reporting support",
+    ],
+    forWhom:
+      "Startups, SMEs, and multinational businesses subject to UAE corporate tax obligations.",
+  },
+  {
+    id: 2,
+    icon: FileText,
+    title: "Value Added Tax (VAT)",
+    tag: "Compliance",
+    desc: "Full-spectrum VAT services — simplified, accurate, and tailored for specialized sectors including free zones and oil & gas.",
+    highlights: [
+      "VAT registration and deregistration with the FTA",
+      "VAT return preparation and timely filing",
+      "Input tax recovery and optimization",
+      "VAT health checks and compliance reviews",
+      "Voluntary disclosure preparation and submission",
+      "Sector-specific VAT advisory (free zones, oil & gas, real estate)",
+    ],
+    forWhom:
+      "All VAT-registered UAE businesses, e-commerce, real estate, and businesses approaching the registration threshold.",
+  },
+  {
+    id: 3,
+    icon: Shield,
+    title: "Tax Agent Service",
+    tag: "FTA Approved",
+    desc: "Your official, FTA-authorized representative — managing all correspondence, filings, and disputes on your behalf.",
+    highlights: [
+      "Official FTA representation on your behalf",
+      "Tax return filing and documentation management",
+      "Handling of FTA audits and tax assessments",
+      "Dispute resolution and appeals management",
+      "Response to FTA queries and notices",
+      "Full compliance monitoring and deadline tracking",
+    ],
+    forWhom:
+      "Businesses of any size wanting a licensed professional handling all FTA interactions.",
+  },
+];
+
+const transferPricingItems = [
+  {
+    icon: ClipboardCheck,
+    text: "Transfer pricing documentation and benchmarking",
+  },
+  {
+    icon: Layers,
+    text: "Policy development for IP, financing, procurement, and services",
+  },
+  {
+    icon: FileText,
+    text: "Tax dispute support and advance pricing agreement (APA) guidance",
+  },
+  {
+    icon: Briefcase,
+    text: "Related-party transaction advisory and risk assessment",
+  },
+];
+
+const whyChoose = [
+  {
+    icon: CheckCircle,
+    title: "FTA Approved",
+    body: "Fully authorized to represent your business before the Federal Tax Authority.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Proactive Planning",
+    body: "We don't just file — we plan to minimize tax exposure and structure for growth.",
+  },
+  {
+    icon: AlertCircle,
+    title: "Penalty Protection",
+    body: "Every deadline and filing requirement tracked so you never face avoidable fines.",
+  },
+  {
+    icon: Globe,
+    title: "Global Standards",
+    body: "IFRS and international tax standards applied to keep you competitive across borders.",
+  },
+  {
+    icon: Users,
+    title: "All Business Sizes",
+    body: "From freelancers and startups to established SMEs and multinationals — we scale with you.",
+  },
+];
+
+// ─── Animation variants ───────────────────────────────────────────────────────
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function SectionLabel({ children }) {
+  return (
+    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 mb-3">
+      {children}
+    </p>
+  );
+}
+
+function TaxServiceCard({ service, index, open, onToggle }) {
+  const Icon = service.icon;
+  return (
+    <motion.div
+      layout
+      variants={fadeUp}
+      custom={index}
+      initial="hidden"
+      animate="visible"
+      className={`flex flex-col bg-white border-r border-b border-gray-100 transition-colors duration-200 ${
+        open ? "bg-teal-50/40" : "hover:bg-gray-50/60"
+      }`}
+    >
+      <div className="p-8 flex flex-col gap-4 flex-1">
+        {/* Top row */}
+        <div className="flex items-start justify-between">
+          <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0">
+            <Icon className="w-5 h-5 text-teal-700" strokeWidth={1.6} />
+          </div>
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-full">
+            {service.tag}
+          </span>
+        </div>
+
+        {/* Title + desc */}
+        <div>
+          <h3 className="text-base font-semibold text-gray-900 mb-1.5 leading-snug">
+            {service.title}
+          </h3>
+          <p className="text-sm text-gray-500 leading-relaxed">{service.desc}</p>
+        </div>
+
+        {/* Toggle */}
+        <button
+          onClick={onToggle}
+          aria-expanded={open}
+          className="flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 transition-colors self-start mt-auto pt-2"
+        >
+          <ChevronRight
+            className={`w-3.5 h-3.5 transition-transform duration-200 ${
+              open ? "rotate-90" : ""
+            }`}
+          />
+          {open ? "Less detail" : "What we cover"}
+        </button>
+
+        {/* Expandable */}
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              key="detail"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="border-t border-gray-100 pt-4 flex flex-col gap-2.5">
+                {service.highlights.map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-2 text-xs text-gray-600 leading-relaxed"
+                  >
+                    <CheckCircle className="w-3.5 h-3.5 text-teal-500 mt-0.5 flex-shrink-0" />
+                    {h}
+                  </div>
+                ))}
+                <div className="flex items-start gap-2 text-[11px] text-gray-400 leading-relaxed border-t border-gray-100 pt-2.5 mt-1">
+                  <Users className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-gray-300" />
+                  {service.forWhom}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
+export default function TaxationPage() {
+  const heroRef = useRef(null);
+  const [openId, setOpenId] = useState(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   return (
     <>
-      <Navbar />
+      <Head>
+        <title>Taxation Services — BAC</title>
+        <meta
+          name="description"
+          content="Expert UAE corporate tax advisory, VAT compliance, FTA-approved tax agent services, and transfer pricing support for startups, SMEs, and multinationals."
+        />
+        <meta
+          name="keywords"
+          content="corporate tax UAE, VAT compliance, FTA tax agent, transfer pricing, tax advisory Dubai"
+        />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://yourdomain.com/services/taxation" />
+        <meta property="og:title" content="Taxation Services — BAC" />
+        <meta
+          property="og:description"
+          content="Smart tax strategy, full compliance, zero surprises. Corporate tax, VAT, and FTA agent services for UAE businesses."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yourdomain.com/services/taxation" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "BAC Taxation Services",
+              url: "https://yourdomain.com/services/taxation",
+              description:
+                "Corporate tax advisory, VAT compliance, and FTA-approved tax agent services for UAE businesses.",
+            }),
+          }}
+        />
+      </Head>
 
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden text-white ">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0"
+      <div className="bg-white text-gray-800 antialiased">
+        <Navbar />
+
+        {/* ── HERO ─────────────────────────────────────────────────────────── */}
+        <section
+          ref={heroRef}
+          className="relative h-[92vh] min-h-[580px] flex items-end overflow-hidden"
         >
-          <Image
-            src="/images/img3.webp"
-            alt="Taxation"
-            priority
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-            style={{ transform: "translateZ(0)" }} // ✅ Forces GPU to not over-allocate memory
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-black/80" />
-        </motion.div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-6"
+            style={{ y: heroY }}
+            className="absolute inset-0 will-change-transform"
           >
-            <div className="text-sm md:text-lg flex text-gray-300 gap-x-2">
-              <Link href="/">
-                <span className="text-white cursor-pointer hover:text-textprimary transition-colors">
-                  Home
-                </span>
-              </Link>
-              &nbsp;›&nbsp;
-              <span>Services</span>
-              &nbsp;›&nbsp;
-              <span className="text-textprimary font-medium">Taxation</span>
-            </div>
+            <Image
+              src="/images/img3.webp"
+              alt="Taxation"
+              priority
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold leading-tight mb-6"
+          {/* Breadcrumb */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            className="absolute top-28 left-6 md:left-16 z-10 flex items-center gap-2 text-sm text-gray-300"
           >
-            {" "}
-            <span className="text-transparent bg-clip-text bg-textprimary">
-              Taxation
-            </span>
-          </motion.h1>
+            <Link href="/" className="hover:text-white transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5" />
+            <span>Services</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+            <span className="text-teal-400 font-medium">Taxation</span>
+          </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="text-xl md:text-2xl text-gray-300 max-w-3xl"
+          {/* Hero text */}
+          <motion.div
+            style={{ opacity: heroOpacity }}
+            className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 pb-20 md:pb-28 w-full"
           >
-            Comprehensive corporate tax advisory and compliance services for
-            startups, SMEs, and multinational businesses.
-          </motion.p>
-        </div>
-      </section>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-teal-400 text-sm font-semibold uppercase tracking-[0.2em] mb-5"
+            >
+              BAC Taxation
+            </motion.p>
 
-      {/* FIRST CONTENT */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.2 }}
+              className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
+            >
+              Smart Tax.
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-200">
+                Zero Surprises.
+              </span>
+            </motion.h1>
 
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:space-x-12 items-center">
-            {/* LEFT CONTENT */}
-            <div className="lg:w-1/2 mb-12 lg:mb-0">
-              <p className="text-sm font-semibold uppercase tracking-wider text-secondary mb-2">
-                CORPORATE TAX ADVISORY
-              </p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-lg md:text-xl text-gray-300 max-w-xl mb-10"
+            >
+              Corporate tax advisory, VAT compliance, and FTA-approved representation
+              for startups, SMEs, and multinationals across the UAE.
+            </motion.p>
 
-              <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight mb-6">
-                Strategic Tax Guidance
-                <br />
-                <span className="text-textsecondary">
-                  in a Complex and Evolving Landscape
-                </span>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex flex-wrap gap-4"
+            >
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+              >
+                Get Free Tax Consultation
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a
+                href="#services"
+                className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+              >
+                Explore Services
+              </a>
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* ── INTRO ─────────────────────────────────────────────────────────── */}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-16 grid lg:grid-cols-2 gap-16 items-center">
+            {/* Text */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <SectionLabel>Corporate Tax Advisory</SectionLabel>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                Strategic Guidance in a{" "}
+                <span className="text-teal-700">Complex, Evolving Landscape</span>
               </h2>
-
-              <p className="text-lg text-gray-600 mb-6">
-                In today&apos;s highly regulated and digitally transparent UAE
-                tax environment, managing your tax obligations is more than just
-                compliance — it&apos;s about adding value, minimizing risk, and
+              <p className="text-gray-500 text-lg leading-relaxed mb-4">
+                In today's highly regulated and digitally transparent UAE tax
+                environment, managing your tax obligations is more than just
+                compliance — it's about adding value, minimizing risk, and
                 supporting sustainable business growth.
               </p>
-
-              <p className="text-lg text-gray-600 mb-10">
-                Booker Accounting offers expert corporate tax advisory and
-                comprehensive tax compliance services designed to help startups,
-                SMEs, and multinational businesses navigate the complexities of
-                the tax framework with confidence.
+              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                BAC offers expert tax advisory and compliance services designed to
+                help you navigate the evolving UAE tax framework with confidence.
               </p>
 
-              <div className="grid grid-cols-2 gap-y-6">
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl text-teal-500">•</span>
-                  <p className="text-base font-medium text-gray-700">
-                    Value-Driven Compliance
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl text-teal-500">•</span>
-                  <p className="text-base font-medium text-gray-700">
-                    For All Business Sizes
-                  </p>
-                </div>
+              {/* Stat row */}
+              <div className="flex gap-10 border-t border-gray-100 pt-8">
+                {[
+                  { value: "FTA", label: "Registered tax agent" },
+                  { value: "3", label: "Core tax disciplines" },
+                  { value: "0", label: "Missed deadlines" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <p className="text-3xl font-extrabold text-teal-700 mb-1">
+                      {s.value}
+                    </p>
+                    <p className="text-sm text-gray-400 font-medium">{s.label}</p>
+                  </div>
+                ))}
               </div>
-            </div>
+            </motion.div>
 
-            {/* RIGHT IMAGE */}
-            <div className="lg:w-1/2 relative">
-              <div className="w-full overflow-hidden rounded-xl">
+            {/* Image */}
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
                 <Image
-                  width={600}
-                  height={500}
                   src="/images/taxation.webp"
                   alt="Corporate tax advisory consultation"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                   priority
                 />
               </div>
+              {/* Floating badge */}
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-4 max-w-[230px]">
+                <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-900 leading-snug">
+                    FTA-Approved Tax Agent
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">
+                    Authorized UAE representation
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── SERVICES GRID ────────────────────────────────────────────────── */}
+        <section id="services" className="py-20 md:py-32 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-6 md:px-16">
+            {/* Header */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="mb-12 max-w-2xl"
+            >
+              <SectionLabel>Our Tax Services</SectionLabel>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                Full-Spectrum Tax Solutions
+              </h2>
+            </motion.div>
+
+            {/* Bordered grid */}
+            <div className="border border-gray-100 rounded-2xl overflow-hidden">
+              <div className="grid md:grid-cols-3 divide-x divide-y divide-gray-100">
+                {taxServices.map((service, index) => (
+                  <TaxServiceCard
+                    key={service.id}
+                    service={service}
+                    index={index}
+                    open={openId === service.id}
+                    onToggle={() =>
+                      setOpenId((prev) =>
+                        prev === service.id ? null : service.id
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Footer nudge */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-gray-200"
+            >
+              <p className="text-sm text-gray-500">
+                <span className="font-semibold text-gray-800">
+                  Not sure where to start?
+                </span>{" "}
+                Most businesses begin with corporate tax registration or VAT compliance.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-teal-700 hover:text-teal-900 transition-colors"
+              >
+                Talk to a tax advisor
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── TRANSFER PRICING ─────────────────────────────────────────────── */}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-16">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Image */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
+                  <Image
+                    src="/images/office-workers.webp"
+                    alt="Transfer pricing advisory"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </div>
+                <div className="absolute top-5 right-5 bg-teal-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
+                  Specialized
+                </div>
+              </motion.div>
+
+              {/* Content */}
+              <motion.div
+                variants={fadeUp}
+                custom={1}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <SectionLabel>Transfer Pricing Advisory</SectionLabel>
+                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                  Defensible Policies.{" "}
+                  <span className="text-teal-700">Global Scrutiny, Met.</span>
+                </h2>
+                <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                  With increased global scrutiny on intercompany transactions, our
+                  experts help you develop defensible transfer pricing policies
+                  aligned with UAE regulations and international standards.
+                </p>
+
+                
+              </motion.div>
+            </div>
+            <div className="flex flex-col gap-4 py-8 ">
+                  {transferPricingItems.map((item, i) => {
+                    const Icon = item.icon;
+                    return (
+                      <motion.div
+                        key={i}
+                        variants={fadeUp}
+                        custom={i * 0.4}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        className="flex items-start gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:border-teal-200 hover:bg-teal-50 transition-colors duration-200"
+                      >
+                        <div className="w-9 h-9 rounded-lg bg-teal-50 border border-teal-100 flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-4 h-4 text-teal-600" strokeWidth={1.8} />
+                        </div>
+                        <p className="text-sm text-gray-700 leading-relaxed pt-1.5">
+                          {item.text}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+          </div>
+        </section>
+
+        {/* ── WHY BAC ──────────────────────────────────────────────────────── */}
+        <section className="py-20 md:py-28 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-6 md:px-16">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <SectionLabel>Why Choose Us</SectionLabel>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+                Why Businesses Trust BAC for Taxation
+              </h2>
+            </motion.div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {whyChoose.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    custom={i * 0.25}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="group text-center p-7 rounded-2xl border border-gray-100 bg-white hover:border-teal-200 hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="w-12 h-12 bg-teal-50 group-hover:bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors duration-200">
+                      <Icon className="w-6 h-6 text-teal-600" strokeWidth={1.6} />
+                    </div>
+                    <h3 className="font-bold text-gray-900 text-sm mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-xs leading-relaxed">{item.body}</p>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 2nd SECTION */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center lg:space-x-16">
-            {/* LEFT IMAGE */}
-            <div className="lg:w-1/2 w-full lg:order-1 mb-10 lg:mb-0">
-              <div className="relative w-full overflow-hidden rounded-3xl">
-                <Image
-                  src="/images/office-workers.webp"
-                  alt="VAT advisory consultation"
-                  className="object-cover rounded-3xl"
-                  priority
-                  width={600}
-                  height={500}
-                />
-              </div>
-            </div>
-
-            {/* RIGHT CONTENT */}
-            <div className="lg:w-1/2 w-full lg:order-2">
-              <p className="text-xs md:text-sm font-semibold uppercase tracking-wider text-secondary mb-3">
-                VALUE ADDED TAX (VAT)
-              </p>
-
-              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                VAT Made Simple,
-                <br />
-                <span className="text-transparent bg-clip-text bg-textsecondary">
-                  Compliance + Optimization
-                </span>
+        {/* ── VAT DEEP DIVE ─────────────────────────────────────────────────── */}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-16 grid lg:grid-cols-2 gap-16 items-center">
+            {/* Content */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <SectionLabel>Value Added Tax</SectionLabel>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                VAT Made Simple.{" "}
+                <span className="text-teal-700">Compliance + Optimization.</span>
               </h2>
-
-              <p className="text-gray-600 leading-relaxed text-base mb-4">
+              <p className="text-gray-500 text-lg leading-relaxed mb-4">
                 VAT compliance remains a critical focus for businesses operating
-                across the UAE. Booker Accounting supports your business with a
-                full spectrum of VAT services designed to simplify complexity
-                and ensure total accuracy.
+                across the UAE. BAC supports your business with a full spectrum of
+                VAT services — designed to simplify complexity, ensure total
+                accuracy, and protect you from costly penalties.
+              </p>
+              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                We offer tailored VAT expertise for specialized sectors including
+                free zone businesses and the oil and gas industry.
               </p>
 
-              <p className="text-gray-600 leading-relaxed text-base mb-8">
-                Our team offers tailored VAT expertise for specialized sectors,
-                including free zone businesses and the oil and gas industry —
-                ensuring full compliance and helping you avoid costly penalties.
-              </p>
-
-              {/* ICON GRID */}
-              <div className="grid grid-cols-2 gap-y-6 gap-x-4">
-                <div className="flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-teal-600" />
-                  <span className="text-gray-900 font-semibold text-sm">
-                    VAT Registration & Return Filing
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-teal-600" />
-                  <span className="text-gray-900 font-semibold text-sm">
-                    Audits, Voluntary Disclosures & Advisory
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-teal-600" />
-                  <span className="text-gray-900 font-semibold text-sm">
-                    Real-time VAT Reporting & Optimization
-                  </span>
-                </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { icon: FileText, label: "VAT Registration & Return Filing" },
+                  { icon: Shield, label: "Audits & Voluntary Disclosures" },
+                  { icon: TrendingUp, label: "Real-time VAT Reporting" },
+                  { icon: Globe, label: "Sector-specific Advisory" },
+                ].map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 p-3.5 rounded-xl border border-gray-100 bg-gray-50 hover:border-teal-200 hover:bg-teal-50 transition-colors duration-200"
+                    >
+                      <Icon className="w-4 h-4 text-teal-600 flex-shrink-0" strokeWidth={1.8} />
+                      <span className="text-sm font-medium text-gray-800">
+                        {item.label}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </motion.div>
 
-      {/* 3rd SECTION */}
-
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:space-x-12 items-center">
-            {/* LEFT CONTENT */}
-            <div className="lg:w-1/2 mb-12 lg:mb-0">
-              <p className="text-sm font-semibold uppercase tracking-wider text-secondary mb-2">
-                TAX AGENT SERVICE (FTA APPROVED)
-              </p>
-
-              <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight mb-6">
-                Your Trusted Representation,
-                <br />
-                <span className="text-textsecondary">
-                  Before the FTA & Authorities
-                </span>
-              </h2>
-
-              <p className="text-lg text-gray-600 mb-6">
-                Appointing a tax agent ensures your business stays compliant
-                with UAE tax laws — without stress. We act as your official
-                representative with the{" "}
-                <strong>Federal Tax Authority (FTA).</strong>
-              </p>
-
-              <p className="text-lg text-gray-600 mb-10">
-                From handling your tax filings to managing audits and appeals,
-                we protect your business and ensure hassle-free tax compliance.
-              </p>
-
-              <div className="grid grid-cols-2 gap-y-6">
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl text-teal-500">•</span>
-                  <p className="text-base font-medium text-gray-700">
-                    FTA Representation
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl text-teal-500">•</span>
-                  <p className="text-base font-medium text-gray-700">
-                    Tax Filings & Documentation
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl text-teal-500">•</span>
-                  <p className="text-base font-medium text-gray-700">
-                    Audit & Dispute Handling
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl text-teal-500">•</span>
-                  <p className="text-base font-medium text-gray-700">
-                    Full Compliance Assurance
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT IMAGE */}
-            <div className="lg:w-1/2 relative">
-              <div className="w-full overflow-hidden rounded-xl">
+            {/* Image */}
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
                 <Image
-                  width={600}
-                  height={500}
                   src="/images/taxation2.webp"
                   alt="FTA approved tax agent service"
-                  className="w-full h-full object-cover"
-                  priority
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 🔹 NEW SECTION: Corporate Tax & Transfer Pricing Advisory */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Corporate Tax Advisory &{" "}
-            <span className="text-transparent bg-clip-text bg-textsecondary">
-              Compliance
-            </span>
-          </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Our team provides clear guidance on UAE corporate tax compliance,
-            from strategic tax planning and efficient structuring to timely
-            filing and reporting. We help you understand your tax exposure,
-            identify applicable incentives and reliefs, and ensure your business
-            structure supports long-term growth in an evolving regulatory
-            landscape.
-          </p>
-        </motion.div>
+        {/* ── CTA BAND ─────────────────────────────────────────────────────── */}
+        <section className="bg-teal-700 py-16 px-6 md:px-16">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+                Take Control of Your Tax Position Today
+              </h2>
+              <p className="text-teal-200 text-lg">
+                Corporate tax registration, VAT compliance, or FTA representation — BAC has you covered.
+              </p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="flex-shrink-0"
+            >
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white text-teal-700 hover:bg-teal-50 font-bold px-8 py-4 rounded-full text-sm transition-colors duration-200 shadow-lg"
+              >
+                Let's Talk
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
 
-        {/* Specialized Areas */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="bg-gray-50 rounded-3xl p-10 "
-        >
-          <h3 className="text-2xl font-bold mb-6 text-teal-700">
-            Specialized Tax Advisory Areas – Transfer Pricing Advisory
-          </h3>
-          <p className="text-gray-700 mb-6">
-            With increased global scrutiny on intercompany transactions, our
-            experts assist you in developing defensible transfer pricing
-            policies aligned with UAE regulations and international standards.
-            We offer comprehensive support in:
-          </p>
-
-          <ul className="space-y-3 text-gray-800">
-            <li className="flex items-start gap-3">
-              <ClipboardCheck className="text-teal-600 w-5 h-5 mt-1" />
-              Transfer pricing documentation and benchmarking.
-            </li>
-            <li className="flex items-start gap-3">
-              <Layers className="text-teal-600 w-5 h-5 mt-1" />
-              Policy development for intellectual property, financing,
-              procurement, and services.
-            </li>
-            <li className="flex items-start gap-3">
-              <FileText className="text-teal-600 w-5 h-5 mt-1" />
-              Tax dispute support and advance pricing agreement (APA) guidance.
-            </li>
-            <li className="flex items-start gap-3">
-              <Briefcase className="text-teal-600 w-5 h-5 mt-1" />
-              Related-party transaction advisory and risk assessment.
-            </li>
-          </ul>
-        </motion.div>
-      </section>
-
-      {/* CONTACT */}
-
-      <ContactSection />
-      <FloatingMenuButton />
-      <Footer />
+        <ContactSection />
+        <ScrollToTop />
+        <FloatingMenuButton />
+        <Footer />
+      </div>
     </>
   );
 }
