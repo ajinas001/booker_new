@@ -169,17 +169,17 @@ function TaxServiceCard({ service, index, open, onToggle }) {
           <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0">
             <Icon className="w-5 h-5 text-teal-700" strokeWidth={1.6} />
           </div>
-          <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-full">
+          <span className="text-[10px] font-semibold  tracking-widest text-gray-800 bg-purpletint border border-purpletint px-2.5 py-1 rounded-full">
             {service.tag}
           </span>
         </div>
 
         {/* Title + desc */}
         <div>
-          <h3 className="text-base font-semibold text-gray-900 mb-1.5 leading-snug">
+          <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-1.5 leading-snug">
             {service.title}
           </h3>
-          <p className="text-sm text-gray-500 leading-relaxed">{service.desc}</p>
+          <p className="text-sm md:text-[16px] text-gray-500 leading-relaxed">{service.desc}</p>
         </div>
 
         {/* Toggle */}
@@ -211,13 +211,13 @@ function TaxServiceCard({ service, index, open, onToggle }) {
                 {service.highlights.map((h, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2 text-xs text-gray-600 leading-relaxed"
+                    className="flex items-start gap-2 text-xs md:text-[13px] text-gray-600 leading-relaxed"
                   >
-                    <CheckCircle className="w-3.5 h-3.5 text-teal-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="w-3.5 h-3.5 text-textprimary mt-0.5 flex-shrink-0" />
                     {h}
                   </div>
                 ))}
-                <div className="flex items-start gap-2 text-[11px] text-gray-400 leading-relaxed border-t border-gray-100 pt-2.5 mt-1">
+                <div className="flex items-start gap-2 text-[11px] md:text-[14px] text-gray-400 leading-relaxed border-t border-gray-100 pt-2.5 mt-1">
                   <Users className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-gray-300" />
                   {service.forWhom}
                 </div>
@@ -315,7 +315,7 @@ export default function TaxationPage() {
             <ChevronRight className="w-3.5 h-3.5" />
             <span>Services</span>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-teal-400 font-medium">Taxation</span>
+            <span className="text-textprimary font-medium">Taxation</span>
           </motion.div>
 
           {/* Hero text */}
@@ -327,7 +327,7 @@ export default function TaxationPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-teal-400 text-sm font-semibold uppercase tracking-[0.2em] mb-5"
+              className="text-textprimary text-sm font-semibold uppercase tracking-[0.2em] mb-5"
             >
               BAC Taxation
             </motion.p>
@@ -340,7 +340,7 @@ export default function TaxationPage() {
             >
               Smart Tax.
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-200">
+              <span className="text-transparent bg-clip-text bg-textprimary">
                 Zero Surprises.
               </span>
             </motion.h1>
@@ -363,14 +363,14 @@ export default function TaxationPage() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+                className="inline-flex items-center gap-2 bg-textprimary text-white px-7 py-3.5 rounded-md hover:text-textsecondary hover:bg-white font-semibold text-sm transition-colors duration-200"
               >
                 Get Free Tax Consultation
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="#services"
-                className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+                className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-md font-semibold text-sm transition-colors duration-200"
               >
                 Explore Services
               </a>
@@ -389,17 +389,17 @@ export default function TaxationPage() {
               viewport={{ once: true }}
             >
               <SectionLabel>Corporate Tax Advisory</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
                 Strategic Guidance in a{" "}
-                <span className="text-teal-700">Complex, Evolving Landscape</span>
+                <span className="text-textsecondary">Complex, Evolving Landscape</span>
               </h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-4">
+              <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-4">
                 In today's highly regulated and digitally transparent UAE tax
                 environment, managing your tax obligations is more than just
                 compliance — it's about adding value, minimizing risk, and
                 supporting sustainable business growth.
               </p>
-              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+              <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-10">
                 BAC offers expert tax advisory and compliance services designed to
                 help you navigate the evolving UAE tax framework with confidence.
               </p>
@@ -412,7 +412,7 @@ export default function TaxationPage() {
                   { value: "0", label: "Missed deadlines" },
                 ].map((s) => (
                   <div key={s.label}>
-                    <p className="text-3xl font-extrabold text-teal-700 mb-1">
+                    <p className="text-3xl font-extrabold text-textsecondary mb-1">
                       {s.value}
                     </p>
                     <p className="text-sm text-gray-400 font-medium">{s.label}</p>
@@ -442,7 +442,7 @@ export default function TaxationPage() {
               </div>
               {/* Floating badge */}
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-4 max-w-[230px]">
-                <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-textsecondary flex items-center justify-center flex-shrink-0">
                   <Shield className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -459,7 +459,7 @@ export default function TaxationPage() {
         </section>
 
         {/* ── SERVICES GRID ────────────────────────────────────────────────── */}
-        <section id="services" className="py-20 md:py-32 bg-gray-50">
+        <section id="services" className="py-20 md:py-32 bg-white">
           <div className="max-w-7xl mx-auto px-6 md:px-16">
             {/* Header */}
             <motion.div
@@ -470,13 +470,13 @@ export default function TaxationPage() {
               className="mb-12 max-w-2xl"
             >
               <SectionLabel>Our Tax Services</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-                Full-Spectrum Tax Solutions
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+                Full-Spectrum <span className="text-textsecondary">Tax Solutions</span>
               </h2>
             </motion.div>
 
             {/* Bordered grid */}
-            <div className="border border-gray-100 rounded-2xl overflow-hidden">
+            <div className="border border-gray-100 bg-gray-200 rounded-2xl overflow-hidden">
               <div className="grid md:grid-cols-3 divide-x divide-y divide-gray-100">
                 {taxServices.map((service, index) => (
                   <TaxServiceCard
@@ -541,7 +541,7 @@ export default function TaxationPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
-                <div className="absolute top-5 right-5 bg-teal-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
+                <div className="absolute top-5 right-5 bg-textsecondary text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
                   Specialized
                 </div>
               </motion.div>
@@ -555,11 +555,11 @@ export default function TaxationPage() {
                 viewport={{ once: true }}
               >
                 <SectionLabel>Transfer Pricing Advisory</SectionLabel>
-                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
                   Defensible Policies.{" "}
-                  <span className="text-teal-700">Global Scrutiny, Met.</span>
+                  <span className="text-textsecondary">Global Scrutiny, Met.</span>
                 </h2>
-                <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-10">
                   With increased global scrutiny on intercompany transactions, our
                   experts help you develop defensible transfer pricing policies
                   aligned with UAE regulations and international standards.
@@ -579,12 +579,12 @@ export default function TaxationPage() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="flex items-start gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:border-teal-200 hover:bg-teal-50 transition-colors duration-200"
+                        className="flex items-start gap-4 p-4 rounded-xl border border-gray-100 bg-gray-100 hover:border-purpletint hover:bg-purpletint transition-colors duration-200"
                       >
-                        <div className="w-9 h-9 rounded-lg bg-teal-50 border border-teal-100 flex items-center justify-center flex-shrink-0">
-                          <Icon className="w-4 h-4 text-teal-600" strokeWidth={1.8} />
+                        <div className="w-9 h-9 rounded-lg bg-gray-200 border border-gray-200 flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-4 h-4 text-textsecondary" strokeWidth={1.8} />
                         </div>
-                        <p className="text-sm text-gray-700 leading-relaxed pt-1.5">
+                        <p className="text-sm md:text-lg text-gray-700 leading-relaxed pt-1.5">
                           {item.text}
                         </p>
                       </motion.div>
@@ -595,7 +595,7 @@ export default function TaxationPage() {
         </section>
 
         {/* ── WHY BAC ──────────────────────────────────────────────────────── */}
-        <section className="py-20 md:py-28 bg-gray-50">
+        <section className="py-6  md:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-6 md:px-16">
             <motion.div
               variants={fadeUp}
@@ -605,9 +605,10 @@ export default function TaxationPage() {
               className="text-center mb-16"
             >
               <SectionLabel>Why Choose Us</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-                Why Businesses Trust BAC for Taxation
-              </h2>
+              <h2 className="text-3xl md:text-3xl lg:text-4xl font-semibold text-black">
+             Why Businesses Trust <spam className="text-textsecondary" >BAC</spam> for Taxation
+            </h2>
+              
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -624,7 +625,7 @@ export default function TaxationPage() {
                     className="group text-center p-7 rounded-2xl border border-gray-100 bg-white hover:border-teal-200 hover:shadow-md transition-all duration-300"
                   >
                     <div className="w-12 h-12 bg-teal-50 group-hover:bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors duration-200">
-                      <Icon className="w-6 h-6 text-teal-600" strokeWidth={1.6} />
+                      <Icon className="w-6 h-6 text-textsecondary" strokeWidth={1.6} />
                     </div>
                     <h3 className="font-bold text-gray-900 text-sm mb-2">
                       {item.title}
