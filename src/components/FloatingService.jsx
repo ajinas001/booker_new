@@ -72,7 +72,7 @@ export default function FloatingService() {
             stiffness: 260,
             damping: 25, // Smoothed out bouncing slightly
           }}
-          className="fixed bottom-4 left-4 right-4 z-50 lg:hidden"
+          className="fixed bottom-4 left-4 right-4 z-40 lg:hidden"
         >
           <div className="overflow-x-auto no-scrollbar rounded-2xl border border-stone-100 bg-white/95 backdrop-blur-md py-3 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
             {/* Using justify-start on mobile for clean overflow scrolling, and justify-around on tablets */}

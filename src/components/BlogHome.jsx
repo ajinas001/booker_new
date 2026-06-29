@@ -9,7 +9,7 @@ export default function BlogHome() {
       href: "/blog/e-invoice",
       title: "UAE E-INVOICING TRANSFORMATION & MANDATORY STRATEGY",
       excerpt: "Understanding the UAE’s mandatory e-invoicing rollout, compliance requirements, timelines, and its impact on businesses.",
-      image: "/images/e-invoice.webp",
+      image: "/images/blog1.webp",
     },
     {
       id: 2,
@@ -51,7 +51,7 @@ export default function BlogHome() {
 
           {/* LEFT: Highlight Hero Card (Article 1) */}
           {mainFeaturedPost && (
-            <div className="lg:col-span-6 group relative flex flex-col justify-end min-h-[500px] md:min-h-[600px] rounded-[2rem] overflow-hidden bg-neutral-900 border border-neutral-200/40 shadow-sm hover:shadow-2xl transition-all duration-300">
+            <div className="lg:col-span-6 group relative flex flex-col justify-end min-h-[500px] md:min-h-[600px] rounded-[2rem] overflow-hidden bg-neutral-900  transition-all duration-300">
               <div className="absolute inset-0 w-full h-full z-0">
                 <Image
                   src={mainFeaturedPost.image}
@@ -62,7 +62,7 @@ export default function BlogHome() {
                   priority
                 />
                 {/* Multi-layered cinematic gradient for text protection */}
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" /> */}
               </div>
 
               {/* Glassmorphism Lower Content Plate */}
@@ -71,7 +71,7 @@ export default function BlogHome() {
                   <span className="text-[10px] font-bold tracking-widest text-teal-400 uppercase mb-2 block">
                     Featured Analysis
                   </span>
-                  <h4 className="text-lg md:text-xl font-bold tracking-wide leading-snug uppercase text-white group-hover/link:text-teal-300 transition-colors duration-200">
+                  <h4 className="text-lg md:text-xl font-bold tracking-wide leading-snug uppercase text-white  transition-colors duration-200">
                     {mainFeaturedPost.title}
                   </h4>
                   <p className="mt-3 text-xs md:text-sm text-neutral-200 line-clamp-2 font-normal opacity-90">
@@ -87,7 +87,7 @@ export default function BlogHome() {
 
             {/* Top Row: Secondary Large Card (Article 2) */}
             {secondaryPostLarge && (
-              <div className="group relative flex flex-col justify-end h-[260px] md:h-[286px] rounded-[2rem] overflow-hidden bg-neutral-900 border border-neutral-200/40 shadow-sm hover:shadow-2xl transition-all duration-300">
+              <div className="group relative flex flex-col justify-end h-[260px] md:h-[286px] rounded-[2rem] overflow-hidden bg-neutral-900   transition-all duration-300">
                 <div className="absolute inset-0 z-0">
                   <Image
                     src={secondaryPostLarge.image}
@@ -102,7 +102,7 @@ export default function BlogHome() {
                 {/* Inline Premium Glass Plate */}
                 <div className="relative z-10 m-4 p-5 md:p-6 bg-neutral-950/40 backdrop-blur-md rounded-xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
                   <Link href={secondaryPostLarge.href} className="group/sub">
-                    <h4 className="text-base md:text-lg font-bold tracking-wide uppercase text-white group-hover/sub:text-teal-300 transition-colors duration-200">
+                    <h4 className="text-base md:text-lg font-bold tracking-wide uppercase text-white  transition-colors duration-200">
                       {secondaryPostLarge.title}
                     </h4>
                     <p className="mt-2 text-xs text-neutral-200 line-clamp-2 font-normal opacity-90">
@@ -118,7 +118,7 @@ export default function BlogHome() {
 
               {/* Left Column: Small Article Card (Article 3) */}
               {secondaryPostSmall && (
-                <div className="group relative flex flex-col justify-end h-[250px] md:h-[286px] rounded-[2rem] overflow-hidden bg-neutral-900 border border-neutral-200/40 shadow-sm hover:shadow-2xl transition-all duration-300">
+                <div className="group relative flex flex-col justify-end h-[250px] md:h-[286px] rounded-[2rem] overflow-hidden bg-neutral-900  transition-all duration-300">
                   <div className="absolute inset-0 z-0">
                     <Image
                       src={secondaryPostSmall.image}
@@ -127,13 +127,13 @@ export default function BlogHome() {
                       sizes="(max-width: 768px) 100vw, 25vw"
                       className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out will-change-transform"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-teal-900 to-transparent" />
                   </div>
 
                   {/* Micro Glass Card Base */}
                   <div className="relative z-10 m-4 p-4 bg-neutral-950/50 backdrop-blur-md rounded-xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
                     <Link href={secondaryPostSmall.href} className="group/mini">
-                      <h4 className="text-xs md:text-sm font-bold tracking-wide leading-snug uppercase text-white group-hover:mini:text-teal-300 transition-colors duration-200 line-clamp-3">
+                      <h4 className="text-xs md:text-sm font-bold tracking-wide leading-snug uppercase text-white  transition-colors duration-200 line-clamp-3">
                         {secondaryPostSmall.title}
                       </h4>
                       <p className="mt-1.5 text-[11px] text-neutral-300 line-clamp-2 font-normal opacity-85">
@@ -145,7 +145,7 @@ export default function BlogHome() {
               )}
 
               {/* Right Column: Premium Action Trigger Dashboard Block */}
-              <div className="group relative flex flex-col justify-between h-[250px] md:h-[286px] rounded-[2rem] p-6 bg-gradient-to-br from-neutral-950 via-neutral-900 to-[#1f626d]/30 border border-neutral-800 shadow-xl overflow-hidden">
+              <div className="group relative flex flex-col justify-between h-[250px] md:h-[286px] rounded-[2rem] p-6 bg-gradient-to-br from-gray-900 to-teal-900 border border-neutral-800 shadow-xl overflow-hidden">
                 {/* Minimalist ambient background light orb */}
                 <div className="absolute -right-12 -top-12 w-40 h-40 bg-[#1f626d]/20 rounded-full blur-2xl pointer-events-none group-hover:bg-[#1f626d]/30 transition-all duration-500" />
 

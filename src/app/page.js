@@ -44,17 +44,18 @@ const BookerAccountingWebsite = () => {
       <HeroSection />
       {/* <MainAchievements /> */}
       <HomeAboutTimeline />
-      {/* <MainVisionSection /> */}
+      <MainVisionSection />
 
       <Services />
       <MotoSwiper />
       {/* <IndustryDetailPage/> */}
       <IndustriesSection />
       <LeadMagnet/>
-      <Samplesection/>
+      {/* <Samplesection/> */}
       {/* <ServicesPopup/> */}
+         <ReelsSection/>
       <OurProcess />
-      <ReelsSection/>
+   
       <Testimonials />
       {/* <Call /> */}
       {/* <VideoResources/> */}

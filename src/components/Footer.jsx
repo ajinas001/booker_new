@@ -128,7 +128,7 @@ const Footer = () => {
                 target={social.href.startsWith("http") ? "_blank" : undefined}
                 rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 aria-label={social.label}
-                className="bg-gray-800 hover:bg-teal-900 border border-gray-700 w-9 h-9 flex items-center justify-center rounded-lg text-gray-400 hover:text-teal-400 transition-colors duration-150"
+                className="bg-gray-50 hover:bg-teal-900 border border-gray-700 w-9 h-9 flex items-center justify-center rounded-lg text-gray-800 hover:text-white transition-colors duration-150"
               >
                 <social.icon size={15} />
               </a>
