@@ -357,7 +357,7 @@ export default function BusinessAdvisoryPage() {
             className="absolute inset-0 will-change-transform"
           >
             <Image
-              src="/images/img3.webp"
+              src="/images/business-advisorypage.webp"
               alt="Business Advisory Services"
               priority
               fill
@@ -703,7 +703,7 @@ export default function BusinessAdvisoryPage() {
 
         <ContactSection />
         <ScrollToTop />
-        <FloatingService />
+     
         <Footer />
       </div>
     </>

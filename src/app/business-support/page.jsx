@@ -346,7 +346,7 @@ export default function BusinessSupportPage() {
             className="absolute inset-0 will-change-transform"
           >
             <Image
-              src="/images/img3.webp"
+              src="/images/business-supportpage.webp"
               alt="Business Support Services"
               priority
               fill
@@ -718,7 +718,7 @@ export default function BusinessSupportPage() {
 
         <ContactSection />
         <ScrollToTop />
-        <FloatingService />
+        
         <Footer />
       </div>
     </>

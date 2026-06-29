@@ -365,7 +365,7 @@ export default function AuditAssurancePage() {
             className="absolute inset-0 will-change-transform"
           >
             <Image
-              src="/images/img3.webp"
+              src="/images/auditpage.webp"
               alt="Audit & Assurance"
               priority
               fill
@@ -758,7 +758,7 @@ export default function AuditAssurancePage() {
 
         <ContactSection />
         <ScrollToTop />
-        <FloatingMenuButton />
+       
         <Footer />
       </div>
     </>

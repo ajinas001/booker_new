@@ -293,8 +293,7 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <FloatingActions />
-      <FloatingService />
+     
       <ContactSection />
       <Footer />
     </>

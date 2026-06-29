@@ -293,7 +293,7 @@ export default function TaxationPage() {
             className="absolute inset-0 will-change-transform"
           >
             <Image
-              src="/images/img3.webp"
+              src="/images/taxationpage.webp"
               alt="Taxation"
               priority
               fill
@@ -746,7 +746,7 @@ export default function TaxationPage() {
 
         <ContactSection />
         <ScrollToTop />
-      <FloatingService/>
+  
         <Footer />
       </div>
     </>

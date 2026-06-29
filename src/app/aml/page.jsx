@@ -397,7 +397,7 @@ export default function AntiMoneyLaunderingPage() {
           className="absolute inset-0 will-change-transform"
         >
           <Image
-            src="/images/img3.webp"
+            src="/images/amlpage.webp"
             alt="AML compliance background"
             fill
             priority
@@ -952,7 +952,7 @@ export default function AntiMoneyLaunderingPage() {
       </div>
 
       <ScrollToTop />
-      <FloatingService />
+      
       <Footer />
     </>
   );

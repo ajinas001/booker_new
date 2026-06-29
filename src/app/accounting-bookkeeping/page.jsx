@@ -311,7 +311,7 @@ export default function AccountingPage() {
             className="absolute inset-0 will-change-transform"
           >
             <Image
-              src="/images/img3.webp"
+              src="/images/accountingpage.webp"
               alt="Accounting & Bookkeeping"
               priority
               fill
@@ -672,7 +672,7 @@ export default function AccountingPage() {
 
         <ContactSection />
         <ScrollToTop />
-        <FloatingService/>
+  
         <Footer />
       </div>
     </>
