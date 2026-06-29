@@ -55,6 +55,16 @@ export default function BlogPage() {
       imageUrl: "/images/office-workers.webp",
       readTime: "9 Min Read",
     },
+    {
+      id: 4,
+      href: "/uaecorporatetaxblog",
+      title: "No More Tax-Free by Default: UAE Corporate Tax — Everything Business Owners Need to Know",
+      description:
+        "The UAE introduced Corporate Tax in June 2023 — and it applies to almost every business operating here. Whether you're a startup, an SME, or an established company in a free zone or on the mainland, here's a plain-English guide to what you need to know and do right now.",
+      author: "Content Writer",
+      imageUrl: "/images/uaecorporatetax.webp",
+      readTime: "11 Min Read",
+    },
   ];
 
   return (
@@ -249,7 +259,7 @@ export default function BlogPage() {
 
         </section>
 
-        <FloatingService/>
+        <FloatingService />
         <Footer />
       </div>
     </>
