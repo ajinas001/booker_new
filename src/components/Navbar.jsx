@@ -144,7 +144,7 @@ export default function Navbar() {
               </a>
 
               <a
-                href="https://www.instagram.com/booker_accounting"
+                href="https://www.instagram.com/booker_consulting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-pink-600 hover:text-white transition"
@@ -301,7 +301,7 @@ export default function Navbar() {
                   <FaFacebookF />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/booker_consulting"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-pink-600 hover:text-white transition"
@@ -310,7 +310,7 @@ export default function Navbar() {
                 </a>
 
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/company/bookeraccounting/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-700 hover:text-white transition"

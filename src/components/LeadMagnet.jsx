@@ -61,7 +61,7 @@ export default function LeadMagnet() {
 
               <div className="space-y-3">
                 <a
-                  href="https://instagram.com/bookeraccounting"
+                  href="https://www.instagram.com/booker_consulting"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full border border-white/20 rounded-xl py-3 px-8 text-sm hover:bg-white/10 transition"

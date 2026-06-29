@@ -63,19 +63,19 @@ const PremiumReelsLight = () => {
                             <p className="text-sm text-neutral-500 mt-1 font-medium">
                                 Stay updated with regular financial insights on Instagram{" "}
                                 <a 
-                                    href="https://www.instagram.com/booker_accounting" 
+                                    href="https://www.instagram.com/booker_consulting" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="text-[#1f626d] font-bold hover:underline"
                                 >
-                                    @booker_accounting
+                                    @booker_consulting
                                 </a>
                             </p>
                         </div>
                     </div>
 
                     <a
-                        href="https://www.instagram.com/booker_accounting"
+                        href="https://www.instagram.com/booker_consulting"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group flex items-center gap-3 px-6 py-3 border-2 border-[#1f626d] hover:bg-[#1f626d] text-[#1f626d] hover:text-white text-xs font-bold tracking-widest rounded-xl transition-all duration-200"

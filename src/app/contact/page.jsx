@@ -199,7 +199,7 @@ export default function ContactPage() {
               <Link href="#" className="hover:text-blue-600 transition-colors">
                 <Facebook className="w-8 h-8" />
               </Link>
-              <Link href="#" className="hover:text-pink-600 transition-colors">
+              <Link href="https://www.instagram.com/booker_consulting" className="hover:text-pink-600 transition-colors">
                 <Instagram className="w-8 h-8" />
               </Link>
               <Link
