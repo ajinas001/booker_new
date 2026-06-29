@@ -214,7 +214,7 @@ export default function ContactPage() {
         </div>
       </motion.section>
 
-      <FloatingMenuButton />
+      
       <ScrollToTop />
       <Footer />
     </div>

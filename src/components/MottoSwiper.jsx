@@ -80,7 +80,7 @@ const MotoSwiper = () => {
           modules={[Autoplay]}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           loop={true}
-          slidesPerView={1}
+          slidesPerView={2}
           spaceBetween={40}
           breakpoints={{
             640: { slidesPerView: 2},

@@ -229,10 +229,10 @@ export default function Navbar() {
 
                 if (link === "Services") {
                   return (
-                    <div key={link} className="flex flex-col items-center">
+                    <div key={link} className="flex flex-col items-start">
                       <button
                         onClick={toggleMobileServices}
-                        className="w-full px-4 py-3 flex items-center justify-center gap-1 hover:text-textprimary font-medium transition"
+                        className="w-full px-4 py-3 flex items-center  ms-4 justify-start gap-1 hover:text-textprimary font-medium transition"
                       >
                         Services
                         <svg
@@ -248,7 +248,7 @@ export default function Navbar() {
                         </svg>
                       </button>
                       <div
-                        className={`transition-[max-height,opacity] duration-300 overflow-hidden ${servicesOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"} w-full text-start px-6`}
+                        className={`transition-[max-height,opacity] duration-300 overflow-hidden ${servicesOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"} w-full text-start px-6 ms-4`}
                       >
                         {processedServices.map((s) => (
                           <Link
@@ -270,7 +270,7 @@ export default function Navbar() {
                     key={link}
                     href={href}
                     onClick={closeAllMenus}
-                    className="block px-4 py-3 text-center hover:text-textprimary font-medium transition"
+                    className="block px-4 py-3  ms-4 text-start hover:text-textprimary font-medium transition"
                   >
                     {link}
                   </Link>
