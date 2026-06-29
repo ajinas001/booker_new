@@ -25,6 +25,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import FloatingService from "@/components/FloatingService";
 
 // ─── Static data ─────────────────────────────────────────────────────────────
 
@@ -327,7 +328,7 @@ export default function TaxationPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-textprimary text-sm font-semibold uppercase tracking-[0.2em] mb-5"
+              className="text-textprimary text-xs md:text-sm font-semibold  tracking-[0.2em] mb-5"
             >
               BAC Taxation
             </motion.p>
@@ -336,7 +337,7 @@ export default function TaxationPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
             >
               Smart Tax.
               <br />
@@ -622,15 +623,15 @@ export default function TaxationPage() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="group text-center p-7 rounded-2xl border border-gray-100 bg-white hover:border-teal-200 hover:shadow-md transition-all duration-300"
+                    className="group text-center p-7 rounded-2xl border border-gray-100 bg-purpletint hover:border-purpletint hover:shadow-md transition-all duration-300"
                   >
                     <div className="w-12 h-12 bg-teal-50 group-hover:bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors duration-200">
                       <Icon className="w-6 h-6 text-textsecondary" strokeWidth={1.6} />
                     </div>
-                    <h3 className="font-bold text-gray-900 text-sm mb-2">
+                    <h3 className="font-semibold text-gray-900 text-sm md:text-lg  mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-gray-500 text-xs leading-relaxed">{item.body}</p>
+                    <p className="text-gray-500 text-xs md:text-sm leading-relaxed">{item.body}</p>
                   </motion.div>
                 );
               })}
@@ -649,17 +650,17 @@ export default function TaxationPage() {
               viewport={{ once: true }}
             >
               <SectionLabel>Value Added Tax</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
                 VAT Made Simple.{" "}
-                <span className="text-teal-700">Compliance + Optimization.</span>
+                <span className="text-textsecondary">Compliance + Optimization.</span>
               </h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-4">
+              <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-4">
                 VAT compliance remains a critical focus for businesses operating
                 across the UAE. BAC supports your business with a full spectrum of
                 VAT services — designed to simplify complexity, ensure total
                 accuracy, and protect you from costly penalties.
               </p>
-              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+              <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-10">
                 We offer tailored VAT expertise for specialized sectors including
                 free zone businesses and the oil and gas industry.
               </p>
@@ -675,9 +676,9 @@ export default function TaxationPage() {
                   return (
                     <div
                       key={i}
-                      className="flex items-center gap-3 p-3.5 rounded-xl border border-gray-100 bg-gray-50 hover:border-teal-200 hover:bg-teal-50 transition-colors duration-200"
+                      className="flex items-center gap-3 p-3.5 rounded-xl border border-purpletint bg-purpletint hover:border-purpletint hover:bg-purpletint transition-colors duration-200"
                     >
-                      <Icon className="w-4 h-4 text-teal-600 flex-shrink-0" strokeWidth={1.8} />
+                      <Icon className="w-4 h-4 text-textsecondary flex-shrink-0" strokeWidth={1.8} />
                       <span className="text-sm font-medium text-gray-800">
                         {item.label}
                       </span>
@@ -709,7 +710,7 @@ export default function TaxationPage() {
         </section>
 
         {/* ── CTA BAND ─────────────────────────────────────────────────────── */}
-        <section className="bg-teal-700 py-16 px-6 md:px-16">
+        {/* <section className="bg-teal-700 py-16 px-6 md:px-16">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             <motion.div
               variants={fadeUp}
@@ -741,11 +742,11 @@ export default function TaxationPage() {
               </Link>
             </motion.div>
           </div>
-        </section>
+        </section> */}
 
         <ContactSection />
         <ScrollToTop />
-        <FloatingMenuButton />
+      <FloatingService/>
         <Footer />
       </div>
     </>

@@ -401,7 +401,7 @@ export default function AuditAssurancePage() {
               custom={0}
               initial="hidden"
               animate="visible"
-              className="text-textprimary text-sm font-semibold uppercase tracking-[0.2em] mb-5"
+              className="text-textprimary text-xs md:text-sm font-semibold  tracking-[0.2em] mb-5"
             >
               BAC Audit & Assurance
             </motion.p>
@@ -411,7 +411,7 @@ export default function AuditAssurancePage() {
               custom={1}
               initial="hidden"
               animate="visible"
-              className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
+              className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
             >
               Beyond the
               <br />
@@ -425,7 +425,7 @@ export default function AuditAssurancePage() {
               custom={2}
               initial="hidden"
               animate="visible"
-              className="text-lg md:text-xl text-gray-300 max-w-xl mb-10"
+              className="text-sm md:text-lg lg:text-xl text-gray-300 max-w-xl mb-10"
             >
               Client Credibility. Stakeholder Confidence. Regulatory Compliance.
             </motion.p>

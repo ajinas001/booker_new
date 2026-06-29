@@ -28,6 +28,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import FloatingService from "@/components/FloatingService";
 
 // ─── Static data ──────────────────────────────────────────────────────────────
 
@@ -188,11 +189,11 @@ function ServiceAccordionItem({ service, index, open, onToggle }) {
       >
         {/* Left: number + icon + title */}
         <div className="flex items-center gap-5 flex-1 min-w-0">
-          <span className="text-xs font-semibold text-gray-300 w-6 flex-shrink-0 tabular-nums">
+          <span className="text-xs font-semibold text-gray-600 w-6 flex-shrink-0 tabular-nums">
             {String(index + 1).padStart(2, "0")}
           </span>
           <div className="w-9 h-9 rounded-xl bg-teal-50 flex items-center justify-center flex-shrink-0 group-hover:bg-teal-100 transition-colors duration-150">
-            <Icon className="w-4 h-4 text-teal-700" strokeWidth={1.7} />
+            <Icon className="w-4 h-4 text-textsecondary" strokeWidth={1.7} />
           </div>
           <div className="flex-1 min-w-0">
             <span className="text-base md:text-lg font-semibold text-gray-900 leading-snug">
@@ -206,7 +207,7 @@ function ServiceAccordionItem({ service, index, open, onToggle }) {
           <span className="hidden sm:block text-[10px] font-semibold uppercase tracking-widest text-gray-400 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-full">
             {service.tag}
           </span>
-          <div className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:border-teal-300 group-hover:text-teal-600 transition-colors duration-150 flex-shrink-0">
+          <div className="w-7 h-7   flex items-center justify-center font-extrabold text-gray-800 group-hover:border-teal-300 group-hover:text-teal-600 transition-colors duration-150 flex-shrink-0">
             {open ? <Minus className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
           </div>
         </div>
@@ -223,21 +224,21 @@ function ServiceAccordionItem({ service, index, open, onToggle }) {
             className="overflow-hidden"
           >
             <div className="pb-6 pl-[3.25rem] md:pl-[4.25rem] pr-4">
-              <p className="text-sm text-gray-500 leading-relaxed mb-5">
+              <p className="text-sm md:text-lg text-gray-500 leading-relaxed mb-5">
                 {service.desc}
               </p>
               <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5 mb-5">
                 {service.highlights.map((h, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2 text-xs text-gray-600 leading-relaxed"
+                    className="flex items-start gap-2 text-xs md:text-sm text-gray-600 leading-relaxed"
                   >
-                    <CheckCircle className="w-3.5 h-3.5 text-teal-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="w-3.5 h-3.5 text-textprimary mt-0.5 flex-shrink-0" />
                     {h}
                   </div>
                 ))}
               </div>
-              <div className="flex items-start gap-2 text-[11px] text-gray-400 leading-relaxed pt-4 border-t border-gray-100">
+              <div className="flex items-start gap-2 text-[11px] md:text-[14px] text-gray-400 leading-relaxed pt-4 border-t border-gray-100">
                 <Users className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-gray-300" />
                 {service.forWhom}
               </div>
@@ -333,7 +334,7 @@ export default function AccountingPage() {
             <ChevronRight className="w-3.5 h-3.5" />
             <span>Services</span>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-teal-400 font-medium">
+            <span className="text-textprimary font-medium">
               Accounting & Bookkeeping
             </span>
           </motion.div>
@@ -347,7 +348,7 @@ export default function AccountingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-teal-400 text-sm font-semibold uppercase tracking-[0.2em] mb-5"
+              className="text-textprimary text-xs md:text-sm font-semibold  tracking-[0.2em] mb-5"
             >
               BAC Accounting & Bookkeeping
             </motion.p>
@@ -356,11 +357,11 @@ export default function AccountingPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
+              className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
             >
               Accurate Books.
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-200">
+              <span className="text-transparent bg-clip-text bg-textprimary">
                 Better Control.
               </span>
             </motion.h1>
@@ -369,7 +370,7 @@ export default function AccountingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-lg md:text-xl text-gray-300 max-w-xl mb-10"
+              className="text-sm md:text-lg lg:text-xl text-gray-300 max-w-xl mb-10"
             >
               End-to-end accounting and bookkeeping solutions built for UAE
               businesses — local expertise, IFRS standards, cloud-first
@@ -384,14 +385,14 @@ export default function AccountingPage() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+                className="inline-flex items-center gap-2 bg-textprimary hover:bg-white text-white hover:text-textsecondary px-7 py-3.5 rounded-md font-semibold text-sm transition-colors duration-200"
               >
                 Get Free Consultation
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="#services"
-                className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+                className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-md   font-semibold text-sm transition-colors duration-200"
               >
                 Explore Services
               </a>
@@ -410,16 +411,16 @@ export default function AccountingPage() {
               viewport={{ once: true }}
             >
               <SectionLabel>Who We Are</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
                 Beyond Recording.{" "}
-                <span className="text-teal-700">Real Financial Clarity.</span>
+                <span className="text-textsecondary">Real Financial Clarity.</span>
               </h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-4">
+              <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-4">
                 In today's fast-moving business environment, accurate
                 bookkeeping and compliant financial reporting are the backbone
                 of sustainable growth.
               </p>
-              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+              <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-10">
                 At BAC, we go beyond recording transactions — we give you a
                 clear, real-time picture of your financial health so you can
                 make better decisions, faster.
@@ -430,7 +431,7 @@ export default function AccountingPage() {
                 {platforms.map((p) => (
                   <span
                     key={p}
-                    className="px-4 py-2 text-sm font-medium text-teal-700 bg-teal-50 border border-teal-100 rounded-full"
+                    className="px-4 py-2 text-sm font-medium text-textsecondary bg-purpletint border-purpletint rounded-full"
                   >
                     {p}
                   </span>
@@ -445,10 +446,10 @@ export default function AccountingPage() {
                   { value: "Cloud", label: "First approach" },
                 ].map((s) => (
                   <div key={s.label}>
-                    <p className="text-3xl font-extrabold text-teal-700 mb-1">
+                    <p className="text-2xl md:text-3xl font-bold text-textsecondary mb-1">
                       {s.value}
                     </p>
-                    <p className="text-sm text-gray-400 font-medium">{s.label}</p>
+                    <p className="text-xs md:text-sm text-gray-400 font-medium">{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -474,8 +475,8 @@ export default function AccountingPage() {
                 />
               </div>
               {/* Floating badge */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-4 max-w-[230px]">
-                <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-md p-5 flex items-center gap-4 max-w-[230px]">
+                <div className="w-10 h-10 rounded-full bg-textsecondary flex items-center justify-center flex-shrink-0">
                   <ShieldCheck className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -492,7 +493,7 @@ export default function AccountingPage() {
         </section>
 
         {/* ── SERVICES ACCORDION ───────────────────────────────────────────── */}
-        <section id="services" className="py-20 md:py-32 bg-gray-50">
+        <section id="services" className="py-20 md:py-32 bg-white">
           <div className="max-w-7xl mx-auto px-6 md:px-16">
             <div className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
               {/* Sticky label column */}
@@ -504,7 +505,7 @@ export default function AccountingPage() {
                 className="lg:sticky lg:top-28"
               >
                 <SectionLabel>Our Services</SectionLabel>
-                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
                   Complete Accounting Solutions
                 </h2>
                 <p className="text-gray-500 text-base leading-relaxed mb-8">
@@ -514,7 +515,7 @@ export default function AccountingPage() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-teal-700 hover:text-teal-900 transition-colors"
+                  className="inline-flex items-center gap-2 text-sm md:text-lg font-semibold text-textsecondary hover:text-textprimary transition-colors"
                 >
                   Talk to an accountant
                   <ChevronRight className="w-4 h-4" />
@@ -522,7 +523,7 @@ export default function AccountingPage() {
               </motion.div>
 
               {/* Accordion list */}
-              <div className="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-100 px-6 md:px-8">
+              <div className="bg-gray-50 rounded-2xl border border-gray-50 divide-y divide-gray-200 px-6 md:px-8">
                 {services.map((service, index) => (
                   <ServiceAccordionItem
                     key={service.id}
@@ -561,7 +562,7 @@ export default function AccountingPage() {
                 viewport={{ once: true }}
                 className="relative z-10 p-10 md:p-16 max-w-lg"
               >
-                <p className="text-teal-400 text-xs font-semibold uppercase tracking-[0.18em] mb-4">
+                <p className="text-textprimary text-xs font-semibold uppercase tracking-[0.18em] mb-4">
                   Bookkeeping
                 </p>
                 <h2 className="text-white text-3xl md:text-4xl font-extrabold leading-tight mb-4">
@@ -578,7 +579,7 @@ export default function AccountingPage() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors duration-200"
+                  className="inline-flex items-center gap-2 bg-textsecondary hover:bg-white text-white hover:text-textsecondary px-6 py-3 rounded-md font-semibold text-sm transition-colors duration-200"
                 >
                   Get Started
                   <ArrowRight className="w-4 h-4" />
@@ -599,8 +600,8 @@ export default function AccountingPage() {
               className="text-center mb-16"
             >
               <SectionLabel>Why Choose Us</SectionLabel>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-                Why Businesses Trust BAC
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                Why Businesses Trust <span className="text-textsecondary"> BAC</span> 
               </h2>
             </motion.div>
 
@@ -615,15 +616,15 @@ export default function AccountingPage() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="group text-center p-7 rounded-2xl border border-gray-100 hover:border-teal-200 hover:shadow-md transition-all duration-300"
+                    className="group text-center p-7 rounded-2xl border border-purpletint hover:border-purpletint  bg-purpletint transition-all duration-300"
                   >
                     <div className="w-12 h-12 bg-teal-50 group-hover:bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors duration-200">
-                      <Icon className="w-6 h-6 text-teal-600" strokeWidth={1.6} />
+                      <Icon className="w-6 h-6 text-textsecondary" strokeWidth={1.6} />
                     </div>
-                    <h3 className="font-bold text-gray-900 text-sm mb-2">
+                    <h3 className="font-semibold text-gray-900 text-sm md:text-lg mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-gray-500 text-xs leading-relaxed">
+                    <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
                       {item.body}
                     </p>
                   </motion.div>
@@ -634,7 +635,7 @@ export default function AccountingPage() {
         </section>
 
         {/* ── CTA BAND ─────────────────────────────────────────────────────── */}
-        <section className="bg-teal-700 py-16 px-6 md:px-16">
+        {/* <section className="bg-teal-700 py-16 px-6 md:px-16">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             <motion.div
               variants={fadeUp}
@@ -667,11 +668,11 @@ export default function AccountingPage() {
               </Link>
             </motion.div>
           </div>
-        </section>
+        </section> */}
 
         <ContactSection />
         <ScrollToTop />
-        <FloatingMenuButton />
+        <FloatingService/>
         <Footer />
       </div>
     </>

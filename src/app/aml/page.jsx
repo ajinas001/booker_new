@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -21,12 +26,16 @@ import {
   ChevronDown,
   ChevronUp,
   AlertTriangle,
+  Shield,
+  CheckCircle,
+  ChevronRight,
 } from "lucide-react";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import FloatingMenuButton from "@/components/FloatingMenuButton";
 import ScrollToTop from "@/components/ScrollToTop";
+import FloatingService from "@/components/FloatingService";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -38,11 +47,30 @@ const stats = [
 ];
 
 const regulatoryTable = [
-  { label: "UAE Federal AML Law", detail: "Federal Decree-Law No. 20 of 2018 on Anti-Money Laundering and Combating the Financing of Terrorism" },
-  { label: "Supervisory Authorities", detail: "CBUAE, SCA, DFSA, ADGM FSRA, MOE (for DNFBPs)" },
-  { label: "goAML Portal", detail: "Mandatory platform for filing Suspicious Transaction Reports (STRs) and other regulatory reports" },
-  { label: "FATF Membership", detail: "UAE is a FATF member — businesses must align with international AML/CFT standards" },
-  { label: "DNFBPs", detail: "Designated Non-Financial Businesses and Professions (real estate, gold, legal, accounting) face specific AML obligations" },
+  {
+    label: "UAE Federal AML Law",
+    detail:
+      "Federal Decree-Law No. 20 of 2018 on Anti-Money Laundering and Combating the Financing of Terrorism",
+  },
+  {
+    label: "Supervisory Authorities",
+    detail: "CBUAE, SCA, DFSA, ADGM FSRA, MOE (for DNFBPs)",
+  },
+  {
+    label: "goAML Portal",
+    detail:
+      "Mandatory platform for filing Suspicious Transaction Reports (STRs) and other regulatory reports",
+  },
+  {
+    label: "FATF Membership",
+    detail:
+      "UAE is a FATF member — businesses must align with international AML/CFT standards",
+  },
+  {
+    label: "DNFBPs",
+    detail:
+      "Designated Non-Financial Businesses and Professions (real estate, gold, legal, accounting) face specific AML obligations",
+  },
 ];
 
 const services = [
@@ -50,7 +78,7 @@ const services = [
     id: 1,
     icon: ShieldAlert,
     tag: "Risk",
-    accent: "#EF4444",
+    lightAccent: "bg-red-50",
     title: "AML Risk Assessment",
     subtitle: "Identify Your Exposure Before Regulators Do",
     description:
@@ -72,7 +100,7 @@ const services = [
     id: 2,
     icon: BookOpen,
     tag: "Program",
-    accent: "#6366F1",
+    lightAccent: "bg-slate-50",
     title: "Compliance Program Design",
     subtitle: "Build a Framework That Stands Up to Scrutiny",
     description:
@@ -94,7 +122,7 @@ const services = [
     id: 3,
     icon: Activity,
     tag: "Monitoring",
-    accent: "#F59E0B",
+    lightAccent: "bg-teal-50",
     title: "Transaction Monitoring",
     subtitle: "Detect Suspicious Activity Before It Becomes a Problem",
     description:
@@ -116,7 +144,7 @@ const services = [
     id: 4,
     icon: UserCheck,
     tag: "KYC / CDD",
-    accent: "#14B8A6",
+    lightAccent: "bg-teal-50",
     title: "KYC & Customer Due Diligence",
     subtitle: "Know Your Customer. Protect Your Business.",
     description:
@@ -138,7 +166,7 @@ const services = [
     id: 5,
     icon: GraduationCap,
     tag: "Training",
-    accent: "#10B981",
+    lightAccent: "bg-slate-50",
     title: "AML Training & Awareness",
     subtitle: "An Informed Team Is Your Best Defense",
     description:
@@ -160,7 +188,7 @@ const services = [
     id: 6,
     icon: Send,
     tag: "Reporting",
-    accent: "#8B5CF6",
+    lightAccent: "bg-red-50",
     title: "Regulatory Reporting",
     subtitle: "File Accurately. Meet Deadlines. Stay Protected.",
     description:
@@ -181,11 +209,49 @@ const services = [
 ];
 
 const whyBAC = [
-  { title: "Certified AML Specialists", desc: "Our team holds internationally recognized AML qualifications (CAMS, ICA, etc.)." },
-  { title: "UAE Regulatory Expertise", desc: "We understand goAML, CBUAE, DFSA, and DNFBP-specific requirements inside out." },
-  { title: "Tailored Compliance Programs", desc: "No template solutions — every compliance framework is built around your business and risk profile." },
-  { title: "Ongoing Support", desc: "We don't disappear after implementation — we provide continuous monitoring and advisory." },
-  { title: "Confidential & Professional", desc: "All engagements handled with strict professional confidentiality and discretion." },
+  {
+    title: "Certified AML Specialists",
+    desc: "Our team holds internationally recognized AML qualifications (CAMS, ICA, etc.).",
+  },
+  {
+    title: "UAE Regulatory Expertise",
+    desc: "We understand goAML, CBUAE, DFSA, and DNFBP-specific requirements inside out.",
+  },
+  {
+    title: "Tailored Compliance Programs",
+    desc: "No template solutions — every compliance framework is built around your business and risk profile.",
+  },
+  {
+    title: "Ongoing Support",
+    desc: "We don't disappear after implementation — we provide continuous monitoring and advisory.",
+  },
+  {
+    title: "Confidential & Professional",
+    desc: "All engagements handled with strict professional confidentiality and discretion.",
+  },
+];
+
+const assurancePillars = [
+  {
+    icon: Shield,
+    title: "Risk-Based Approach",
+    body: "Every program is built around your specific risk profile — not a generic template.",
+  },
+  {
+    icon: FileText,
+    title: "Regulatory Documentation",
+    body: "Comprehensive, regulator-ready records and reports prepared to the highest standard.",
+  },
+  {
+    icon: Activity,
+    title: "Ongoing Monitoring",
+    body: "Continuous transaction surveillance and periodic reviews to keep your program effective.",
+  },
+  {
+    icon: CheckCircle,
+    title: "End-to-End Compliance",
+    body: "From initial risk assessment through to regulatory reporting — full lifecycle coverage.",
+  },
 ];
 
 // ─── ANIMATION VARIANTS ──────────────────────────────────────────────────────
@@ -204,50 +270,70 @@ const fadeIn = {
   visible: { opacity: 1, transition: { duration: 0.7 } },
 };
 
+// ─── SECTION LABEL ────────────────────────────────────────────────────────────
+
+function SectionLabel({ children }) {
+  return (
+    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 mb-3">
+      {children}
+    </p>
+  );
+}
+
 // ─── SERVICE CARD ─────────────────────────────────────────────────────────────
 
 function ServiceCard({ service, index }) {
   const [open, setOpen] = useState(false);
-  const { icon: Icon, tag, accent, title, subtitle, description, bullets, forWhom } = service;
+  const {
+    icon: Icon,
+    tag,
+    lightAccent,
+    title,
+    subtitle,
+    description,
+    bullets,
+    forWhom,
+  } = service;
 
   return (
     <motion.div
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-      custom={index * 0.4}
-      className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+      viewport={{ once: true, margin: "-60px" }}
+      custom={index * 0.5}
+      className="group relative flex flex-col rounded-2xl border border-purpletint bg-purpletint overflow-hidden hover:shadow-lg transition-shadow duration-300"
     >
-      <div className="h-0.5 w-full" style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }} />
-
-      <div className="p-7">
-        <div className="flex items-start justify-between mb-5">
-          <span
-            className="inline-block px-3 py-1 rounded-full text-xs font-bold tracking-wide"
-            style={{ color: accent, background: `${accent}18` }}
-          >
+      <div className="p-8 flex flex-col flex-1 gap-5">
+        {/* Icon + tag row */}
+        <div className="flex items-start justify-between">
+          <div className={`p-3 rounded-xl ${lightAccent}`}>
+            <Icon className="w-6 h-6 text-black" strokeWidth={1.6} />
+          </div>
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-700 bg-white px-3 py-1 rounded-full border border-white">
             {tag}
           </span>
-          <div
-            className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
-            style={{ background: `${accent}15` }}
-          >
-            <Icon className="w-5 h-5" style={{ color: accent }} />
-          </div>
         </div>
 
-        <h3 className="text-lg font-bold text-gray-900 mb-1 leading-snug">{title}</h3>
-        <p className="text-xs font-semibold mb-3" style={{ color: accent }}>{subtitle}</p>
-        <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+        {/* Title + subtitle + description */}
+        <div>
+          <h3 className="text-xl font-bold text-gray-900 mb-1">{title}</h3>
+          <p className="text-xs font-semibold text-textsecondary mb-2">
+            {subtitle}
+          </p>
+          <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+        </div>
 
+        {/* Expandable highlights */}
         <button
-          onClick={() => setOpen((v) => !v)}
-          className="mt-5 flex items-center gap-1.5 text-xs font-semibold transition-colors"
-          style={{ color: accent }}
+          onClick={() => setOpen((o) => !o)}
+          className="flex items-center gap-1.5 text-sm font-medium text-textsecondary hover:text-teal-900 transition-colors self-start"
+          aria-expanded={open}
         >
           {open ? "Show less" : "See what's included"}
-          {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+          <ChevronRight
+            className={`w-4 h-4 transition-transform duration-300 ${open ? "rotate-90" : ""}`}
+          />
         </button>
 
         <AnimatePresence initial={false}>
@@ -260,21 +346,21 @@ function ServiceCard({ service, index }) {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
             >
-              <ul className="mt-4 space-y-2">
+              <ul className="space-y-2 border-t border-gray-100 pt-4">
                 {bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
-                    <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{ color: accent }} />
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm text-gray-600"
+                  >
+                    <CheckCircle className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
                     {b}
                   </li>
                 ))}
+                <li className="flex items-start gap-2 text-sm text-gray-500 italic mt-3 pt-3 border-t border-gray-100">
+                  <Users className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                  {forWhom}
+                </li>
               </ul>
-              <div
-                className="mt-4 rounded-xl px-4 py-3 text-xs leading-relaxed"
-                style={{ background: `${accent}10`, color: accent }}
-              >
-                <span className="font-bold">Who it's for: </span>
-                {forWhom}
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -287,8 +373,12 @@ function ServiceCard({ service, index }) {
 
 export default function AntiMoneyLaunderingPage() {
   const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <>
@@ -299,133 +389,205 @@ export default function AntiMoneyLaunderingPage() {
       ═══════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative min-h-[92vh] flex items-end overflow-hidden bg-[#0A1628]"
+        className="relative h-[92vh] min-h-[580px] flex items-end overflow-hidden"
       >
-        <motion.div style={{ y: heroY }} className="absolute inset-0 will-change-transform">
+        {/* Parallax image */}
+        <motion.div
+          style={{ y: heroY }}
+          className="absolute inset-0 will-change-transform"
+        >
           <Image
             src="/images/img3.webp"
             alt="AML compliance background"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center opacity-30 pointer-events-none select-none"
+            className="object-cover object-center"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
         </motion.div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1628]/80 via-transparent to-transparent" />
+        {/* Breadcrumb */}
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+          className="absolute top-28 left-6 md:left-16 z-10 flex items-center gap-2 text-sm text-gray-300"
+        >
+          <Link href="/" className="hover:text-white transition-colors">
+            Home
+          </Link>
+          <ChevronRight className="w-3.5 h-3.5" />
+          <span>Services</span>
+          <ChevronRight className="w-3.5 h-3.5" />
+          <span className="text-textprimary font-medium">
+            Anti-Money Laundering
+          </span>
+        </motion.div>
 
-        {/* Red warning glow — thematically appropriate for compliance/risk */}
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-red-500/8 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 rounded-full bg-teal-500/8 blur-[100px] pointer-events-none" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-24 pt-40 w-full">
-          {/* Breadcrumb */}
-          <motion.div
+        {/* Hero text */}
+        <motion.div
+          style={{ opacity: heroOpacity }}
+          className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 pb-20 md:pb-28 w-full"
+        >
+          <motion.p
             variants={fadeUp}
+            custom={0}
             initial="hidden"
             animate="visible"
-            custom={0}
-            className="mb-8 flex items-center gap-2 text-sm text-gray-400"
+            className="text-textprimary text-xs md:text-sm  font-semibold  tracking-[0.2em] mb-5"
           >
-            <Link href="/" className="hover:text-teal-400 transition-colors">Home</Link>
-            <span>/</span>
-            <span>Services</span>
-            <span>/</span>
-            <span className="text-teal-400 font-medium">Anti-Money Laundering</span>
+            BAC AML Compliance Specialists
+          </motion.p>
+
+          <motion.h1
+            variants={fadeUp}
+            custom={1}
+            initial="hidden"
+            animate="visible"
+            className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.02] mb-6 max-w-4xl"
+          >
+            Anti-Money
+            <br />
+            <span className="text-transparent bg-clip-text bg-textprimary">
+              Laundering.
+            </span>
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUp}
+            custom={2}
+            initial="hidden"
+            animate="visible"
+            className="text-sm md:text-lg lg:text-xl text-gray-300 max-w-xl mb-10"
+          >
+            Risk Prevention. Financial Transparency. Regulatory Compliance.
+            <br className="hidden sm:block" />
+            Protecting your business against financial crime and UAE regulatory
+            penalties.
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            custom={3}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-wrap gap-4"
+          >
+            <a
+              href="#contact-form"
+              className="inline-flex items-center gap-2 bg-textprimary hover:bg-white hover:text-textsecondary text-white px-7 py-3.5 rounded-md font-semibold text-sm transition-colors duration-200"
+            >
+              Schedule a Compliance Review
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a
+              href="#services"
+              className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-md font-semibold text-sm transition-colors duration-200"
+            >
+              Explore Services
+            </a>
           </motion.div>
 
-          <div className="max-w-4xl">
-            <motion.span
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={1}
-              className="inline-block mb-5 px-4 py-1.5 rounded-full border border-red-400/40 bg-red-500/10 text-red-300 text-xs font-semibold tracking-widest uppercase"
-            >
-              UAE AML Compliance Specialists
-            </motion.span>
-
-            <motion.h1
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={2}
-              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-6"
-            >
-              Anti-Money
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-teal-400">
-                Laundering
-              </span>
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={3}
-              className="text-lg sm:text-xl text-gray-300 max-w-2xl leading-relaxed mb-10"
-            >
-              Risk Prevention. Financial Transparency. Regulatory Compliance.
-              <br className="hidden sm:block" />
-              Protecting your business against financial crime and UAE regulatory penalties.
-            </motion.p>
-
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={4}
-              className="flex flex-wrap gap-4"
-            >
-              <a
-                href="#contact-form"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-white font-semibold text-base transition-all duration-200 shadow-lg shadow-teal-500/30 hover:-translate-y-0.5"
-              >
-                Schedule a Compliance Review <ArrowRight className="w-4 h-4" />
-              </a>
-              <a
-                href="#services"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-white/20 hover:border-teal-400/50 text-white font-semibold text-base transition-all duration-200 hover:bg-white/5"
-              >
-                Explore Services
-              </a>
-            </motion.div>
-          </div>
-
           {/* Stat bar */}
-          <motion.div
+          {/* <motion.div
             variants={fadeUp}
+            custom={4}
             initial="hidden"
             animate="visible"
-            custom={5}
             className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10"
           >
             {stats.map(({ value, label }) => (
               <div key={label} className="bg-white/5 px-6 py-5 text-center">
-                <p className="text-2xl sm:text-3xl font-extrabold text-white">{value}</p>
-                <p className="text-xs text-gray-400 mt-1 font-medium">{label}</p>
+                <p className="text-2xl sm:text-3xl font-extrabold text-white">
+                  {value}
+                </p>
+                <p className="text-xs text-gray-400 mt-1 font-medium">
+                  {label}
+                </p>
               </div>
             ))}
-          </motion.div>
-        </div>
+          </motion.div> */}
+        </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════
           OVERVIEW / INTRO
       ═══════════════════════════════════════════ */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-20 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-16 grid lg:grid-cols-2 gap-16 items-center">
+          {/* Text */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <SectionLabel>UAE AML Compliance</SectionLabel>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
+              Implementing Strong Controls Against{" "}
+              <span className="text-textsecondary">Financial Crime</span>
+            </h2>
+            <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-4">
+              Money laundering and terrorist financing pose significant legal,
+              financial, and reputational risks to businesses operating in the
+              UAE. Regulatory authorities are actively enforcing AML obligations
+              — and non-compliance can result in heavy fines, license
+              suspension, or criminal liability.
+            </p>
+            <p className="text-gray-500 text-sm md:text-lg leading-relaxed mb-8">
+              At BAC, our AML compliance solutions help you build a robust,
+              regulator-ready framework that protects your business and meets
+              all UAE requirements — from initial risk assessment through to
+              ongoing monitoring and regulatory reporting.
+            </p>
+
+            {/* Quick service tags */}
+            <div className="flex flex-wrap gap-2">
+              {[
+                "AML Risk Assessments",
+                "Compliance Program Design",
+                "KYC & Due Diligence",
+                "Regulatory Reporting",
+                "Transaction Monitoring",
+                "AML Training",
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1.5 rounded-lg bg-purpletint text-textsecondary text-xs font-semibold border border-purpletint"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Stat row */}
+            <div className="flex gap-10 border-t border-gray-100 pt-8 mt-8">
+              {[
+                { value: "AED 5M", label: "Max fine per violation" },
+                { value: "FATF", label: "Aligned standards" },
+                { value: "100%", label: "Tailored programs" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <p className="text-xl md:text-3xl font-extrabold text-textsecondary mb-1">
+                    {s.value}
+                  </p>
+                  <p className="text-sm text-gray-400 font-medium">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Image */}
           <motion.div
-            variants={fadeIn}
+            variants={fadeUp}
+            custom={1}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl">
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
               <Image
                 src="/images/aml.webp"
                 alt="AML compliance UAE"
@@ -433,102 +595,30 @@ export default function AntiMoneyLaunderingPage() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-              {/* Warning badge */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-xl px-5 py-4 shadow-xl border border-gray-100">
-                <div className="flex items-start gap-3">
-                  <AlertTriangle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-xs font-bold text-red-600 uppercase tracking-wider mb-0.5">
-                      Non-compliance risk
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      Fines up to AED 5 million per violation, licence cancellation, and criminal prosecution.
-                    </p>
-                  </div>
-                </div>
+            </div>
+
+            {/* Warning badge */}
+            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 flex items-start gap-3 max-w-[260px]">
+              <AlertTriangle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs font-bold text-red-600 uppercase tracking-wider mb-0.5">
+                  Non-compliance risk
+                </p>
+                <p className="text-sm text-gray-600">
+                  Fines up to AED 5 million per violation, licence cancellation,
+                  and criminal prosecution.
+                </p>
               </div>
             </div>
-            <div className="absolute -top-4 -left-4 w-24 h-24 rounded-xl bg-red-500/10 border border-red-400/20 -z-10" />
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-xl bg-teal-500/10 border border-teal-400/20 -z-10" />
           </motion.div>
-
-          {/* Text */}
-          <div>
-            <motion.span
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              className="inline-block mb-4 text-xs font-bold tracking-widest uppercase text-red-600"
-            >
-              UAE AML Compliance
-            </motion.span>
-
-            <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-6"
-            >
-              Implementing Strong Controls Against{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-teal-500">
-                Financial Crime
-              </span>
-            </motion.h2>
-
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={2}
-              className="text-gray-600 text-lg leading-relaxed mb-4"
-            >
-              Money laundering and terrorist financing pose significant legal, financial, and reputational risks
-              to businesses operating in the UAE. Regulatory authorities are actively enforcing AML obligations —
-              and non-compliance can result in heavy fines, license suspension, or criminal liability.
-            </motion.p>
-
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={3}
-              className="text-gray-600 text-lg leading-relaxed mb-8"
-            >
-              At BAC, our AML compliance solutions help you build a robust, regulator-ready framework that
-              protects your business and meets all UAE requirements — from initial risk assessment through
-              to ongoing monitoring and regulatory reporting.
-            </motion.p>
-
-            {/* Quick service tags */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={4}
-              className="flex flex-wrap gap-2"
-            >
-              {["AML Risk Assessments", "Compliance Program Design", "KYC & Due Diligence", "Regulatory Reporting", "Transaction Monitoring", "AML Training"].map((tag) => (
-                <span key={tag} className="px-3 py-1.5 rounded-lg bg-red-50 text-red-700 text-xs font-semibold border border-red-100">
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
-          </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
           UAE REGULATORY FRAMEWORK
       ═══════════════════════════════════════════ */}
-      <section className="py-20 bg-[#F8FAFC]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -536,15 +626,15 @@ export default function AntiMoneyLaunderingPage() {
             viewport={{ once: true }}
             className="mb-12 max-w-2xl"
           >
-            <span className="inline-block mb-4 text-xs font-bold tracking-widest uppercase text-teal-600">
-              Know the Rules
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-3">
+            <SectionLabel>Know the Rules</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-3">
               UAE AML Regulatory Framework
             </h2>
             <p className="text-gray-500 text-base">
-              The UAE has significantly strengthened its AML/CFT regime, aligning with FATF recommendations
-              and international best practices. Understanding the landscape is the first step to staying compliant.
+              The UAE has significantly strengthened its AML/CFT regime,
+              aligning with FATF recommendations and international best
+              practices. Understanding the landscape is the first step to
+              staying compliant.
             </p>
           </motion.div>
 
@@ -563,7 +653,9 @@ export default function AntiMoneyLaunderingPage() {
                   i % 2 === 0 ? "bg-white" : "bg-gray-50"
                 } ${i !== regulatoryTable.length - 1 ? "border-b border-gray-100" : ""}`}
               >
-                <div className="text-sm font-bold text-gray-800 sm:border-r border-gray-200 sm:pr-6">{label}</div>
+                <div className="text-sm font-bold text-gray-800 sm:border-r border-gray-200 sm:pr-6">
+                  {label}
+                </div>
                 <div className="text-sm text-gray-600 sm:pl-6">{detail}</div>
               </div>
             ))}
@@ -581,8 +673,9 @@ export default function AntiMoneyLaunderingPage() {
             <AlertTriangle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
             <p className="text-sm text-red-700 leading-relaxed">
               <span className="font-bold">Non-compliance warning: </span>
-              Failure to maintain active AML programs can result in fines of up to AED 5 million per violation,
-              licence cancellation, and criminal prosecution. All DNFBPs and financial institutions must comply.
+              Failure to maintain active AML programs can result in fines of up
+              to AED 5 million per violation, licence cancellation, and criminal
+              prosecution. All DNFBPs and financial institutions must comply.
             </p>
           </motion.div>
         </div>
@@ -591,8 +684,8 @@ export default function AntiMoneyLaunderingPage() {
       {/* ═══════════════════════════════════════════
           SERVICES GRID
       ═══════════════════════════════════════════ */}
-      <section id="services" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <section id="services" className="py-20 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -600,14 +693,13 @@ export default function AntiMoneyLaunderingPage() {
             viewport={{ once: true }}
             className="mb-16 max-w-2xl"
           >
-            <span className="inline-block mb-4 text-xs font-bold tracking-widest uppercase text-teal-600">
-              Our AML Services
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+            <SectionLabel>Our AML Services</SectionLabel>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
               Our Structured AML Compliance Process
             </h2>
-            <p className="text-gray-500 text-lg">
-              Six disciplines covering every dimension of AML compliance — expand each card to see exactly what's included.
+            <p className="text-gray-500 text-lg mt-3">
+              Six disciplines covering every dimension of AML compliance —
+              expand each card to see exactly what's included.
             </p>
           </motion.div>
 
@@ -620,70 +712,239 @@ export default function AntiMoneyLaunderingPage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          WHY BAC
+          ASSURANCE / PROGRAM PILLARS
       ═══════════════════════════════════════════ */}
-      <section className="py-24 bg-[#0A1628]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="mb-14 text-center"
-          >
-            <span className="inline-block mb-4 text-xs font-bold tracking-widest uppercase text-teal-400">
-              Why Choose Us
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
-              Why Businesses Across the UAE Trust BAC
-            </h2>
-          </motion.div>
+      <section className="py-20 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Image */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative order-2 lg:order-1"
+            >
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/3]">
+                <Image
+                  src="/images/aml.webp"
+                  alt="AML compliance program"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              </div>
+              <div className="absolute top-5 right-5 bg-textsecondary text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full">
+                AML Program
+              </div>
+            </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whyBAC.map(({ title, desc }, i) => (
-              <motion.div
-                key={title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i * 0.5}
-                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-7 hover:border-teal-500/30 transition-colors duration-300"
-              >
-                <div className="w-8 h-0.5 bg-teal-500 mb-5 rounded-full" />
-                <h3 className="text-white font-bold text-base mb-2">{title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
-              </motion.div>
-            ))}
+            {/* Content */}
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="order-1 lg:order-2"
+            >
+              <SectionLabel>Our Compliance Approach</SectionLabel>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                Protect Your Business.{" "}
+                <span className="text-textsecondary">Stay Ahead of Risk.</span>
+              </h2>
+              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                Our AML compliance programs go beyond checkbox compliance. We
+                build fully operational, risk-based frameworks tailored to your
+                business — from risk assessment and customer due diligence
+                through to transaction monitoring and regulatory reporting.
+                Every engagement is supported by certified specialists who
+                understand UAE regulations inside out.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-5 pt-8">
+            {assurancePillars.map((pillar, i) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  custom={i * 0.4}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="p-5 rounded-xl border border-purpletint bg-gray-100 hover:bg-purpletint transition-colors duration-200"
+                >
+                  <Icon className="w-5 h-5 text-textsecondary mb-3" />
+                  <h4 className="font-semibold text-gray-900 text-sm md:text-lg mb-1">
+                    {pillar.title}
+                  </h4>
+                  <p className="text-gray-500 text-xs md:text-md leading-relaxed">
+                    {pillar.body}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-          CTA BAND
+          WHY BAC — dark section (matching IFRS dark section style)
       ═══════════════════════════════════════════ */}
-      <section className="py-20 bg-gradient-to-br from-red-600 to-teal-600">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto px-6 text-center"
-        >
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-5 leading-tight">
-            Need Expert Assistance with UAE AML Compliance?
-          </h2>
-          <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Protect your business against financial crime, regulatory penalties, and reputational risk.
-            Schedule a compliance review with our AML specialists today.
-          </p>
-          <a
-            href="#contact-form"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-red-700 font-bold text-base hover:bg-gray-50 transition-all duration-200 shadow-lg hover:-translate-y-0.5"
+      <section>
+        <div className="rounded-2xl py-8 md:py-20 max-w-7xl mx-auto px-6 md:px-16 bg-gradient-to-br from-gray-900 to-teal-900">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <span className="inline-block text-xs font-base tracking-[0.18em] text-textprimary bg-teal-400/10 border border-teal-400/20 px-4 py-1.5 rounded-full mb-6">
+                Why Choose Us
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-2">
+                Why Businesses Across the UAE Trust BAC
+              </h2>
+              <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-4">
+                Non-compliance with UAE AML regulations carries severe
+                consequences — fines, licence cancellation, and criminal
+                prosecution. Businesses across the UAE choose BAC because we
+                deliver more than policy documents. We build compliance programs
+                that actually work.
+              </p>
+              <p className="text-gray-400 text-sm md:text-lg leading-relaxed mb-10">
+                Our certified specialists combine international AML
+                qualifications with deep knowledge of UAE-specific regulatory
+                requirements — so you get expert guidance that's practical,
+                accurate, and immediately actionable.
+              </p>
+              <a
+                href="#contact-form"
+                className="inline-flex items-center gap-2 bg-textsecondary hover:bg-purpletint text-white hover:text-textsecondary px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
+              >
+                Schedule a Compliance Review
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </motion.div>
+
+            {/* Right — why BAC checklist */}
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
+              {whyBAC.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  custom={i * 0.4}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="flex items-start gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-5 hover:border-teal-500/40 hover:bg-teal-900/20 transition-all duration-200"
+                >
+                  <CheckCircle className="w-5 h-5 text-textprimary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-white font-semibold text-base mb-0.5">
+                      {item.title}
+                    </p>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          WHY CHOOSE — cards (matching audit page "Why BAC" section)
+      ═══════════════════════════════════════════ */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            Schedule a Compliance Review <ArrowRight className="w-5 h-5" />
-          </a>
-        </motion.div>
+            <SectionLabel>Why Choose Us</SectionLabel>
+            <h2 className="text-3xl md:text-3xl lg:text-4xl font-semibold text-black">
+              Need Expert Assistance with{" "}
+              <span className="relative inline-block text-textsecondary pb-3 after:content-[''] after:absolute after:w-full after:bg-textsecondary after:left-0 after:bottom-0">
+                UAE AML Compliance?
+              </span>
+            </h2>
+            <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">
+              Protect your business against financial crime, regulatory
+              penalties, and reputational risk. Schedule a compliance review
+              with our AML specialists today.
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: ShieldAlert,
+                title: "Regulatory Compliance",
+                body: "Stay ahead of UAE AML regulatory changes and avoid penalties with our up-to-date expertise.",
+              },
+              {
+                icon: Activity,
+                title: "Risk Management",
+                body: "Identify and address financial crime vulnerabilities before they become regulatory problems.",
+              },
+              {
+                icon: Users,
+                title: "Stakeholder Trust",
+                body: "Give investors, banks, and partners full confidence in your compliance program.",
+              },
+              {
+                icon: CheckCircle,
+                title: "Certified Specialists",
+                body: "Our team holds internationally recognised AML qualifications (CAMS, ICA, and more).",
+              },
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  custom={i * 0.3}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="group text-center p-8 rounded-2xl border border-gray-100 bg-gray-100 hover:bg-purpletint hover:border- transition-all duration-300"
+                >
+                  <div className="w-14 h-14 bg-white group-hover:bg-purpletint rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors duration-200">
+                    <Icon
+                      className="w-7 h-7 text-textsecondary"
+                      strokeWidth={1.6}
+                    />
+                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    {item.body}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       <div id="contact-form">
@@ -691,7 +952,7 @@ export default function AntiMoneyLaunderingPage() {
       </div>
 
       <ScrollToTop />
-      <FloatingMenuButton />
+      <FloatingService />
       <Footer />
     </>
   );
