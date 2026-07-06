@@ -134,58 +134,58 @@ export default function Navbar() {
               })}
             </div>
             <div className="hidden lg:flex justify-center items-center gap-2 ">
-              <a
+              <Link
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-600 hover:text-white transition"
               >
                 <FaFacebookF />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="https://www.instagram.com/booker_consulting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-pink-600 hover:text-white transition"
               >
                 <FaInstagram />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="https://www.tiktok.com/@yourusername"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-gray-800 hover:text-white transition"
               >
                 <FaTiktok />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="https://www.linkedin.com/company/bookeraccounting/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-700 hover:text-white transition"
               >
                 <FaLinkedinIn />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="mailto:info@bookeraccounting.com"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-gray-800 hover:text-white transition"
               >
                 <MdEmail />
-              </a>
+              </Link>
             </div>
             <div>
-              <a
+              <Link
                 href="https://wa.me/971567678156?text=Hello%20Booker%20Accounting%2C%20I%20would%20like%20assistance%20in%20making%20my%20business%20compliant%20and%20supporting%20its%20growth."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-textsecondary text-white text-sm hidden rounded-md lg:block px-4 py-3 border-2 border-white hover:border-textsecondary font-small hover:bg-white transition hover:text-textsecondary"
               >
                 Book Free Assessment
-              </a>
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -281,57 +281,57 @@ export default function Navbar() {
             {/* Bottom Section: CTA and Socials (Pinned to bottom) */}
             <div className="pb-8 border-t border-gray-100">
               <div className="px-6 pt-5">
-                <a
+                <Link
                   href="https://wa.me/971567678156?text=Hello%20Booker%20Accounting%2C%20I%20would%20like%20assistance%20in%20making%20my%20business%20compliant%20and%20supporting%20its%20growth."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center bg-secondary text-white font-medium py-3 rounded-md border border-secondary hover:bg-transparent hover:text-secondary transition duration-300"
                 >
                   Book Free Assessment
-                </a>
+                </Link>
               </div>
 
               <div className="flex justify-center items-center gap-3 pt-5">
-                <a
+                <Link
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-600 hover:text-white transition"
                 >
                   <FaFacebookF />
-                </a>
-                <a
+                </Link>
+                <Link
                   href="https://www.instagram.com/booker_consulting"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-pink-600 hover:text-white transition"
                 >
                   <FaInstagram />
-                </a>
+                </Link>
 
-                <a
+                <Link
                   href="https://www.linkedin.com/company/bookeraccounting/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-700 hover:text-white transition"
                 >
                   <FaLinkedinIn />
-                </a>
-                <a
+                </Link>
+                <Link
                   href="https://www.tiktok.com/@yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-black hover:text-white transition"
                 >
                   <FaTiktok />
-                </a>
+                </Link>
 
-                <a
+                <Link
                   href="mailto:info@example.com"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-600 hover:text-white transition"
                 >
                   <MdEmail />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
