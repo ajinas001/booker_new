@@ -11,9 +11,9 @@ const NEUTRAL_BG = "bg-white";
 const DARK_BG = "bg-secondary"; // Assuming 'secondary' is defined in your Tailwind config
 
 // Placeholder Image Paths (Update these to your working URLs)
-const Image1Path = "/images/newimg2.png";
-const Image2Path = "/images/business66.png";
-const Image3Path = "/images/newimg3.png";
+const Image1Path = "/images/newimg2.webp";
+const Image2Path = "/images/business66.webp";
+const Image3Path = "/images/newimg3.webp";
 
 // --- Framer Motion Animation Variants ---
 

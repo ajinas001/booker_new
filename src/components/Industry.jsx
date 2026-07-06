@@ -398,8 +398,8 @@ export default function PremiumHorizontalIndustries() {
                 onClick={() => handleMobileSelect(idx)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full flex-shrink-0 transition-all duration-200 text-[11px] font-medium border"
                 style={{
-                  background: active ? "#1c1a17" : "#ffffff",
-                  color: active ? "#ffffff" : "#78716c",
+                  background: active ? "#1f626d" : "#ffffff",
+                  color: active ? "#ffffff" : "#1f626d",
                   border: active ? "1px solid #1c1a17" : "1px solid #e7e5e4",
                 }}
               >

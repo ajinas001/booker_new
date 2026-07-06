@@ -141,7 +141,7 @@ const Footer = () => {
           {/* Clean Social Links */}
           <div className="flex gap-3 order-1 sm:order-2">
             {socialLinks.map((social, idx) => (
-              <a
+              <Link
                 key={idx}
                 href={social.href}
                 target={social.href.startsWith("http") ? "_blank" : undefined}
@@ -154,7 +154,7 @@ const Footer = () => {
                 className="bg-gray-50 hover:bg-teal-900 border border-gray-700 w-9 h-9 flex items-center justify-center rounded-lg text-gray-800 hover:text-white transition-colors duration-150"
               >
                 <social.icon size={15} />
-              </a>
+              </Link>
             ))}
           </div>
         </div>

@@ -77,7 +77,7 @@ export default function HeroSection() {
                 {/* Desktop Image */}
                 <div className="absolute inset-0 w-full h-full hidden md:block">
                     <Image
-                        src="/images/newbanner.png"
+                        src="/images/newbanner.webp"
                         alt="Your Trusted Accounting Partner"
                         fill
                         priority
@@ -88,7 +88,7 @@ export default function HeroSection() {
                 {/* Mobile Image */}
                 <div className="absolute inset-0 w-full h-full block md:hidden">
                     <Image
-                        src="/images/mobilebanner.png"
+                        src="/images/mobilebanner.webp"
                         alt="Your Trusted Accounting Partner"
                         fill
                         priority
@@ -125,7 +125,7 @@ export default function HeroSection() {
                                 From Compliance to Growth – We Simplify Your Finance, So You Can Focus on Your Business.
                             </p>
 
-                            <a
+                            <Link
                                 href="/contact"
                                 className="group inline-flex items-center justify-center gap-2 bg-textsecondary hover:bg-white hover:text-textsecondary text-white text-xs md:text-sm font-bold w-fit px-5 py-3 rounded transition-all duration-300 shadow-md"
                             >
@@ -140,7 +140,7 @@ export default function HeroSection() {
                                 >
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                                 </svg>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Badges Column Stack */}

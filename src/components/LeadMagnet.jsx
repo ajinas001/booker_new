@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Download, Instagram } from "lucide-react";
+import Link from "next/link";
 
 export default function LeadMagnet() {
   return (
@@ -60,7 +61,7 @@ export default function LeadMagnet() {
               </ul>
 
               <div className="space-y-3">
-                <a
+                <Link
                   href="https://www.instagram.com/booker_consulting"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -68,15 +69,15 @@ export default function LeadMagnet() {
                 >
                   <Instagram size={16} />
                   Step 1: Follow on Instagram
-                </a>
+                </Link>
 
-                <a
+                <Link
                   href="/pdfs/uae-corporate-tax-guide.pdf"
                   className="flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl py-3 font-medium hover:scale-[1.02] transition"
                 >
                   Step 2: Download Guide
                   <Download size={16} />
-                </a>
+                </Link>
               </div>
             </div>
 

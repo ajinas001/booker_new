@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { TrendingUp, Sparkles } from "lucide-react"; // ✅ Normal icons (clean & minimal)
+import Image from "next/image";
 
 /* ---------------------- SERVICES DATA ---------------------- */
 const services = [
@@ -48,8 +49,7 @@ const services = [
   {
     id: 4,
     type: "image",
-    imageUrl:
-      "/images/service.webp",
+    imageUrl: "/images/service.webp",
     bgColor: "bg-neutral-300",
     span: "lg:col-span-1 lg:row-span-2",
     borderRadius: "rounded-[45px]",
@@ -133,7 +133,10 @@ export default function AccountingServices() {
       <section className="py-12 px-6 md:px-16">
         <h1 className="text-4xl md:text-6xl font-light text-gray-900 leading-tight">
           Business Consultants <br />
-          for a <span className="font-semibold text-textsecondary">Growth Mindset</span>
+          for a{" "}
+          <span className="font-semibold text-textsecondary">
+            Growth Mindset
+          </span>
         </h1>
       </section>
 
@@ -161,11 +164,13 @@ export default function AccountingServices() {
           // Image Card
           if (item.type === "image") {
             return (
-              <div key={item.id} className={cardClasses}>
-                <img
+              <div key={item.id} className={`${cardClasses} relative`}>
+                <Image
                   src={item.imageUrl}
-                  alt="service"
-                  className="w-full h-full object-cover grayscale"
+                  alt="Service"
+                  fill
+                  sizes="100vw"
+                  className="object-cover grayscale"
                 />
               </div>
             );
