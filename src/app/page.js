@@ -40,7 +40,7 @@ const BookerAccountingWebsite = () => {
 
     <div className="min-h-screen text-foreground">
       <Navbar />
-      {/* <LoadingScreen /> */}
+      <LoadingScreen />
       <HeroSection />
       {/* <MainAchievements /> */}
       <HomeAboutTimeline />
