@@ -436,12 +436,12 @@ export default function BusinessAdvisoryPage() {
                 Book Free Consultation
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <a
+              <Link
                 href="#services"
                 className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-md font-semibold text-sm transition-colors duration-200"
               >
                 Explore Services
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
         </section>

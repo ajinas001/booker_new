@@ -474,19 +474,19 @@ export default function AntiMoneyLaunderingPage() {
             animate="visible"
             className="flex flex-wrap gap-4"
           >
-            <a
+            <Link
               href="#contact-form"
               className="inline-flex items-center gap-2 bg-textprimary hover:bg-white hover:text-textsecondary text-white px-7 py-3.5 rounded-md font-semibold text-sm transition-colors duration-200"
             >
               Schedule a Compliance Review
               <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
+            </Link>
+            <Link
               href="#services"
               className="inline-flex items-center gap-2 border border-white/30 text-white hover:border-white/70 px-7 py-3.5 rounded-md font-semibold text-sm transition-colors duration-200"
             >
               Explore Services
-            </a>
+            </Link>
           </motion.div>
 
           {/* Stat bar */}
@@ -824,13 +824,13 @@ export default function AntiMoneyLaunderingPage() {
                 requirements — so you get expert guidance that's practical,
                 accurate, and immediately actionable.
               </p>
-              <a
+              <Link
                 href="#contact-form"
                 className="inline-flex items-center gap-2 bg-textsecondary hover:bg-purpletint text-white hover:text-textsecondary px-7 py-3.5 rounded-full font-semibold text-sm transition-colors duration-200"
               >
                 Schedule a Compliance Review
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </motion.div>
 
             {/* Right — why BAC checklist */}
