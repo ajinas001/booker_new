@@ -8,6 +8,7 @@ import {
   FaEnvelope,
   FaLocationDot,
 } from "react-icons/fa6";
+import { FaTiktok } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -34,7 +35,8 @@ const socialLinks = [
     href: "https://www.linkedin.com/company/bookeraccounting/",
     label: "LinkedIn",
   },
-  { icon: FaWhatsapp, href: "https://wa.me/971567678156", label: "WhatsApp" },
+  { icon: FaTiktok, href: "https://www.tiktok.com/@booker_accounting_consu1?_r=1&_t=ZS-97o2YdHt30H",
+     label: "Tiktok" },
   {
     icon: FaInstagram,
     href: "https://www.instagram.com/booker_consulting",
@@ -45,7 +47,7 @@ const socialLinks = [
     href: "mailto:info@bookeraccounting.com",
     label: "Email",
   },
-  { icon: FaFacebook, href: "#", label: "Facebook" },
+  { icon: FaFacebook, href: "https://www.facebook.com/share/1bsoQ3j3Km/", label: "Facebook" },
 ];
 
 const Footer = () => {

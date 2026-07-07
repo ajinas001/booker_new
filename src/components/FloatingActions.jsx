@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, Calendar } from 'lucide-react';
-import Link from 'next/link';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, Calendar } from "lucide-react";
+import Link from "next/link";
 
 export default function FloatingActions() {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,12 +29,14 @@ export default function FloatingActions() {
         >
           {/* WhatsApp Button */}
           <Link
-            href="https://wa.me/YOUR_NUMBER"
+            href="https://wa.me/971567678156?text=Hello%20Booker%20Accounting%2C%20I%20would%20like%20assistance%20in%20making%20my%20business%20compliant%20and%20supporting%20its%20growth."
             target="_blank"
             rel="noopener noreferrer"
             className="w-12 h-12 flex items-center justify-center bg-[#25D366] text-white hover:bg-[#20ba5a] transition-colors duration-300"
             aria-label="Chat on WhatsApp"
           >
+            {/* Your icon */}
+
             {/* Custom SVG used for exact WhatsApp branding match */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +54,7 @@ export default function FloatingActions() {
 
           {/* Call Button */}
           <Link
-            href="tel:+97100000000"
+            href="tel:+971567678156"
             className="w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 transition-colors duration-300"
             aria-label="Call Us"
           >
@@ -61,8 +63,6 @@ export default function FloatingActions() {
 
           {/* Border Divider */}
           <div className="w-full h-[1px] bg-white/10" />
-
-
         </motion.div>
       )}
     </AnimatePresence>

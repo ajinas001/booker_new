@@ -135,7 +135,7 @@ export default function Navbar() {
             </div>
             <div className="hidden lg:flex justify-center items-center gap-2 ">
               <Link
-                href="https://facebook.com"
+                href="https://www.facebook.com/share/1bsoQ3j3Km/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-blue-600 hover:text-white transition"
@@ -153,7 +153,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="https://www.tiktok.com/@yourusername"
+                href="https://www.tiktok.com/@booker_accounting_consu1?_r=1&_t=ZS-97o2YdHt30H"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 p-2 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary text-lg hover:bg-gray-800 hover:text-white transition"
@@ -293,7 +293,7 @@ export default function Navbar() {
 
               <div className="flex justify-center items-center gap-3 pt-5">
                 <Link
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/share/1bsoQ3j3Km/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-600 hover:text-white transition"
@@ -318,7 +318,7 @@ export default function Navbar() {
                   <FaLinkedinIn />
                 </Link>
                 <Link
-                  href="https://www.tiktok.com/@yourusername"
+                  href="https://www.tiktok.com/@booker_accounting_consu1?_r=1&_t=ZS-97o2YdHt30H"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-black hover:text-white transition"
