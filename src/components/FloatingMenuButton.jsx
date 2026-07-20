@@ -42,7 +42,7 @@ const socialItems = [
   { icon: FaWhatsapp, href: "https://wa.me/971567678156 ", label: "WhatsApp" },
   {
     icon: FaInstagram,
-    href: "https://www.instagram.com/booker_accounting?igsh=dzZ5MGZwMHJscjh4&utm_source=qr",
+    href: "https://www.instagram.com/booker_consulting",
     label: "Instagram",
   },
 ];

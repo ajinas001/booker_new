@@ -327,7 +327,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  href="mailto:info@example.com"
+                  href="mailto:info@bookeraccounting.com"
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-textsecondary text-textsecondary hover:bg-blue-600 hover:text-white transition"
                 >
                   <MdEmail />
